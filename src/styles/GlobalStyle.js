@@ -1,4 +1,7 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
+import { createGlobalStyle } from 'styled-components';
+
+const GlobalStyle = createGlobalStyle`
+  /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -51,7 +54,9 @@ strong {
     font-weight: bold;
 }
 
-a{
+/*--------------------My Styles-----------------------*/
+
+a {
     text-decoration: none;
     color: inherit;
 }
@@ -59,3 +64,11 @@ a{
 * {
     box-sizing: border-box;
 }
+
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #333;
+}  
+`;
+
+export default GlobalStyle;
