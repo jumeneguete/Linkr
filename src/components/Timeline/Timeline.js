@@ -1,5 +1,5 @@
 
-export default function SignUp() {
+export default function Timeline() {
     return(
         <div>teste</div>
     );
