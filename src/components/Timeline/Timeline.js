@@ -8,6 +8,7 @@ import Post from './Post';
 export default function Timeline() {
     const token = '8181382a-f871-4195-ade8-982e9eb999fa';
     const [postsList, setPostsList] = useState(null);
+    
 
     useEffect(() => {
         const config ={ headers: { Authorization: `Bearer ${token}` }}
@@ -25,7 +26,7 @@ export default function Timeline() {
             <ContainerPostsAndTrendings>
                 <ContainerPosts>
                     <CreatePost>Em breve</CreatePost>
-                    {postsList && postsList.map(p => <Post key ={p.id} postDetails={p}/>)}
+                    {postsList!==null ? (postsList.length>0 ? postsList.map(p => <Post key ={p.id} postDetails={p}/>) : "Nenhum post encontrado") : "Loading"}
                 </ContainerPosts>
                 <Trendings>Em breve</Trendings>
             </ContainerPostsAndTrendings>

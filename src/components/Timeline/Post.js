@@ -1,33 +1,48 @@
+import { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom'
 import { IoHeartSharp, IoHeartOutline } from "react-icons/io5";
 import styled from 'styled-components';
+import ReactHashtag from "react-hashtag";
+import axios from 'axios';
+
 import { SinglePost } from "./Styles";
 
 export default function Post({ postDetails}) {
 
+    const token = '8181382a-f871-4195-ade8-982e9eb999fa';
+    const history = useHistory()
+    const[postLiked, setPostLiked] = useState(false)
+    const userId = 11;
     const { text, link, linkTitle, linkDescription, linkImage, user, likes } = postDetails;
     const { username, avatar } = user;
 
+    function likePost() {
+        const config ={ headers: { Authorization: `Bearer ${token}` }}
+        const request = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts/${postDetails.id}/like`,{}, config);
+        request.then( response => {
+            setPostLiked(true)
+        })
+    }
     return(
         <SinglePost>
             <Profile>
                 <img src={avatar} alt={username}/>
-                <IoHeartSharp color={'#AC0000'} size={25} />
-                <IoHeartOutline color={'#FFFFFF'} size={25} />
-                <p>13 likes</p>
+                {postLiked ? <IoHeartSharp color={'#AC0000'} size={25} /> : <IoHeartOutline onClick={likePost} color={'#FFFFFF'} size={25} />}
+                <p>{likes === undefined ? 0 : likes.length } likes</p>
             </Profile>
             <PostContent>
-                <CreatorName>{username}</CreatorName>
-                <Description>{text}</Description>
-                <LinkContainer>
+                <Link to={`/user/${user.id}`}><CreatorName>{username}</CreatorName></Link>
+                <Description>
+                    <ReactHashtag onHashtagClick={val => history.push(`/hashtag/${val}`)}>{text}</ReactHashtag>
+                </Description>
+                <a href={link} target="_blank"><LinkContainer>
                     <LinkInfo>
                     <h1>{linkTitle}</h1>
                     <p>{linkDescription}</p>
-                    <a href={link} >{link}</a>
+                    <span>{link}</span>
                     </LinkInfo>
-                    <LinkImg backgroud={linkImage}>
-                    
-                    </LinkImg>
-                </LinkContainer>
+                    <LinkImg backgroud={linkImage} />
+                </LinkContainer></a>
             </PostContent>
         </SinglePost>
     );
@@ -63,6 +78,9 @@ font-size: 17px;
 line-height: 20px;
 color: #B7B7B7;
 margin: 10px 0;
+    span{
+        color: #FFFFFF;
+    }
 `;
 const LinkContainer = styled.div`
 display: flex;
@@ -88,7 +106,7 @@ padding: 20px;
         line-height: 13px;
         color: #9B9595;
     }
-    a {
+    span {
         font-size: 11px;
         line-height: 13px;
         color: #CECECE;
