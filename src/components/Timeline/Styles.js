@@ -35,7 +35,6 @@ border-radius: 16px;
 const SinglePost = styled.div`
 display:flex;
 justify-content: space-between;
-height: 276px;
 margin-bottom: 16px;
 padding:21px;
 background: #171717;
