@@ -8,6 +8,7 @@ import Timeline from './Timeline/Timeline';
 export default function App() {
     return(
         <Router>
+            <GlobalStyle />
             <Switch>
                 <Route exact path= "/">
                     <Login />
