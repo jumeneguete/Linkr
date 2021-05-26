@@ -32,9 +32,8 @@ export default function Post({ postDetails}) {
             <PostContent>
                 <Link to={`/user/${user.id}`}><CreatorName>{username}</CreatorName></Link>
                 <Description>
-                    <ReactHashtag renderHashtag={(val, i) => (
-                        <Link to={`/hashtag/${val.replace("#", "")}`} ><Hashtag key={i} >{val}</Hashtag></Link>
-                        )}>
+                    <ReactHashtag renderHashtag={(val) => (
+                        <Link to={`/hashtag/${val.replace("#", "")}`} ><Hashtag >{val}</Hashtag></Link>)}>
                         {text}
                     </ReactHashtag>
                 </Description>
@@ -52,5 +51,4 @@ export default function Post({ postDetails}) {
         </SinglePost>
     );
 }
-
 
