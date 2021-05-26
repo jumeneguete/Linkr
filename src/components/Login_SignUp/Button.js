@@ -1,8 +1,8 @@
 import styled from "styled-components"
 
-export default function Button ({children}){
+export default function Button ({children, disabled}){
     return (
-        <ButtonStyle type="submit">{children}</ButtonStyle>
+        <ButtonStyle type="submit" disabled={disabled}>{children}</ButtonStyle>
     );
 }
 
@@ -17,7 +17,8 @@ const ButtonStyle = styled.button`
     margin-bottom: 5px;
     border: none;
     border-radius: 5px;
-    background-color: #1F81F2;
+    background-color: ${props => props.disabled ? "#5ea1ed" : "#1F81F2"};
+    cursor: ${props => props.disabled ? "not-allowed" : "pointer"};
     
     @media (max-width: 600px) {
         width: 90%;

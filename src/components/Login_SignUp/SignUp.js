@@ -11,6 +11,7 @@ export default function SignUp() {
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");
     const [url, setUrl] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const history = useHistory();
 
@@ -20,8 +21,10 @@ export default function SignUp() {
         const body = {email, password, username, pictureUrl: url }
 
         const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/sign-up", body);
-        request.then((response) => {
+        setLoading(true);
+        request.then(() => {
             history.push("/");
+            setLoading(false);
         });
         request.catch((resp) => {
             if (resp.response.status === 403){
@@ -29,6 +32,7 @@ export default function SignUp() {
             } else {
                 alert("Preencha os campos corretamente!")
             }
+            setLoading(false);
         })
     }
 
@@ -37,11 +41,11 @@ export default function SignUp() {
             <Banner />
             <Fields>
                 <form onSubmit={SigningUp}>
-                    <Input type="email" placeholder="email" onChange={(e)=> setEmail(e.target.value)} value={email} />
-                    <Input type="password" placeholder="senha" onChange={(e)=> setPassword(e.target.value)} value={password} />
-                    <Input type="username" placeholder="nome" onChange={(e)=> setUsername(e.target.value)} value={username} />
-                    <Input type="url" placeholder="foto" onChange={(e)=> setUrl(e.target.value)} value={url} />
-                    <Button>Sign Up</Button>
+                    <Input type="email" placeholder="email" onChange={(e)=> setEmail(e.target.value)} value={email} disabled={loading ? true : false} />
+                    <Input type="password" placeholder="senha" onChange={(e)=> setPassword(e.target.value)} value={password} disabled={loading ? true : false}  />
+                    <Input type="username" placeholder="nome" onChange={(e)=> setUsername(e.target.value)} value={username} disabled={loading ? true : false}  />
+                    <Input type="url" placeholder="foto" onChange={(e)=> setUrl(e.target.value)} value={url} disabled={loading ? true : false}  />
+                    <Button  disabled={loading ? true : false} >Sign Up</Button>
                 </form>
                 <Link to={"/"}><p>Switch back to log in</p></Link>
             </Fields>
