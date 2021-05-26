@@ -49,4 +49,85 @@ const Fields = styled.div`
     }
 `;
 
-export { Container, Fields };
+const BannerStyle = styled.div`
+    width: 65%;
+    padding-left: 25px;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    @media (max-width: 600px) {
+        width: 100%;
+        padding: 20px;
+        text-align: center;
+    }
+
+    h1 {
+        font-family: 'Passion One', sans-serif;
+        color: #fff;
+        font-size: 110px;
+        font-weight: bold;
+    }
+
+    h2 {
+        font-family: 'Oswald', sans-serif;
+        color: #fff;
+        font-size: 43px;
+        font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+        h1 {
+            font-size: 76px;
+        }
+        h2 {
+            font-size: 23px;
+        }
+    }
+`;
+
+const InputStyle = styled.input`
+    width: 80%;
+    height: 45px;
+    padding-left: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+
+    @media (max-width: 600px) {
+        width: 90%;
+    }
+
+    &::placeholder{
+            font-family: "Oswald", sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #9F9F9F;
+        }
+        &:focus{
+            box-shadow: 0 0 0 0;
+            outline: 0;
+        }
+`;
+
+const ButtonStyle = styled.button`
+    width: 80%;
+    height: 45px;
+    color: #fff;
+    font-family: "Oswald", sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1px;;
+    margin-bottom: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: ${props => props.disabled ? "#5ea1ed" : "#1F81F2"};
+    cursor: ${props => props.disabled ? "not-allowed" : "pointer"};
+    
+    @media (max-width: 600px) {
+        width: 90%;
+    }
+
+`;
+
+export { Container, Fields, BannerStyle, InputStyle, ButtonStyle };
