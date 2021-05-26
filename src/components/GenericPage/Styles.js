@@ -38,7 +38,7 @@ const Menu = styled.div`
         height: 60px;
         margin-left: 10px;
         border-radius: 70px;
-        background-image: url("https://i.pinimg.com/474x/a1/47/c0/a147c01b872bb34cc506fb3f50ae5165.jpg");
+        background-image: ${props => props.url ? `url(${props.url})` : ""};
         background-size: cover;
         background-repeat: no-repeat;
     }
