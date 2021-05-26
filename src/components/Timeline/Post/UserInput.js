@@ -5,7 +5,9 @@ import styled from 'styled-components';
 
 
 export default function UserInput () {
+    //solução provisoria ate começarmos a usar o context
     const token = '8181382a-f871-4195-ade8-982e9eb999fa';
+    const avatar = 'https://veja.abril.com.br/wp-content/uploads/2017/03/entretenimento-programas-de-tv-20170329-013.jpg';
     const userId = 11;
     const [ clicked, setClicked ] = useState(false);
     const [ userComment, setUserComment ] = useState('');
@@ -54,7 +56,7 @@ export default function UserInput () {
 
     return (
         <UserInputContainer clicked={clicked}>
-
+            <img src={avatar} />
             <form onSubmit={(event) => submitComment(event)}>
 
                 <h2>What do you want to bookmark today?</h2>
