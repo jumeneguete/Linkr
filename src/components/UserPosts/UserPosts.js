@@ -1,14 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
+import UserContext from '../../contexts/UserContext';
 import GenericPage from '../GenericPage/GenericPage';
-import GlobalStyle from '../../styles/GlobalStyle';
 
 export default function UserPosts() {
 
+    const { userProfile } = useContext(UserContext);
+    const { token } = userProfile
     const { id } = useParams();
-    const token = '8181382a-f871-4195-ade8-982e9eb999fa';
     const [userPostsList, setUserPostsList] = useState(null);
 
     useEffect(() => {
@@ -18,11 +19,10 @@ export default function UserPosts() {
             setUserPostsList(response.data.posts)
         });
         request.catch(erro => alert("Ocorreu um erro ao carregar os posts do usuario"))
-    }, [id])
+    }, [id, token])
 
     return(
         <>
-            <GlobalStyle />
             {userPostsList && <GenericPage title={`${userPostsList[0].user.username}'s Posts`} arrayOfPosts={userPostsList}/>}
         </>
     );

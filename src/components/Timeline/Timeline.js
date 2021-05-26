@@ -1,11 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 
+import UserContext from '../../contexts/UserContext';
 import GenericPage from '../GenericPage/GenericPage';
-import GlobalStyle from '../../styles/GlobalStyle';
 
 export default function Timeline() {
-    const token = '8181382a-f871-4195-ade8-982e9eb999fa';
+
+    const { userProfile } = useContext(UserContext);
+    const { token } = userProfile
     const [postsList, setPostsList] = useState(null);
 
     useEffect(() => {
@@ -15,11 +17,10 @@ export default function Timeline() {
             setPostsList(response.data.posts)
         });
         request.catch(erro => alert("Ocorreu um erro ao carregar os posts"))
-    }, [])
+    }, [token])
 
     return(
         <>
-            <GlobalStyle />
             <GenericPage title={`timeline`} arrayOfPosts={postsList}/>
         </>
     );
