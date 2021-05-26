@@ -1,16 +1,19 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
+
+import UserContext from '../../contexts/UserContext';
 import {Container, Fields } from "./Styles"
 import Banner from "./Banner"
 import Button from "./Button";
 import Input from "./Input";
 
 export default function Login() {
+
+    const { setUserProfile } = useContext(UserContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
-
     const history = useHistory();
 
     function SigningUp (e){
@@ -21,7 +24,7 @@ export default function Login() {
         const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/sign-in", body);
         setLoading(true);
         request.then((response) => {
-            console.log(response.data)
+            setUserProfile(response.data)
             history.push("/timeline");
             setLoading(false);
         });
