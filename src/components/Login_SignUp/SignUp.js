@@ -41,10 +41,10 @@ export default function SignUp() {
             <Banner />
             <Fields>
                 <form onSubmit={SigningUp}>
-                    <Input type="email" placeholder="email" onChange={(e)=> setEmail(e.target.value)} value={email} disabled={loading ? true : false} />
-                    <Input type="password" placeholder="senha" onChange={(e)=> setPassword(e.target.value)} value={password} disabled={loading ? true : false}  />
-                    <Input type="username" placeholder="nome" onChange={(e)=> setUsername(e.target.value)} value={username} disabled={loading ? true : false}  />
-                    <Input type="url" placeholder="foto" onChange={(e)=> setUrl(e.target.value)} value={url} disabled={loading ? true : false}  />
+                    <Input type="email" placeholder="e-mail" onChange={(e)=> setEmail(e.target.value)} value={email} disabled={loading ? true : false} />
+                    <Input type="password" placeholder="password" onChange={(e)=> setPassword(e.target.value)} value={password} disabled={loading ? true : false}  />
+                    <Input type="username" placeholder="username" onChange={(e)=> setUsername(e.target.value)} value={username} disabled={loading ? true : false}  />
+                    <Input type="url" placeholder="picture url" onChange={(e)=> setUrl(e.target.value)} value={url} disabled={loading ? true : false}  />
                     <Button  disabled={loading ? true : false} >Sign Up</Button>
                 </form>
                 <Link to={"/"}><p>Switch back to log in</p></Link>
