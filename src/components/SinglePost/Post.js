@@ -11,7 +11,6 @@ export default function Post({ postDetails}) {
     const token = '8181382a-f871-4195-ade8-982e9eb999fa';
     const history = useHistory()
     const[postLiked, setPostLiked] = useState(false)
-    //const userId = 11;
     const { text, link, linkTitle, linkDescription, linkImage, user, likes } = postDetails;
     const { username, avatar } = user;
 
