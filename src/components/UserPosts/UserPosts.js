@@ -11,6 +11,7 @@ export default function UserPosts() {
     const { token } = userProfile
     const { id } = useParams();
     const [userPostsList, setUserPostsList] = useState(null);
+    const userName = userPostsList[0].user.username;
 
     useEffect(() => {
         const config ={ headers: { Authorization: `Bearer ${token}` }}
@@ -23,7 +24,7 @@ export default function UserPosts() {
 
     return(
         <>
-            {userPostsList && <GenericPage title={`${userPostsList[0].user.username}'s Posts`} arrayOfPosts={userPostsList}/>}
+            {userPostsList && <GenericPage title={userName === userProfile.user.username ? "My Posts" : `${userName}'s Posts`} arrayOfPosts={userPostsList}/>}
         </>
     );
 }
