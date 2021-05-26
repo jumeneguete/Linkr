@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom'
 
 import { PageTitle, ContainerPostsAndTrendings, Trendings, CreatePost, ContainerPosts } from "./Styles";
 import Post from '../SinglePost/Post';
+import UserInput from '../UserPosts/UserInput'
 
 export default function GenericPage({ title, arrayOfPosts}) {
     const location = useLocation().pathname;
@@ -13,7 +14,7 @@ export default function GenericPage({ title, arrayOfPosts}) {
             <PageTitle>{title}</PageTitle>
             <ContainerPostsAndTrendings>
                 <ContainerPosts>
-                    {location === "/timeline" ? <CreatePost>Em breve</CreatePost> : ""}
+                    {location === "/timeline" ? <UserInput/> : ""}
                     {arrayOfPosts!==null ? (arrayOfPosts.length>0 ? arrayOfPosts.map(p => <Post key ={p.id} postDetails={p}/>) : <span>Nenhum post encontrado</span>) : <span>{loading}</span>}
                 </ContainerPosts>
                 <Trendings>Em breve</Trendings>
