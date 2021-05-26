@@ -1,6 +1,7 @@
+import Header from "./Header";
 
 export default function Timeline() {
     return(
-        <div>teste</div>
+        <Header />
     );
 }
