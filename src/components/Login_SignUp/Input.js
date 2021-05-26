@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-export default function Input({type, placeholder}) {
+export default function Input({type, placeholder, value, onChange}) {
     return (
-        <InputStyle type={type} placeholder={placeholder}></InputStyle>
+        <InputStyle type={type} placeholder={placeholder} onChange={onChange} value={value}></InputStyle>
     );
 }
 

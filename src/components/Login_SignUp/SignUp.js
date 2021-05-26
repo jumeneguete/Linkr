@@ -1,19 +1,46 @@
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Banner from "./Banner"
 import Button from "./Button";
 import Input from "./Input";
 
 export default function SignUp() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [username, setUsername] = useState("");
+    const [url, setUrl] = useState("");
+
+    const history = useHistory();
+
+    function SigningUp (e){
+        e.preventDefault();
+
+        const body = {email, password, username, pictureUrl: url }
+
+        const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/sign-up", body);
+        request.then((response) => {
+            history.push("/");
+        });
+        request.catch((resp) => {
+            if (resp.response.status === 403){
+                alert("Este usuário já é cadastrado No Linkr!")
+            } else {
+                alert("Preencha os campos corretamente!")
+            }
+        })
+    }
+
     return(
         <Container>
             <Banner />
             <Fields>
-                <form>
-                    <Input type="email" placeholder="email" />
-                    <Input type="password" placeholder="senha" />
-                    <Input type="text" placeholder="nome" />
-                    <Input type="url" placeholder="foto" />
+                <form onSubmit={SigningUp}>
+                    <Input type="email" placeholder="email" onChange={(e)=> setEmail(e.target.value)} value={email} />
+                    <Input type="password" placeholder="senha" onChange={(e)=> setPassword(e.target.value)} value={password} />
+                    <Input type="username" placeholder="nome" onChange={(e)=> setUsername(e.target.value)} value={username} />
+                    <Input type="url" placeholder="foto" onChange={(e)=> setUrl(e.target.value)} value={url} />
                     <Button>Sign Up</Button>
                 </form>
                 <Link to={"/"}><p>Switch back to log in</p></Link>
