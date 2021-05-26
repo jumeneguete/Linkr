@@ -5,17 +5,14 @@ import { PageTitle, ContainerPostsAndTrendings, Trendings, CreatePost, Container
 import Post from '../SinglePost/Post';
 
 import Header from "./Header";
-import MenuSelection from "../contexts/MenuSelection"
 import { useState } from "react";
 
 export default function GenericPage({ title, arrayOfPosts }) {
     const location = useLocation().pathname;
     const loading = <Loader type="Circles" color="#FFF" height={80} width={80} />;
-    const [menuSelected, setMenuSelected] = useState(false);
 
     return (
         <>
-        <MenuSelection.Provider value={{menuSelected, setMenuSelected }}>
             <Header />
             <PageTitle>{title}</PageTitle>
             <ContainerPostsAndTrendings>
@@ -25,7 +22,6 @@ export default function GenericPage({ title, arrayOfPosts }) {
                 </ContainerPosts>
                 <Trendings>Em breve</Trendings>
             </ContainerPostsAndTrendings>
-        </MenuSelection.Provider>
         </>
     );
 }
