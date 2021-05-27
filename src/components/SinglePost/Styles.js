@@ -52,6 +52,12 @@ word-break: break-all;
     display:flex;
     justify-content: space-between;
 }
+
+.iconesseparados{
+    display:flex;
+    justify-content: space-between;
+    margin-left: 5px;
+}
 `;
 
 const BsTrash = styled.div`
