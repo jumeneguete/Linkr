@@ -10,7 +10,7 @@ import UserContext from '../../contexts/UserContext'
 
 import { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg } from "./Styles";
 
-export default function Post({ postDetails}) {
+export default function Post({ postDetails, setArrayOfPosts}) {
     const { userProfile } = useContext(UserContext);
     const { token } = userProfile
     const history = useHistory()
@@ -38,11 +38,16 @@ export default function Post({ postDetails}) {
     function deleteSucceeded () {
         setIsLoading(false);
         setModalIsOpen(!modalIsOpen);
-        getPostsList();
+        getPost();
     }
 
-    function getPostsList(){
-        
+    function getPost(){
+        const config ={ headers: { Authorization: `Bearer ${token}` }}
+        const request = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts', config);
+        request.then(response => {
+            setArrayOfPosts(response.data.posts)
+        });
+        request.catch(erro => alert("Ocorreu um erro ao carregar os posts"))
     }
 
     function errorHandle () {
