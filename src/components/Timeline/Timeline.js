@@ -21,7 +21,7 @@ export default function Timeline() {
 
     return(
         <>
-            <GenericPage title={`timeline`} arrayOfPosts={postsList}/>
+            <GenericPage title={`timeline`} arrayOfPosts={postsList} setArrayOfPosts={setPostsList}/>
         </>
     );
 }

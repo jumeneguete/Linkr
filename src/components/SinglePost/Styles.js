@@ -46,16 +46,25 @@ width: calc(15% - 20px);
 }
 `;
 const PostContent = styled.div`
-    width: calc(90% - 20px);
-    word-break: break-all;
-    `;
-    const CreatorName = styled.div`
-    height: 23px;
-    font-size: 19px;
-    color: #FFFFFF;
-    @media (max-width: 614px) {
-        font-size: 17px;
-    }
+width: calc(90% - 20px);
+word-break: break-all;
+.icones {
+    display:flex;
+    justify-content: space-between;
+}
+`;
+
+const BsTrash = styled.div`
+color: white
+`;
+
+const CreatorName = styled.div`
+height: 23px;
+font-size: 19px;
+color: #FFFFFF;
+@media (max-width: 614px) {
+    font-size: 17px;
+}
 
 `;
 const Description = styled.div`
