@@ -15,11 +15,11 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const history = useHistory();
-    const lastUser = localStorage.getItem("lastLogin");
+    const alreadyLoggedIn = localStorage.getItem("lastLogin");
 
     useEffect(()=>{
-        if (lastUser){
-            const currentUser = JSON.parse(lastUser);
+        if (alreadyLoggedIn){
+            const currentUser = JSON.parse(alreadyLoggedIn);
             setUserProfile(currentUser);
             history.push("/timeline");
             return ;
@@ -36,8 +36,8 @@ export default function Login() {
         setLoading(true);
         request.then((response) => {
             setUserProfile(response.data)
-            const loginSave = JSON.stringify(response.data);
-            localStorage.setItem("lastLogin", loginSave);
+            const loginSaved = JSON.stringify(response.data);
+            localStorage.setItem("lastLogin", loginSaved);
             history.push("/timeline");
             setLoading(false);
         });
