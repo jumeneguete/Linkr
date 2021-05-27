@@ -69,7 +69,7 @@ export default function Post({ postDetails, setArrayOfPosts}) {
                     <Link to={`/user/${user.id}`}><CreatorName>{username}</CreatorName></Link>
                     
                     {userProfile.user.username === username && 
-                            <BsTrash onClick={() => setModalIsOpen(!modalIsOpen)}/>
+                            <BsTrash color="#FFFFFF" onClick={() => setModalIsOpen(!modalIsOpen)}/>
                         } 
 
                     < Modal 
