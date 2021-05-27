@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import UserContext from "../../contexts/UserContext";
 
 export default function Trending (){
     const [hashtags, setHashtags] = useState("");
     const {userProfile} = useContext(UserContext);
-    console.log(userProfile)
 
     useEffect(() =>{
         const config = { headers: { Authorization: `Bearer ${userProfile.token}` }}
@@ -28,7 +28,7 @@ export default function Trending (){
             <TrendingList>
                 { hashtags === "" ? "" :
                 hashtags.map(h =>(
-                    <li key ={h.id}># {h.name}</li>
+                    <Link to={`/hashtag/${h.name}}`}><li key ={h.id}># {h.name}</li></Link>
                 ))}
             </TrendingList>
 

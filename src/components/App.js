@@ -30,6 +30,9 @@ export default function App() {
                     <Route path= "/user/:id">
                         <UserPosts />
                     </Route>
+                    <Route path= "/user/:id">
+                        <UserPosts />
+                    </Route>
                 </Switch>
             </Router>
         </UserContext.Provider>
