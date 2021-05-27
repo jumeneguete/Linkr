@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import UserContext from '../../contexts/UserContext';
@@ -15,6 +15,17 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const history = useHistory();
+    const lastUser = localStorage.getItem("lastLogin");
+
+    useEffect(()=>{
+        if (lastUser){
+            const currentUser = JSON.parse(lastUser);
+            setUserProfile(currentUser);
+            history.push("/timeline");
+            return ;
+        }
+
+    }, [])
 
     function SigningUp (e){
         e.preventDefault();
@@ -25,6 +36,8 @@ export default function Login() {
         setLoading(true);
         request.then((response) => {
             setUserProfile(response.data)
+            const loginSave = JSON.stringify(response.data);
+            localStorage.setItem("lastLogin", loginSave);
             history.push("/timeline");
             setLoading(false);
         });
