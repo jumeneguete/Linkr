@@ -8,8 +8,8 @@ import SignUp from './Login_SignUp/SignUp';
 import Timeline from './Timeline/Timeline';
 import UserPosts from "./UserPosts/UserPosts";
 import HashtagPosts from "./HashtagPosts/HashtagPosts";
+import MyPosts from './MyPosts/MyPosts';
 
-// eslint-disable-next-line
 export default function App() {
     
     const [userProfile, setUserProfile] = useState(null);
@@ -34,6 +34,10 @@ export default function App() {
                     <Route path= "/hashtag/:hashtag">
                         <HashtagPosts />
                     </Route>
+                    <Route path= "/my-posts">
+                        <MyPosts />
+                    </Route>
+                    
                 </Switch>
             </Router>
         </UserContext.Provider>

@@ -70,7 +70,6 @@ const Hashtag = styled.span`
 const LinkContainer = styled.div`
 display: flex;
 justify-content: space-between;
-/*height: 155px;*/
 border: 1px solid #4D4D4D;
 box-sizing: border-box;
 border-radius: 11px;

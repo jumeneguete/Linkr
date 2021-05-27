@@ -5,7 +5,6 @@ import { PageTitle, ContainerPostsAndTrendings, Trendings, CreatePost, Container
 import Post from '../SinglePost/Post';
 
 import Header from "./Header";
-import { useState } from "react";
 
 export default function GenericPage({ title, arrayOfPosts }) {
     const location = useLocation().pathname;
