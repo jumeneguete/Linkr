@@ -8,7 +8,7 @@ import Modal from "../UserPosts/Modal";
 import axios from 'axios';
 import UserContext from '../../contexts/UserContext'
 
-import { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg } from "./Styles";
+import { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag } from "./Styles";
 
 export default function Post({ postDetails, setArrayOfPosts}) {
     const { userProfile } = useContext(UserContext);
@@ -81,16 +81,21 @@ export default function Post({ postDetails, setArrayOfPosts}) {
 
                 </div>
                 <Description>
-                    <ReactHashtag onHashtagClick={val => history.push(`/hashtag/${val}`)}>{text}</ReactHashtag>
+                    <ReactHashtag renderHashtag={(val) => (
+                        <Link to={`/hashtag/${val.replace("#", "")}`} ><Hashtag >{val}</Hashtag></Link>)}>
+                        {text}
+                    </ReactHashtag>
                 </Description>
-                <a href={link} target="_blank" rel="noreferrer"><LinkContainer>
-                    <LinkInfo>
-                    <h1>{linkTitle}</h1>
-                    <p>{linkDescription}</p>
-                    <span>{link}</span>
-                    </LinkInfo>
-                    <LinkImg backgroud={linkImage} />
-                </LinkContainer></a>
+                <a href={link} target="_blank" rel="noreferrer">
+                    <LinkContainer>
+                        <LinkInfo>
+                        <h1>{linkTitle}</h1>
+                        <p>{linkDescription}</p>
+                        <span>{link}</span>
+                        </LinkInfo>
+                        <LinkImg backgroud={linkImage} />
+                    </LinkContainer>
+                </a>
             </PostContent>
         </SinglePost>
     );
