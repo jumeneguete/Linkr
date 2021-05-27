@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom'
 import { IoHeartSharp, IoHeartOutline } from "react-icons/io5";
 import { BsTrash } from 'react-icons/bs';
+import { BsPencil } from 'react-icons/bs';
 import ReactHashtag from "react-hashtag";
 import Modal from "../UserPosts/Modal";
 import axios from 'axios';
@@ -38,6 +39,7 @@ export default function Post({ postDetails}) {
         setIsLoading(false);
         setModalIsOpen(!modalIsOpen);
         postDetails.getPostsList();
+        //arrumar essa props pra renderizar a atualizaçaõ de posts no servidor sem o post excluido :)
     }
 
     function errorHandle () {
