@@ -32,9 +32,6 @@ export default function App() {
                     <Route path="/user/:id">
                         <UserPosts />
                     </Route>
-                    <Route path="/user/:id">
-                        <UserPosts />
-                    </Route>
                     <Route path="/hashtag/:hashtag">
                         <HashtagPosts />
                     </Route>
