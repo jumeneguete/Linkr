@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import UserContext from '../contexts/UserContext';
 
 import GlobalStyle from "../styles/GlobalStyle";
@@ -11,8 +11,8 @@ import HashtagPosts from "./HashtagPosts/HashtagPosts";
 
 // eslint-disable-next-line
 export default function App() {
-
-    const [userProfile, setUserProfile] = useState(null);
+    const alreadyLoggedIn = localStorage.getItem("lastLogin");
+    const [userProfile, setUserProfile] = useState(JSON.parse(alreadyLoggedIn));    
 
     return (
         <UserContext.Provider value={{ userProfile, setUserProfile }}>

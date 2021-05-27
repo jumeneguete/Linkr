@@ -10,17 +10,14 @@ import Input from "./Input";
 
 export default function Login() {
 
-    const { setUserProfile } = useContext(UserContext);
+    const { userProfile, setUserProfile } = useContext(UserContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const history = useHistory();
-    const alreadyLoggedIn = localStorage.getItem("lastLogin");
 
     useEffect(()=>{
-        if (alreadyLoggedIn){
-            const currentUser = JSON.parse(alreadyLoggedIn);
-            setUserProfile(currentUser);
+        if (userProfile){
             history.push("/timeline");
             return ;
         }
