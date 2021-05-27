@@ -27,7 +27,7 @@ export default function Header() {
     return (
         <>
             <HeaderStyles>
-                <span>linkr</span>
+                <span><Link to="/timeline">linkr</Link></span>
                 <Menu url={userProfile.user.avatar} onClick={(event) => toggle(event)}>
                     <span>{menuSelected ? arrowUp : arrowDown}</span>
                     <div></div>
