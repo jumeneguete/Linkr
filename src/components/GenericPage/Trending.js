@@ -44,6 +44,9 @@ const TrendingStyle = styled.div`
     color: #fff;
     display: flex;
     flex-direction: column;
+    position: sticky;
+    right: auto;
+    top: 200px;
 
     @media (max-width: 614px) {
         display: none;
