@@ -7,31 +7,35 @@ import Login from './Login_SignUp/Login';
 import SignUp from './Login_SignUp/SignUp';
 import Timeline from './Timeline/Timeline';
 import UserPosts from "./UserPosts/UserPosts";
+import HashtagPosts from "./HashtagPosts/HashtagPosts";
 
-
+// eslint-disable-next-line
 export default function App() {
-    
+
     const [userProfile, setUserProfile] = useState(null);
 
-    return(
-        <UserContext.Provider value={{userProfile, setUserProfile}}>
+    return (
+        <UserContext.Provider value={{ userProfile, setUserProfile }}>
             <GlobalStyle />
             <Router>
                 <Switch>
-                    <Route exact path= "/">
+                    <Route exact path="/">
                         <Login />
                     </Route>
-                    <Route path= "/sign-up">
+                    <Route path="/sign-up">
                         <SignUp />
                     </Route>
-                    <Route path= "/timeline">
+                    <Route path="/timeline">
                         <Timeline />
                     </Route>
-                    <Route path= "/user/:id">
+                    <Route path="/user/:id">
                         <UserPosts />
                     </Route>
-                    <Route path= "/user/:id">
+                    <Route path="/user/:id">
                         <UserPosts />
+                    </Route>
+                    <Route path="/hashtag/:hashtag">
+                        <HashtagPosts />
                     </Route>
                 </Switch>
             </Router>

@@ -63,15 +63,15 @@ const Description = styled.div`
     line-height: 20px;
     color: #B7B7B7;
     margin: 10px 0;
-    span{
-        cursor: pointer;
-        color: #FFFFFF;
-    }
+   
+`;
+const Hashtag = styled.span`
+    color: #FFFFFF;
+    cursor: pointer;
 `;
 const LinkContainer = styled.div`
     display: flex;
     justify-content: space-between;
-    /*height: 155px;*/
     border: 1px solid #4D4D4D;
     box-sizing: border-box;
     border-radius: 11px;
@@ -120,4 +120,4 @@ const LinkImg = styled.div`
     border-radius: 0px 12px 13px 0px;
 `;
 
-export { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg };
+export { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag };

@@ -26,7 +26,7 @@ export default function Trending (){
                 { hashtags.length !== 0 &&
                 hashtags.map(h =>(
                     <>
-                    <Link to={`/hashtag/${h.name}}`}><li key ={h.id}>#&nbsp;{h.name}</li></Link>
+                    <Link to={`/hashtag/${h.name}`}><li key ={h.id}>#&nbsp;{h.name}</li></Link>
                     </>
                 ))}
             </TrendingList>
