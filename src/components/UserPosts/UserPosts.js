@@ -1,12 +1,11 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-
 import UserContext from '../../contexts/UserContext';
 import GenericPage from '../GenericPage/GenericPage';
+import UserInput from './UserInput';
 
 export default function UserPosts() {
-
     const { userProfile } = useContext(UserContext);
     const { token } = userProfile
     const { id } = useParams();
@@ -24,7 +23,7 @@ export default function UserPosts() {
 
     return(
         <>
-            {userPostsList && <GenericPage title={`${userName}'s Posts`} arrayOfPosts={userPostsList}/>}
+            {userPostsList &&  <GenericPage title={userName === userProfile.user.username ? "My Posts" : `${userName}'s Posts`} arrayOfPosts={userPostsList}/>}
         </>
     );
 }
