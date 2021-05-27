@@ -28,7 +28,9 @@ export default function Trending (){
             <TrendingList>
                 { hashtags === "" ? "" :
                 hashtags.map(h =>(
-                    <Link to={`/hashtag/${h.name}}`}><li key ={h.id}># {h.name}</li></Link>
+                    <>
+                    <Link to={`/hashtag/${h.name}}`}><li key ={h.id}>#&nbsp;{h.name}</li></Link>
+                    </>
                 ))}
             </TrendingList>
 

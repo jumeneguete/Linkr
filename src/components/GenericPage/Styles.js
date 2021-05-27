@@ -146,10 +146,13 @@ const TrendingList = styled.ul`
     padding: 15px;
     
     li {
+        width: 90%;
         font-size: 18px;
         font-weight: 700;
         letter-spacing: 1px;
         margin-top: 12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 `;
 
