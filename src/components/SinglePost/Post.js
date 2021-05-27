@@ -14,7 +14,6 @@ export default function Post({ postDetails}) {
     const[postLiked, setPostLiked] = useState(false)
     const { text, link, linkTitle, linkDescription, linkImage, user, likes } = postDetails;
     const { username, avatar } = user;
-    console.log(text.split("#"))
     
     function likePost() {
         const config ={ headers: { Authorization: `Bearer ${token}` }}
