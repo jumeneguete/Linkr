@@ -2,8 +2,9 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { CreatePost } from '../GenericPage/Styles'
 import UserContext from '../../contexts/UserContext';
+import UserPosts from '../UserPosts/UserPosts'
 
-export default function UserInput () {
+export default function UserInput (props) {
     const { userProfile } = useContext(UserContext);
     const { token } = userProfile
     const [ clicked, setClicked ] = useState(false);
@@ -44,6 +45,7 @@ export default function UserInput () {
         setUserLink('');
         setUserComment('');
         setClicked(false);
+        props.setArrayOfPosts();
     }
 
     function userPostFailed () {
