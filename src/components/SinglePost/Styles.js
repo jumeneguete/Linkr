@@ -79,11 +79,11 @@ const Hashtag = styled.span`
     cursor: pointer;
 `;
 const LinkContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    border: 1px solid #4D4D4D;
-    box-sizing: border-box;
-    border-radius: 11px;
+display: flex;
+justify-content: space-between;
+border: 1px solid #4D4D4D;
+box-sizing: border-box;
+border-radius: 11px;
 `;
 const LinkInfo = styled.div`
     display: flex;

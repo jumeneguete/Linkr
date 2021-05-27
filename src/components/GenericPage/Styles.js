@@ -98,6 +98,9 @@ width: 611px;
     & > span {
         display: flex;
         justify-content: center;
+        color: #FFFFFF;
+        font-size: 23px;
+        margin-top: 50px;
     }
     @media (max-width: 614px) {
         width: 100%;
