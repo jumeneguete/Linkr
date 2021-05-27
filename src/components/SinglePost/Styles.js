@@ -62,10 +62,10 @@ font-size: 17px;
 line-height: 20px;
 color: #B7B7B7;
 margin: 10px 0;
-    span{
-        cursor: pointer;
-        color: #FFFFFF;
-    }
+`;
+const Hashtag = styled.span`
+    color: #FFFFFF;
+    cursor: pointer;
 `;
 const LinkContainer = styled.div`
 display: flex;
@@ -119,4 +119,4 @@ background-size: cover;
 border-radius: 0px 12px 13px 0px;
 `;
 
-export { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg };
+export { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag };
