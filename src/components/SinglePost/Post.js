@@ -38,8 +38,11 @@ export default function Post({ postDetails}) {
     function deleteSucceeded () {
         setIsLoading(false);
         setModalIsOpen(!modalIsOpen);
-        postDetails.getPostsList();
-        //arrumar essa props pra renderizar a atualizaçaõ de posts no servidor sem o post excluido :)
+        getPostsList();
+    }
+
+    function getPostsList(){
+        
     }
 
     function errorHandle () {
@@ -87,5 +90,3 @@ export default function Post({ postDetails}) {
         </SinglePost>
     );
 }
-
-

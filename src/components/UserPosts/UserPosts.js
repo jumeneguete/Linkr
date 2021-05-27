@@ -23,7 +23,7 @@ export default function UserPosts() {
 
     return(
         <>
-            {userPostsList &&  <GenericPage title={userName === userProfile.user.username ? "My Posts" : `${userName}'s Posts`} arrayOfPosts={userPostsList} setArrayOfPosts={setUserPostsList}/>}
+            {userPostsList &&  <GenericPage title={userName === userProfile.user.username ? "My Posts" : `${userName}'s Posts`} arrayOfPosts={userPostsList}/>}
         </>
     );
 }

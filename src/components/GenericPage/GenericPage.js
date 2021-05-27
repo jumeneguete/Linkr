@@ -14,7 +14,7 @@ export default function GenericPage({ title, arrayOfPosts, setArrayOfPosts}) {
             <PageTitle>{title}</PageTitle>
             <ContainerPostsAndTrendings>
                 <ContainerPosts>
-                    {setArrayOfPosts!==null ? <UserInput setArrayOfPosts={setArrayOfPosts}/> : ""}
+                    {location === "/timeline" ? <UserInput setArrayOfPosts={setArrayOfPosts}/> : ""}
                     {arrayOfPosts!==null ? (arrayOfPosts.length>0 ? arrayOfPosts.map(p => <Post key ={p.id} postDetails={p}/>) : <span>Nenhum post encontrado</span>) : <span>{loading}</span>}
                 </ContainerPosts>
                 <Trendings>Em breve</Trendings>

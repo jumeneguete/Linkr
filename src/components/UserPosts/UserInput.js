@@ -4,7 +4,7 @@ import { CreatePost } from '../GenericPage/Styles'
 import UserContext from '../../contexts/UserContext';
 import UserPosts from '../UserPosts/UserPosts'
 
-export default function UserInput (props) {
+export default function UserInput ({ setArrayOfPosts }) {
     const { userProfile } = useContext(UserContext);
     const { token } = userProfile
     const [ clicked, setClicked ] = useState(false);
@@ -45,7 +45,16 @@ export default function UserInput (props) {
         setUserLink('');
         setUserComment('');
         setClicked(false);
-        props.setArrayOfPosts();
+        getPost();
+    }
+
+    function getPost(){
+        const config ={ headers: { Authorization: `Bearer ${token}` }}
+        const request = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts', config);
+        request.then(response => {
+            setArrayOfPosts(response.data.posts)
+        });
+        request.catch(erro => alert("Ocorreu um erro ao carregar os posts"))
     }
 
     function userPostFailed () {
