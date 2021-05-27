@@ -8,7 +8,8 @@ import SignUp from './Login_SignUp/SignUp';
 import Timeline from './Timeline/Timeline';
 import UserPosts from "./UserPosts/UserPosts";
 import HashtagPosts from "./HashtagPosts/HashtagPosts";
-import MyPosts from './MyPosts/MyPosts';
+import MyPosts from './MyPosts_MyLikes/MyPosts';
+import MyLikes from './MyPosts_MyLikes/MyLikes';
 
 export default function App() {
 
@@ -40,7 +41,9 @@ export default function App() {
                     <Route path= "/my-posts">
                         <MyPosts />
                     </Route>
-                    
+                    <Route path= "/my-likes">
+                        <MyLikes />
+                    </Route>
                 </Switch>
             </Router>
         </UserContext.Provider>
