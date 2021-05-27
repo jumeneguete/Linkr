@@ -1,14 +1,35 @@
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
+import UserContext from "../../contexts/UserContext";
 
 export default function Trending (){
+    const [hashtags, setHashtags] = useState("");
+    const {userProfile} = useContext(UserContext);
+    console.log(userProfile)
+
+    useEffect(() =>{
+        const config = { headers: { Authorization: `Bearer ${userProfile.token}` }}
+
+        const request = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/hashtags/trending", config);
+
+        request.then(response => {
+            setHashtags(response.data.hashtags)
+        });
+        request.catch(error => {
+            console.log(error)
+        })
+    },[])
+
     return (
         <TrendingStyle>
             <Title>trending</Title>
             <Separator></Separator>
             <TrendingList>
-                <li>#exemplo</li>
-                <li>#exemplo</li>
-                <li>#exemplo</li>
+                { hashtags === "" ? "" :
+                hashtags.map(h =>(
+                    <li key ={h.id}># {h.name}</li>
+                ))}
             </TrendingList>
 
         </TrendingStyle>
@@ -49,6 +70,6 @@ const TrendingList = styled.ul`
         font-size: 18px;
         font-weight: 700;
         letter-spacing: 1px;
-        margin-top: 10px;
+        margin-top: 12px;
     }
 `;
