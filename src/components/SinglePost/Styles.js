@@ -46,41 +46,42 @@ width: calc(15% - 20px);
 }
 `;
 const PostContent = styled.div`
-width: calc(90% - 20px);
-`;
-const CreatorName = styled.div`
-height: 23px;
-font-size: 19px;
-color: #FFFFFF;
-@media (max-width: 614px) {
-    font-size: 17px;
-}
+    width: calc(90% - 20px);
+    word-break: break-all;
+    `;
+    const CreatorName = styled.div`
+    height: 23px;
+    font-size: 19px;
+    color: #FFFFFF;
+    @media (max-width: 614px) {
+        font-size: 17px;
+    }
 
 `;
 const Description = styled.div`
-font-size: 17px;
-line-height: 20px;
-color: #B7B7B7;
-margin: 10px 0;
+    font-size: 17px;
+    line-height: 20px;
+    color: #B7B7B7;
+    margin: 10px 0;
+   
 `;
 const Hashtag = styled.span`
     color: #FFFFFF;
     cursor: pointer;
 `;
 const LinkContainer = styled.div`
-display: flex;
-justify-content: space-between;
-/*height: 155px;*/
-border: 1px solid #4D4D4D;
-box-sizing: border-box;
-border-radius: 11px;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #4D4D4D;
+    box-sizing: border-box;
+    border-radius: 11px;
 `;
 const LinkInfo = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: space-between;
-max-width:70%;
-padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width:70%;
+    padding: 20px;
 
     h1 {
         font-size: 16px;
@@ -113,10 +114,10 @@ padding: 20px;
 
 `;
 const LinkImg = styled.div`
-min-width: 30%;
-background: url(${props => props.backgroud});
-background-size: cover;
-border-radius: 0px 12px 13px 0px;
+    min-width: 30%;
+    background: url(${props => props.backgroud});
+    background-size: cover;
+    border-radius: 0px 12px 13px 0px;
 `;
 
 export { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag };
