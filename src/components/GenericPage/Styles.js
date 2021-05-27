@@ -92,16 +92,7 @@ margin: 29px auto;
     width: 100%;
 }
 `;
-const Trendings = styled.div`
-width: 301px;
-height: 406px;
-background: #171717;
-border-radius: 16px;
-color: #fff;
-@media (max-width: 614px) {
-    display: none;
-}
-`;
+
 const ContainerPosts =styled.div`
 width: 611px;
     & > span {
@@ -122,4 +113,4 @@ border-radius: 16px;
 `;
 
 
-export { HeaderStyles, Menu, ToggleMenu, PageTitle, ContainerPostsAndTrendings, Trendings, CreatePost, ContainerPosts };
+export { HeaderStyles, Menu, ToggleMenu, PageTitle, ContainerPostsAndTrendings, CreatePost, ContainerPosts };
