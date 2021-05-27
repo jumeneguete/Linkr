@@ -2,7 +2,6 @@ import { useContext, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { HeaderStyles, Menu, ToggleMenu } from "./Styles"
 import UserContext from "../../contexts/UserContext"
-
 import ClickAwayListener from 'react-click-away-listener';
 
 
@@ -25,8 +24,6 @@ export default function Header() {
         history.push("/");
     }
 
-    console.log(userProfile.user.avatar)
-
     return (
         <>
             <HeaderStyles>
@@ -42,7 +39,6 @@ export default function Header() {
                             <Link to={"/my-likes"}><li>My likes</li></Link>
                             <li onClick={logout}>Logout</li>
                         </ul>
-
                     </ToggleMenu>
                 </ClickAwayListener>
             </HeaderStyles>
