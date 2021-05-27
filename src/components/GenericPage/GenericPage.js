@@ -1,7 +1,7 @@
 import Loader from "react-loader-spinner";
 import { useLocation } from 'react-router-dom'
 
-import { PageTitle, ContainerPostsAndTrendings, CreatePost, ContainerPosts } from "./Styles";
+import { PageTitle, ContainerPostsAndTrendings, ContainerPosts } from "./Styles";
 import Post from '../SinglePost/Post';
 import UserInput from '../UserPosts/UserInput'
 import Header from "./Header";

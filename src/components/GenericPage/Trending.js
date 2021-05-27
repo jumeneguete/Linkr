@@ -16,7 +16,7 @@ export default function Trending (){
         request.then(response => {
             setHashtags(response.data.hashtags)
         });
-    },[])
+    },[userProfile])
 
     return (
         <TrendingStyle>

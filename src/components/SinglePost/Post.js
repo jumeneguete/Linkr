@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { IoHeartSharp, IoHeartOutline } from "react-icons/io5";
 import { BsTrash } from 'react-icons/bs';
 import { BsPencil } from 'react-icons/bs';
@@ -13,7 +13,6 @@ import { SinglePost, Profile, PostContent, CreatorName, Description, LinkContain
 export default function Post({ postDetails, setArrayOfPosts}) {
     const { userProfile } = useContext(UserContext);
     const { token } = userProfile
-    const history = useHistory()
     const[postLiked, setPostLiked] = useState(false)
     const { text, link, linkTitle, linkDescription, linkImage, user, likes } = postDetails;
     const { username, avatar } = user;

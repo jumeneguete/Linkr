@@ -7,7 +7,7 @@ import GenericPage from '../GenericPage/GenericPage';
 export default function UserPosts() {
 
     const { userProfile } = useContext(UserContext);
-    const { token, user } = userProfile
+    const { token } = userProfile
     const [myLikesList, setMyLikesList] = useState(null);
 
     useEffect(() => {

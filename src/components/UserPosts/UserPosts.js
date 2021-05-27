@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import UserContext from '../../contexts/UserContext';
 import GenericPage from '../GenericPage/GenericPage';
-import UserInput from './UserInput';
 
 export default function UserPosts() {
     const { userProfile } = useContext(UserContext);
