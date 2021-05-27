@@ -11,27 +11,30 @@ import HashtagPosts from "./HashtagPosts/HashtagPosts";
 import MyPosts from './MyPosts/MyPosts';
 
 export default function App() {
-    
+
     const [userProfile, setUserProfile] = useState(null);
 
-    return(
-        <UserContext.Provider value={{userProfile, setUserProfile}}>
+    return (
+        <UserContext.Provider value={{ userProfile, setUserProfile }}>
             <GlobalStyle />
             <Router>
                 <Switch>
-                    <Route exact path= "/">
+                    <Route exact path="/">
                         <Login />
                     </Route>
-                    <Route path= "/sign-up">
+                    <Route path="/sign-up">
                         <SignUp />
                     </Route>
-                    <Route path= "/timeline">
+                    <Route path="/timeline">
                         <Timeline />
                     </Route>
-                    <Route path= "/user/:id">
+                    <Route path="/user/:id">
                         <UserPosts />
                     </Route>
-                    <Route path= "/hashtag/:hashtag">
+                    <Route path="/user/:id">
+                        <UserPosts />
+                    </Route>
+                    <Route path="/hashtag/:hashtag">
                         <HashtagPosts />
                     </Route>
                     <Route path= "/my-posts">

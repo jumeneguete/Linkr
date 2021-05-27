@@ -72,36 +72,27 @@ const ToggleMenu = styled.div`
 `;
 
 const PageTitle = styled.div`
-width: 937px;
-font-size: 43px;
-color: #FFFFFF;
-margin: 125px auto 0 auto;
-@media (max-width: 614px) {
-    width: 100%;
-    margin: 91px 0 0 0px;
-    padding: 0 20px;
-}
+    width: 937px;
+    font-size: 43px;
+    color: #FFFFFF;
+    margin: 125px auto 0 auto;
+    @media (max-width: 614px) {
+        width: 100%;
+        margin: 91px 0 0 0px;
+        padding: 0 20px;
+    }
 `;
 
 const ContainerPostsAndTrendings = styled.div`
-display: flex;
-justify-content: space-between;
-width: 937px;
-margin: 29px auto;
-@media (max-width: 614px) {
-    width: 100%;
-}
+    display: flex;
+    justify-content: space-between;
+    width: 937px;
+    margin: 29px auto;
+    @media (max-width: 614px) {
+        width: 100%;
+    }
 `;
-const Trendings = styled.div`
-width: 301px;
-height: 406px;
-background: #171717;
-border-radius: 16px;
-color: #fff;
-@media (max-width: 614px) {
-    display: none;
-}
-`;
+
 const ContainerPosts =styled.div`
 width: 611px;
     & > span {
@@ -111,18 +102,62 @@ width: 611px;
         font-size: 23px;
         margin-top: 50px;
     }
-@media (max-width: 614px) {
-    width: 100%;
-}
+    @media (max-width: 614px) {
+        width: 100%;
+    }
 `;
 
 const CreatePost = styled.div`
-height: 209px;
-margin-bottom: 29px;
-background: #FFFFFF;
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-border-radius: 16px;
+    height: 209px;
+    margin-bottom: 29px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 16px;
+`;
+
+const TrendingStyle = styled.div`
+    width: 301px;
+    height: 406px;
+    background: #171717;
+    border-radius: 16px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    right: auto;
+    top: 200px;
+
+    @media (max-width: 614px) {
+        display: none;
+    }
+`;
+
+const Title = styled.div`
+    font-family: "Oswald", sans-serif;
+    font-size: 27px;
+    font-weight: 700;
+    padding: 15px;
+`;
+
+const Separator = styled.div`
+    width: 100%;
+    height: 1px;
+    background-color: #484848;
+`;
+
+const TrendingList = styled.ul`
+    padding: 15px;
+    
+    li {
+        width: 90%;
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        margin-top: 12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 `;
 
 
-export { HeaderStyles, Menu, ToggleMenu, PageTitle, ContainerPostsAndTrendings, Trendings, CreatePost, ContainerPosts };
+export { HeaderStyles, Menu, ToggleMenu, PageTitle, ContainerPostsAndTrendings, CreatePost, ContainerPosts, TrendingStyle, Title, Separator, TrendingList };

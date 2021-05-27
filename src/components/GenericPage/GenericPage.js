@@ -1,10 +1,11 @@
 import Loader from "react-loader-spinner";
 import { useLocation } from 'react-router-dom'
 
-import { PageTitle, ContainerPostsAndTrendings, Trendings, CreatePost, ContainerPosts } from "./Styles";
+import { PageTitle, ContainerPostsAndTrendings, CreatePost, ContainerPosts } from "./Styles";
 import Post from '../SinglePost/Post';
 
 import Header from "./Header";
+import Trending from "./Trending";
 
 export default function GenericPage({ title, arrayOfPosts }) {
     const location = useLocation().pathname;
@@ -19,7 +20,7 @@ export default function GenericPage({ title, arrayOfPosts }) {
                     {location === "/timeline" ? <CreatePost>Em breve</CreatePost> : ""}
                     {arrayOfPosts !== null ? (arrayOfPosts.length > 0 ? arrayOfPosts.map(p => <Post key={p.id} postDetails={p} />) : <span>Nenhum post encontrado</span>) : <span>{loading}</span>}
                 </ContainerPosts>
-                <Trendings>Em breve</Trendings>
+                <Trending />
             </ContainerPostsAndTrendings>
         </>
     );
