@@ -5,7 +5,7 @@ import { TrendingStyle, Title, Separator, TrendingList } from "./Styles.js";
 import UserContext from "../../contexts/UserContext";
 
 export default function Trending (){
-    const [hashtags, setHashtags] = useState("");
+    const [hashtags, setHashtags] = useState([]);
     const {userProfile} = useContext(UserContext);
 
     useEffect(() =>{
@@ -16,9 +16,6 @@ export default function Trending (){
         request.then(response => {
             setHashtags(response.data.hashtags)
         });
-        request.catch(error => {
-            console.log(error)
-        })
     },[])
 
     return (
@@ -26,7 +23,7 @@ export default function Trending (){
             <Title>trending</Title>
             <Separator></Separator>
             <TrendingList>
-                { hashtags === "" ? "" :
+                { hashtags.length !== 0 &&
                 hashtags.map(h =>(
                     <>
                     <Link to={`/hashtag/${h.name}}`}><li key ={h.id}>#&nbsp;{h.name}</li></Link>
