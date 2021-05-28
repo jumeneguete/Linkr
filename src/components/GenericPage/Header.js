@@ -28,9 +28,9 @@ export default function Header() {
         <>
             <HeaderStyles>
                 <span>linkr</span>
-                <Menu url={userProfile.user.avatar} onClick={(event) => toggle(event)}>
+                <Menu onClick={(event) => toggle(event)}>
                     <span>{menuSelected ? arrowUp : arrowDown}</span>
-                    <div></div>
+                    <img src={userProfile.user.avatar} alt={userProfile.user.username}/>
                 </Menu>
                 <ClickAwayListener onClickAway={() => setMenuSelected(false)}>
                     <ToggleMenu menuSelected={menuSelected}>

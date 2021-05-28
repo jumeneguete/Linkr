@@ -33,14 +33,12 @@ const Menu = styled.div`
         color:  #fff;
     }
 
-    div{
-        width: 60px;
-        height: 60px;
+    img {
+        border-radius: 50%;
+        height: 55px;
         margin-left: 10px;
-        border-radius: 70px;
-        background-image: ${props => props.url ? `url(${props.url})` : ""};
-        background-size: cover;
-        background-repeat: no-repeat;
+        width: 55px;
+        object-fit: cover;
     }
 `;
 
@@ -126,7 +124,6 @@ const CreatePost = styled.div`
         margin-right: 20px;
         width: 50px;
         object-fit: cover;
-
     }
     form {
         display: flex;
