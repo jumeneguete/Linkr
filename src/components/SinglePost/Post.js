@@ -59,7 +59,7 @@ export default function Post({ postDetails, setArrayOfPosts}) {
     return(
         <SinglePost>
             <Profile>
-                <img src={avatar} alt={username}/>
+                <Link to={`/user/${user.id}`}><img src={avatar} alt={username}/></Link>
                 {postLiked ? <IoHeartSharp color={'#AC0000'} size={25} /> : <IoHeartOutline onClick={likePost} color={'#FFFFFF'}  />}
                 <p>{likes === undefined ? 0 : likes.length } likes</p>
             </Profile>

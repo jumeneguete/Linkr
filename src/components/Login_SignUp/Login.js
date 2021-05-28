@@ -21,7 +21,6 @@ export default function Login() {
             history.push("/timeline");
             return ;
         }
-
     }, [])
 
     function SigningUp (e){
