@@ -26,7 +26,6 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
     const [OnEditingPost, setOnEditingPost] = useState(false);
     const [postMainDescription, setPostMainDescription] = useState(text);
     const [onSendingPostEdition, setOnSendingPostEdition] = useState(false);
-    console.log(postLiked)
 
     useEffect( () => {
         if (textEditRef.current)
