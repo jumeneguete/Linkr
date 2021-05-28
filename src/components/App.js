@@ -12,8 +12,8 @@ import MyPosts from './MyPosts_MyLikes/MyPosts';
 import MyLikes from './MyPosts_MyLikes/MyLikes';
 
 export default function App() {
-
-    const [userProfile, setUserProfile] = useState(null);
+    const alreadyLoggedIn = localStorage.getItem("lastLogin");
+    const [userProfile, setUserProfile] = useState(JSON.parse(alreadyLoggedIn));    
 
     return (
         <UserContext.Provider value={{ userProfile, setUserProfile }}>
