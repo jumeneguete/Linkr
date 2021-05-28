@@ -1,5 +1,5 @@
 import { useState, useContext, useRef, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import { IoHeartSharp, IoHeartOutline } from "react-icons/io5";
 import { BsTrash } from 'react-icons/bs';
 import { BsPencil } from 'react-icons/bs';
@@ -17,7 +17,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
     const { userProfile } = useContext(UserContext);
     const { token } = userProfile
     const textEditRef = useRef();
-    const history = useHistory();
+    const location = useLocation().pathname;
     const { text, link, linkTitle, linkDescription, linkImage, likes, id } = postDetails;
     const[ postLiked, setPostLiked ] = useState (likes.find(l => l["user.id"] === userProfile.user.id ||l["id"]===userProfile.user.id))
     const { username, avatar } = postDetails.user;
@@ -84,7 +84,12 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
 
     function getPost(){
         const config ={ headers: { Authorization: `Bearer ${token}` }}
-        const request = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts', config);
+        let request;
+        if(location === "/timeline"){
+            request = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts', config);
+        } else{
+            request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/users/${userProfile.user.id}/posts`, config);
+        }
         request.then(response => {
             setArrayOfPosts(response.data.posts)
         });
