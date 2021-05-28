@@ -20,6 +20,7 @@ export default function Header() {
     }
 
     function logout() {
+        localStorage.removeItem("lastLogin");
         setUserProfile("");
         history.push("/");
     }
@@ -27,10 +28,10 @@ export default function Header() {
     return (
         <>
             <HeaderStyles>
-                <span>linkr</span>
-                <Menu url={userProfile.user.avatar} onClick={(event) => toggle(event)}>
+                <span><Link to="/">linkr</Link></span>
+                <Menu onClick={(event) => toggle(event)}>
                     <span>{menuSelected ? arrowUp : arrowDown}</span>
-                    <div></div>
+                    <img src={userProfile.user.avatar} alt={userProfile.user.username}/>
                 </Menu>
                 <ClickAwayListener onClickAway={() => setMenuSelected(false)}>
                     <ToggleMenu menuSelected={menuSelected}>

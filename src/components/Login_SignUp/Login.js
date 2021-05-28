@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import UserContext from '../../contexts/UserContext';
@@ -10,11 +10,18 @@ import Input from "./Input";
 
 export default function Login() {
 
-    const { setUserProfile } = useContext(UserContext);
+    const { userProfile, setUserProfile } = useContext(UserContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const history = useHistory();
+
+    useEffect(()=>{
+        if (userProfile){
+            history.push("/timeline");
+            return ;
+        }
+    }, [])
 
     function SigningUp (e){
         e.preventDefault();
@@ -25,6 +32,8 @@ export default function Login() {
         setLoading(true);
         request.then((response) => {
             setUserProfile(response.data)
+            const loginSaved = JSON.stringify(response.data);
+            localStorage.setItem("lastLogin", loginSaved);
             history.push("/timeline");
             setLoading(false);
         });

@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { CreatePost } from '../GenericPage/Styles'
 import UserContext from '../../contexts/UserContext';
-import UserPosts from '../UserPosts/UserPosts'
 
 export default function UserInput ({ setArrayOfPosts }) {
     const { userProfile } = useContext(UserContext);
@@ -16,7 +15,7 @@ export default function UserInput ({ setArrayOfPosts }) {
 
         if (userLink.length) {
             setClicked(true);
-            sendPost(formatObj());
+            sendPost(formatObj()); 
         }
         else {
             alert(`Desculpe, você não pode publicar sem um link`);
@@ -64,7 +63,7 @@ export default function UserInput ({ setArrayOfPosts }) {
 
     return (
         <CreatePost clicked={clicked}>
-            <img src={userProfile.user.avatar} />
+            <img src={userProfile.user.avatar} alt={userProfile.user.username}/>
             <form onSubmit={(event) => submitComment(event)}>
 
                 <h2>O que você tem pra favoritar hoje?</h2>
@@ -76,7 +75,7 @@ export default function UserInput ({ setArrayOfPosts }) {
                     disabled={clicked}
                 />
 
-                <input type='text' 
+                <textarea type='text' 
                     placeholder='Muito irado esse post falando de #JavaScript' 
                     onChange={(e) => setUserComment(e.target.value)} 
                     value={userComment} 
