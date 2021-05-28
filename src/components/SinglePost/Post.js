@@ -83,7 +83,6 @@ export default function Post({ postDetails, setArrayOfPosts}) {
         alert(`Sorry, we couln't delete your post`);
     }
 
-
     return(
         <SinglePost>
             <Profile>
