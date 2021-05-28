@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import ReactTooltip from 'react-tooltip';
 
 const SinglePost = styled.div`
 display:flex;
@@ -41,9 +42,7 @@ width: calc(15% - 20px);
         object-fit: cover;
     }
     p {
-        margin-top: 5px;
-        font-size: 11px;
-        color: #fff;
+       
     }
     svg {
         font-size: 25px;
@@ -71,7 +70,7 @@ word-break: break-all;
 `;
 
 const BsTrash = styled.div`
-color: white
+color: white;
 `;
 
 const CreatorName = styled.div`
@@ -145,4 +144,22 @@ const LinkImg = styled.div`
     border-radius: 0px 12px 13px 0px;
 `;
 
-export { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag };
+const LikesContainer = styled.div`
+ margin-top: 5px;
+font-size: 11px;
+color: #fff;
+cursor: pointer;
+`;
+
+const StyledReactTooltip = styled(ReactTooltip)`
+
+background: rgba(255, 255, 255, 0.9) !important;
+color: #505050 !important;
+border-radius: 3px !important;
+padding: 5px !important;
+
+    &:after{
+        border-bottom-color: white !important;
+    }
+`;
+export { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag, LikesContainer, StyledReactTooltip };
