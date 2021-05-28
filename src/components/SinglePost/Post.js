@@ -8,7 +8,7 @@ import Modal from "../UserPosts/Modal";
 import axios from 'axios';
 import UserContext from '../../contexts/UserContext'
 
-import { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag, input } from "./Styles";
+import { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag } from "./Styles";
 
 export default function Post({ postDetails, setArrayOfPosts}) {
     const { userProfile } = useContext(UserContext);
@@ -129,15 +129,15 @@ export default function Post({ postDetails, setArrayOfPosts}) {
                             else if (event.key === "Enter") 
                                 sendEditedPostToServer();
                         }}
-                    /> : "" }
-
-                </div>
-                <Description>
+                    /> : <Description>
                     <ReactHashtag renderHashtag={(val) => (
                         <Link to={`/hashtag/${val.replace("#", "")}`} ><Hashtag >{val}</Hashtag></Link>)}>
                         {text}
                     </ReactHashtag>
-                </Description>
+                    </Description> }
+
+                </div>
+        
                 <a href={link} target="_blank" rel="noreferrer">
                     <LinkContainer>
                         <LinkInfo>
