@@ -18,14 +18,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
     const textEditRef = useRef();
     const history = useHistory();
     const { text, link, linkTitle, linkDescription, linkImage, likes, id } = postDetails;
-    const[ postLiked, setPostLiked ] = useState( likes && likes.forEach(l => {
-        if(l["user.id"] === userProfile.user.id){
-            return true;
-        } else {
-            return false;
-        }
-    }))
-   ;
+    const[ postLiked, setPostLiked ] = useState (likes.find(l => l["user.id"] === userProfile.user.id))
     const { username, avatar } = postDetails.user;
     const [ modalIsOpen, setModalIsOpen ] = useState(false);
     const [ isLoading, setIsLoading ] = useState(false);
