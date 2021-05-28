@@ -19,13 +19,14 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
     const textEditRef = useRef();
     const history = useHistory();
     const { text, link, linkTitle, linkDescription, linkImage, likes, id } = postDetails;
-    const[ postLiked, setPostLiked ] = useState (likes.find(l => l["user.id"] === userProfile.user.id))
+    const[ postLiked, setPostLiked ] = useState (likes.find(l => l["user.id"] === userProfile.user.id ||l["id"]===userProfile.user.id))
     const { username, avatar } = postDetails.user;
     const [ modalIsOpen, setModalIsOpen ] = useState(false);
     const [ isLoading, setIsLoading ] = useState(false);
     const [OnEditingPost, setOnEditingPost] = useState(false);
     const [postMainDescription, setPostMainDescription] = useState(text);
     const [onSendingPostEdition, setOnSendingPostEdition] = useState(false);
+    console.log(postLiked)
 
     useEffect( () => {
         if (textEditRef.current)
