@@ -8,7 +8,7 @@ import Modal from "../UserPosts/Modal";
 import axios from 'axios';
 import UserContext from '../../contexts/UserContext'
 
-import { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag } from "./Styles";
+import { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag, input } from "./Styles";
 
 export default function Post({ postDetails, setArrayOfPosts}) {
     const { userProfile } = useContext(UserContext);

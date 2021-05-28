@@ -58,6 +58,12 @@ word-break: break-all;
     justify-content: space-between;
     margin-left: 5px;
 }
+
+svg{
+    size: 18px; 
+    margin-right: 10px;
+    color: white;
+} 
 `;
 
 const BsTrash = styled.div`
@@ -135,4 +141,11 @@ const LinkImg = styled.div`
     border-radius: 0px 12px 13px 0px;
 `;
 
-export { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag };
+const Input = styled.div`
+        height: 2rem;
+        border: 0;
+        margin-top: 0.4rem;
+        border-radius: 0.7rem;
+`;
+
+export { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag, Input };
