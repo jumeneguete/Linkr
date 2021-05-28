@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import UserContext from '../contexts/UserContext';
 
 import GlobalStyle from "../styles/GlobalStyle";
