@@ -15,7 +15,7 @@ export default function UserInput ({ setArrayOfPosts }) {
 
         if (userLink.length) {
             setClicked(true);
-            sendPost(formatObj());
+            sendPost(formatObj()); 
         }
         else {
             alert(`Desculpe, você não pode publicar sem um link`);
@@ -75,7 +75,7 @@ export default function UserInput ({ setArrayOfPosts }) {
                     disabled={clicked}
                 />
 
-                <input type='text' 
+                <textarea type='text' 
                     placeholder='Muito irado esse post falando de #JavaScript' 
                     onChange={(e) => setUserComment(e.target.value)} 
                     value={userComment} 

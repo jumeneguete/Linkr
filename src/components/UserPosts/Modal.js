@@ -74,7 +74,15 @@ const BackButton = styled.button`
   color: #1877F2;
   cursor: pointer;
   outline: none;
-  padding: 5px 20px;
+  padding: 8px 20px;
+  font-weight: 700;
+  font-size: 16px;
+
+  @media (max-width: 614px) {
+      padding: 5px 20px;
+      font-size: 14px;  
+      margin-right: 5px;
+    }
 `;
 
 const DeleteButton = styled.button`
@@ -84,5 +92,13 @@ const DeleteButton = styled.button`
   color: white;
   cursor: pointer;
   outline: none;
-  padding: 5px 20px;
+  padding: 8px 20px;
+  font-weight: 700;
+  font-size: 16px;
+
+  @media (max-width: 614px) {
+      padding: 5px 20px;
+      font-size: 14px;  
+      margin-left: 5px;
+    }
 `;

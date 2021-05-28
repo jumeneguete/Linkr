@@ -28,7 +28,7 @@ export default function Header() {
     return (
         <>
             <HeaderStyles>
-                <span>linkr</span>
+                <span><Link to="/">linkr</Link></span>
                 <Menu onClick={(event) => toggle(event)}>
                     <span>{menuSelected ? arrowUp : arrowDown}</span>
                     <img src={userProfile.user.avatar} alt={userProfile.user.username}/>
