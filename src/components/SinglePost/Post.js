@@ -6,18 +6,21 @@ import { BsPencil } from 'react-icons/bs';
 import ReactHashtag from "react-hashtag";
 import Modal from "../UserPosts/Modal";
 import axios from 'axios';
+
 import UserContext from '../../contexts/UserContext'
+import { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag, LikesContainer, StyledReactTooltip } from "./Styles";
+import ReactTooltip from 'react-tooltip';
 
-import { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag } from "./Styles";
+export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts}) {
 
-export default function Post({ postDetails, setArrayOfPosts}) {
+    
     const { userProfile } = useContext(UserContext);
     const { token } = userProfile
     const textEditRef = useRef();
-    const history = useHistory()
-    const[postLiked, setPostLiked] = useState(false)
-    const { text, link, linkTitle, linkDescription, linkImage, user, likes } = postDetails;
-    const { username, avatar } = user;
+    const history = useHistory();
+    const { text, link, linkTitle, linkDescription, linkImage, likes, id } = postDetails;
+    const[ postLiked, setPostLiked ] = useState (likes.find(l => l["user.id"] === userProfile.user.id ||l["id"]===userProfile.user.id))
+    const { username, avatar } = postDetails.user;
     const [ modalIsOpen, setModalIsOpen ] = useState(false);
     const [ isLoading, setIsLoading ] = useState(false);
     const [OnEditingPost, setOnEditingPost] = useState(false);
@@ -32,7 +35,7 @@ export default function Post({ postDetails, setArrayOfPosts}) {
      function sendEditedPostToServer() {
         setOnSendingPostEdition(true);
         const config ={ headers: { Authorization: `Bearer ${token}` }}
-        const request = axios.put(`https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts/${postDetails.id}`, {'text': postMainDescription}, config);
+        const request = axios.put(`https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts/${id}`, {'text': postMainDescription}, config);
 
         request.then( ({data}) => {
             setOnSendingPostEdition(false);  //input desabilitado
@@ -48,17 +51,28 @@ export default function Post({ postDetails, setArrayOfPosts}) {
     }
 
     function likePost() {
+        ReactTooltip.rebuild();
+        const newArrayOfPosts = [...arrayOfPosts];
         const config ={ headers: { Authorization: `Bearer ${token}` }}
-        const request = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts/${postDetails.id}/like`,{}, config);
+        let request;
+        if(!postLiked){
+            request = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts/${id}/like`,{}, config);
+        }else {
+            request = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts/${id}/dislike`,{}, config);
+        }
         request.then( response => {
-            setPostLiked(true)
+            const newPost = {...postDetails, likes: response.data.post.likes};
+            newArrayOfPosts[index] = newPost;
+            setArrayOfPosts(newArrayOfPosts)
+            setPostLiked(!postLiked);
+            
         })
     }
 
     function Delete () {
         const config ={ headers: { Authorization: `Bearer ${token}` }}
         setIsLoading(true);
-        const request = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts/${postDetails.id}`,config);
+        const request = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts/${id}`,config);
         request.then(deleteSucceeded).catch(errorHandle);
     }
 
@@ -86,13 +100,26 @@ export default function Post({ postDetails, setArrayOfPosts}) {
     return(
         <SinglePost>
             <Profile>
-                <Link to={`/user/${user.id}`}><img src={avatar} alt={username}/></Link>
-                {postLiked ? <IoHeartSharp color={'#AC0000'} size={25} /> : <IoHeartOutline onClick={likePost} color={'#FFFFFF'}  />}
-                <p>{likes === undefined ? 0 : likes.length } likes</p>
+                <Link to={`/user/${postDetails.user.id}`}><img src={avatar} alt={username}/></Link>
+                {postLiked ? <IoHeartSharp onClick={likePost} color={'#AC0000'} /> : <IoHeartOutline onClick={likePost} color={'#FFFFFF'}  />}
+                <LikesContainer data-tip data-for={`${id}`}>
+                    {likes ? `${likes.length} likes` : "0 like" }
+                </LikesContainer>
+                <StyledReactTooltip border place="bottom" effect="solid" id={`${id}`}>
+                    <span>
+                        {likes[0] ? 
+                            likes[1] ? 
+                                likes[2] ? 
+                                    `${likes[0]["user.username"]||likes[0]["username"]}, ${likes[1]["user.username"]||likes[1]["username"]} e outras ${likes.length - 2} pessoas` 
+                                : `${likes[0]["user.username"]||likes[0]["username"]}, ${likes[1]["user.username"]||likes[1]["username"]} ` 
+                            : `${likes[0]["user.username"]||likes[0]["username"]}`
+                        : `0 like`}
+                    </span>
+                </StyledReactTooltip>
             </Profile>
             <PostContent>
                 <div className='icones'>
-                    <Link to={`/user/${user.id}`}><CreatorName>{username}</CreatorName></Link>
+                    <Link to={`/user/${postDetails.user.id}`}><CreatorName>{username}</CreatorName></Link>
                     
                 <div className='iconesseparados'>
                     {userProfile.user.username === username && 
