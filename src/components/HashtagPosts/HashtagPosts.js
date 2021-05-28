@@ -23,7 +23,7 @@ export default function HashtagPosts() {
 
     return(
         <>
-            {hashtagPostsList && <GenericPage title={`# ${hashtag}`} arrayOfPosts={hashtagPostsList}/>}
+            {hashtagPostsList && <GenericPage title={`# ${hashtag}`} arrayOfPosts={hashtagPostsList} setArrayOfPosts={setHashtagPostsList}/>}
         </>
     );
 }

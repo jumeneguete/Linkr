@@ -21,7 +21,7 @@ export default function UserPosts() {
 
     return(
         <>
-            {myLikesList && <GenericPage title={`My Likes`} arrayOfPosts={myLikesList} setArrayOfPosts={""} />}
+            {myLikesList && <GenericPage title={`My Likes`} arrayOfPosts={myLikesList} setArrayOfPosts={setMyLikesList} />}
         </>
     );
 }
