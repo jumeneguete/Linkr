@@ -51,7 +51,7 @@ export default function Post({ postDetails, setArrayOfPosts}) {
         const config ={ headers: { Authorization: `Bearer ${token}` }}
         const request = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts/${postDetails.id}/like`,{}, config);
         request.then( response => {
-            setPostLiked(true)
+            setPostLiked(!postLiked)
         })
     }
 
