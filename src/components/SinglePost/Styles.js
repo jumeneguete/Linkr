@@ -1,3 +1,4 @@
+
 import styled from 'styled-components';
 
 const SinglePost = styled.div`
@@ -10,6 +11,21 @@ border-radius: 16px;
 @media (max-width: 614px) {
     border-radius: 0;
     padding: 15px;
+}
+input {
+    background: #EFEFEF;
+    border-radius: 5px;
+    cursor: text;
+    flex-grow: grow;
+    margin-bottom: 10px;
+    overflow-wrap: anywhere;
+    padding: 10px;
+    width: 100%;
+    box-shadow:none;
+}
+input[type=text] {
+    flex-grow: 1;
+}
 }
 `;
 const Profile = styled.div`
@@ -65,7 +81,6 @@ color: #FFFFFF;
 @media (max-width: 614px) {
     font-size: 17px;
 }
-
 `;
 const Description = styled.div`
     font-size: 17px;
@@ -91,7 +106,6 @@ const LinkInfo = styled.div`
     justify-content: space-between;
     max-width:70%;
     padding: 20px;
-
     h1 {
         font-size: 16px;
         line-height: 19px;
@@ -120,7 +134,6 @@ const LinkInfo = styled.div`
         font-size: 9px;
     }
 }
-
 `;
 const LinkImg = styled.div`
     min-width: 30%;
