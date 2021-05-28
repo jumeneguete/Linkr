@@ -20,7 +20,7 @@ export default function Header() {
     }
 
     function logout() {
-        const lastUser = localStorage.removeItem("lastLogin");
+        localStorage.removeItem("lastLogin");
         setUserProfile("");
         history.push("/");
     }
@@ -28,7 +28,7 @@ export default function Header() {
     return (
         <>
             <HeaderStyles>
-                <span>linkr</span>
+                <span><Link to="/">linkr</Link></span>
                 <Menu onClick={(event) => toggle(event)}>
                     <span>{menuSelected ? arrowUp : arrowDown}</span>
                     <img src={userProfile.user.avatar} alt={userProfile.user.username}/>

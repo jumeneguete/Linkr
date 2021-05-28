@@ -27,7 +27,6 @@ input {
 input[type=text] {
     flex-grow: 1;
 }
-}
 `;
 const Profile = styled.div`
 display: flex;
