@@ -97,12 +97,11 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
         alert(`Sorry, we couln't delete your post`);
     }
 
-
     return(
         <SinglePost>
             <Profile>
                 <Link to={`/user/${postDetails.user.id}`}><img src={avatar} alt={username}/></Link>
-                {postLiked ? <IoHeartSharp onClick={likePost} color={'#AC0000'} size={25} /> : <IoHeartOutline onClick={likePost} color={'#FFFFFF'}  />}
+                {postLiked ? <IoHeartSharp onClick={likePost} color={'#AC0000'} /> : <IoHeartOutline onClick={likePost} color={'#FFFFFF'}  />}
                 <LikesContainer data-tip data-for={`${id}`}>
                     {likes ? `${likes.length} likes` : "0 like" }
                 </LikesContainer>

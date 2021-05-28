@@ -1,3 +1,4 @@
+
 import styled from 'styled-components';
 import ReactTooltip from 'react-tooltip';
 
@@ -12,7 +13,6 @@ border-radius: 16px;
     border-radius: 0;
     padding: 15px;
 }
-
 input {
     background: #EFEFEF;
     border-radius: 5px;
@@ -45,6 +45,7 @@ width: calc(15% - 20px);
     }
     svg {
         font-size: 25px;
+        cursor: pointer;
     }
 @media (max-width: 614px) {
     img{
@@ -79,7 +80,6 @@ color: #FFFFFF;
 @media (max-width: 614px) {
     font-size: 17px;
 }
-
 `;
 const Description = styled.div`
     font-size: 17px;
@@ -105,7 +105,6 @@ const LinkInfo = styled.div`
     justify-content: space-between;
     max-width:70%;
     padding: 20px;
-
     h1 {
         font-size: 16px;
         line-height: 19px;
@@ -134,7 +133,6 @@ const LinkInfo = styled.div`
         font-size: 9px;
     }
 }
-
 `;
 const LinkImg = styled.div`
     min-width: 30%;
