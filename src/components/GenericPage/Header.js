@@ -20,7 +20,7 @@ export default function Header() {
     }
 
     function logout() {
-        const lastUser = localStorage.removeItem("lastLogin");
+        localStorage.removeItem("lastLogin");
         setUserProfile("");
         history.push("/");
     }
