@@ -66,6 +66,7 @@ const ToggleMenu = styled.div`
         font-weight: 700;
         color: #fff;
         margin-top: 7px;
+        cursor: pointer;
     }
 `;
 
