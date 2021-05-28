@@ -114,6 +114,7 @@ export default function Post({ postDetails, setArrayOfPosts}) {
                             }}/>
                     }
                 </div>
+                </div>
 
                 {OnEditingPost ? 
                     <input 
@@ -135,8 +136,6 @@ export default function Post({ postDetails, setArrayOfPosts}) {
                         {text}
                     </ReactHashtag>
                     </Description> }
-
-                </div>
         
                 <a href={link} target="_blank" rel="noreferrer">
                     <LinkContainer>
