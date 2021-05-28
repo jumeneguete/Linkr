@@ -11,6 +11,22 @@ border-radius: 16px;
     border-radius: 0;
     padding: 15px;
 }
+
+input {
+    background: #EFEFEF;
+    border-radius: 5px;
+    cursor: text;
+    flex-grow: grow;
+    margin-bottom: 10px;
+    overflow-wrap: anywhere;
+    padding: 10px;
+    width: 100%;
+    box-shadow:none;
+}
+input[type=text] {
+    flex-grow: 1;
+}
+}
 `;
 const Profile = styled.div`
 display: flex;

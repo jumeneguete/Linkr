@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useRef, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom'
 import { IoHeartSharp, IoHeartOutline } from "react-icons/io5";
 import { BsTrash } from 'react-icons/bs';
@@ -13,12 +13,39 @@ import { SinglePost, Profile, PostContent, CreatorName, Description, LinkContain
 export default function Post({ postDetails, setArrayOfPosts}) {
     const { userProfile } = useContext(UserContext);
     const { token } = userProfile
+    const textEditRef = useRef();
     const history = useHistory()
     const[postLiked, setPostLiked] = useState(false)
     const { text, link, linkTitle, linkDescription, linkImage, user, likes } = postDetails;
     const { username, avatar } = user;
     const [ modalIsOpen, setModalIsOpen ] = useState(false);
     const [ isLoading, setIsLoading ] = useState(false);
+    const [OnEditingPost, setOnEditingPost] = useState(false);
+    const [postMainDescription, setPostMainDescription] = useState(text);
+    const [onSendingPostEdition, setOnSendingPostEdition] = useState(false);
+
+    useEffect( () => {
+        if (textEditRef.current)
+          textEditRef.current.focus();
+     }, [OnEditingPost]);
+
+     function sendEditedPostToServer() {
+        setOnSendingPostEdition(true);
+        const config ={ headers: { Authorization: `Bearer ${token}` }}
+        const request = axios.put(`https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts/${postDetails.id}`, {'text': postMainDescription}, config);
+
+        request.then( ({data}) => {
+            setOnSendingPostEdition(false);  //input desabilitado
+            setOnEditingPost(false);  //edição finalizada
+            getPost(true);   //refresh Timeline
+        })
+        request.catch( () => {
+            setOnSendingPostEdition(false);
+            setOnEditingPost(false);
+            alert("A alteração não foi possível de ser concluída!");
+            setPostMainDescription(text);
+        })
+    }
 
     function likePost() {
         const config ={ headers: { Authorization: `Bearer ${token}` }}
@@ -68,6 +95,7 @@ export default function Post({ postDetails, setArrayOfPosts}) {
                 <div className='icones'>
                     <Link to={`/user/${user.id}`}><CreatorName>{username}</CreatorName></Link>
                     
+                <div className='iconesseparados'>
                     {userProfile.user.username === username && 
                             <BsTrash color="#FFFFFF" onClick={() => setModalIsOpen(!modalIsOpen)}/>
                         } 
@@ -79,13 +107,36 @@ export default function Post({ postDetails, setArrayOfPosts}) {
                         isLoading = { isLoading }
                     />
 
+                    {userProfile.user.username === username && 
+                            <BsPencil color={'#FFFFFF'} onClick={() => {
+                                setOnEditingPost(!OnEditingPost)
+                                setPostMainDescription(text);
+                            }}/>
+                    }
                 </div>
-                <Description>
+                </div>
+
+                {OnEditingPost ? 
+                    <input 
+                        ref = {textEditRef}
+                        disabled = {onSendingPostEdition}
+                        value = {postMainDescription}
+                        onChange ={e => setPostMainDescription(e.target.value)}
+                        onKeyDown = { (event) => {
+                            if(event.key === "Escape") {
+                                setOnEditingPost(false);
+                                setPostMainDescription(text);
+                            }                               
+                            else if (event.key === "Enter") 
+                                sendEditedPostToServer();
+                        }}
+                    /> : <Description>
                     <ReactHashtag renderHashtag={(val) => (
                         <Link to={`/hashtag/${val.replace("#", "")}`} ><Hashtag >{val}</Hashtag></Link>)}>
                         {text}
                     </ReactHashtag>
-                </Description>
+                    </Description> }
+        
                 <a href={link} target="_blank" rel="noreferrer">
                     <LinkContainer>
                         <LinkInfo>
