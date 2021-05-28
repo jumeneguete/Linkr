@@ -55,6 +55,7 @@ export default function Post({ postDetails, setArrayOfPosts}) {
         alert(`Sorry, we couln't delete your post`);
     }
 
+    console.log(postDetails)
 
     return(
         <SinglePost>
