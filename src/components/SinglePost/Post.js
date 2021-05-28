@@ -9,10 +9,11 @@ import axios from 'axios';
 
 import UserContext from '../../contexts/UserContext'
 import { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag, LikesContainer, StyledReactTooltip } from "./Styles";
+import ReactTooltip from 'react-tooltip';
 
 export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts}) {
 
-
+    
     const { userProfile } = useContext(UserContext);
     const { token } = userProfile
     const textEditRef = useRef();
@@ -25,7 +26,6 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
     const [OnEditingPost, setOnEditingPost] = useState(false);
     const [postMainDescription, setPostMainDescription] = useState(text);
     const [onSendingPostEdition, setOnSendingPostEdition] = useState(false);
-    console.log(postLiked)
 
     useEffect( () => {
         if (textEditRef.current)
@@ -51,6 +51,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
     }
 
     function likePost() {
+        ReactTooltip.rebuild();
         const newArrayOfPosts = [...arrayOfPosts];
         const config ={ headers: { Authorization: `Bearer ${token}` }}
         let request;
@@ -63,7 +64,8 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
             const newPost = {...postDetails, likes: response.data.post.likes};
             newArrayOfPosts[index] = newPost;
             setArrayOfPosts(newArrayOfPosts)
-            setPostLiked(!postLiked)
+            setPostLiked(!postLiked);
+            
         })
     }
 
@@ -109,9 +111,9 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                         {likes[0] ? 
                             likes[1] ? 
                                 likes[2] ? 
-                                    `${likes[0]["user.username"]}, ${likes[1]["user.username"]} e outras ${likes.length - 2} pessoas` 
-                                : `${likes[0]["user.username"]}, ${likes[1]["user.username"]}`
-                            : `${likes[0]["user.username"]}`
+                                    `${likes[0]["user.username"]||likes[0]["username"]}, ${likes[1]["user.username"]||likes[1]["username"]} e outras ${likes.length - 2} pessoas` 
+                                : `${likes[0]["user.username"]||likes[0]["username"]}, ${likes[1]["user.username"]||likes[1]["username"]} ` 
+                            : `${likes[0]["user.username"]||likes[0]["username"]}`
                         : `0 like`}
                     </span>
                 </StyledReactTooltip>
