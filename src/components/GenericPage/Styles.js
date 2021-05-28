@@ -147,7 +147,7 @@ const CreatePost = styled.div`
             margin-bottom: 10px;
             width: 100%;
         }
-        input {
+        input, textarea {
             background: #EFEFEF;
             border-radius: 5px;
             cursor: text;
@@ -163,12 +163,19 @@ const CreatePost = styled.div`
             flex-grow: 1;
         }
 
-        input::placeholder{
+        textarea {
+            height: 70px;
+            resize: none;
+        }
+
+        input::placeholder, textarea::placeholder{
+            font-family: "Lato", sans-serif;
+            padding-top: 0;
             font-size: 15px;
             color: #949494;
         }
 
-        input:focus{
+        input:focus, textarea:focus{
             box-shadow: 0 0 0 0;
             outline: 0;
         }
@@ -180,9 +187,10 @@ const CreatePost = styled.div`
         width: 100vw;
         form {
             padding-right: 20px;
+
             button {
                 font-size: 15px;
-                margin-top: 3px;
+                margin-top: 5px;
                 padding: 7px;
             }
         
@@ -192,10 +200,19 @@ const CreatePost = styled.div`
                 margin-bottom: 15px;
                 text-align: center;
             }
-            input {
+           
+            input, textarea {
                 font-size: 16px;
                 margin-bottom: 5px;
             }
+            input {
+                height: 30px;
+            }
+
+            textarea {
+                height: 60px;
+            }
+
         }
         
         img {
