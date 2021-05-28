@@ -28,10 +28,10 @@ export default function Header() {
     return (
         <>
             <HeaderStyles>
-                <span><Link to="/timeline">linkr</Link></span>
-                <Menu url={userProfile.user.avatar} onClick={(event) => toggle(event)}>
+                <span>linkr</span>
+                <Menu onClick={(event) => toggle(event)}>
                     <span>{menuSelected ? arrowUp : arrowDown}</span>
-                    <div></div>
+                    <img src={userProfile.user.avatar} alt={userProfile.user.username}/>
                 </Menu>
                 <ClickAwayListener onClickAway={() => setMenuSelected(false)}>
                     <ToggleMenu menuSelected={menuSelected}>

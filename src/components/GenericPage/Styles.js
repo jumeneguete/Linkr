@@ -29,18 +29,16 @@ const Menu = styled.div`
     cursor: pointer;    
 
     svg {
-        width: 40px;
+        width: 20px;
         color:  #fff;
     }
 
-    div{
-        width: 60px;
-        height: 60px;
+    img {
+        border-radius: 50%;
+        height: 55px;
         margin-left: 10px;
-        border-radius: 70px;
-        background-image: ${props => props.url ? `url(${props.url})` : ""};
-        background-size: cover;
-        background-repeat: no-repeat;
+        width: 55px;
+        object-fit: cover;
     }
 `;
 
@@ -74,6 +72,8 @@ const ToggleMenu = styled.div`
 const PageTitle = styled.div`
     width: 937px;
     font-size: 43px;
+    font-weight: 700;
+    font-family: "Oswald", sans-serif;
     color: #FFFFFF;
     margin: 125px auto 0 auto;
     @media (max-width: 614px) {
@@ -98,6 +98,9 @@ width: 611px;
     & > span {
         display: flex;
         justify-content: center;
+        color: #FFFFFF;
+        font-size: 23px;
+        margin-top: 50px;
     }
     @media (max-width: 614px) {
         width: 100%;
@@ -105,11 +108,100 @@ width: 611px;
 `;
 
 const CreatePost = styled.div`
-    height: 209px;
-    margin-bottom: 29px;
-    background: #FFFFFF;
+    background: #fff;
+    border-radius: 15px;
+    color: #707070;
+    display: flex;
+    font: 300 16px 'Lato', sans-serif;
+    height: 250px;
+    margin-bottom: 20px;
+    padding: 25px;
+    width: 600px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 16px;
+    img {
+        border-radius: 50%;
+        height: 50px;
+        margin-right: 20px;
+        width: 50px;
+        object-fit: cover;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        width: 100%;
+        button {
+            font-size: 15px;
+            background: ${ props => props.clicked ? '#CCC' : '#1877F2'};
+            border-radius: 5px;
+            color: #FFF;
+            font-weight: 700;
+            padding: 10px;
+            text-align: center;
+            border: none;
+            width: 120px;
+        }
+        h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        input {
+            background: #EFEFEF;
+            border-radius: 5px;
+            cursor: text;
+            flex-grow: grow;
+            margin-bottom: 10px;
+            overflow-wrap: anywhere;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            box-shadow:none;
+        }
+        input[type=text] {
+            flex-grow: 1;
+        }
+
+        input::placeholder{
+            font-size: 15px;
+            color: #949494;
+        }
+
+        input:focus{
+            box-shadow: 0 0 0 0;
+            outline: 0;
+        }
+    }
+    @media (max-width: 614px) {
+        border-radius: 0;
+        height: 200px;
+        padding: 20px;
+        width: 100vw;
+        form {
+            padding-right: 20px;
+            button {
+                font-size: 15px;
+                margin-top: 3px;
+                padding: 7px;
+            }
+        
+            h2 {
+                font-size: 18px;
+                letter-spacing: -0.5px;
+                margin-bottom: 15px;
+                text-align: center;
+            }
+            input {
+                font-size: 16px;
+                margin-bottom: 5px;
+            }
+        }
+        
+        img {
+            display: none;
+        }
+    }
+    }
 `;
 
 const TrendingStyle = styled.div`
@@ -155,6 +247,5 @@ const TrendingList = styled.ul`
         text-overflow: ellipsis;
     }
 `;
-
 
 export { HeaderStyles, Menu, ToggleMenu, PageTitle, ContainerPostsAndTrendings, CreatePost, ContainerPosts, TrendingStyle, Title, Separator, TrendingList };

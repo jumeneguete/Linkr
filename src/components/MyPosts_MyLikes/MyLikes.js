@@ -4,24 +4,24 @@ import axios from 'axios';
 import UserContext from '../../contexts/UserContext';
 import GenericPage from '../GenericPage/GenericPage';
 
-export default function Timeline() {
+export default function UserPosts() {
 
     const { userProfile } = useContext(UserContext);
     const { token } = userProfile
-    const [postsList, setPostsList] = useState(null);
+    const [myLikesList, setMyLikesList] = useState(null);
 
     useEffect(() => {
         const config ={ headers: { Authorization: `Bearer ${token}` }}
-        const request = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts', config);
+        const request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts/liked`, config);
         request.then(response => {
-            setPostsList(response.data.posts)
+            setMyLikesList(response.data.posts)
         });
-        request.catch(erro => alert("Ocorreu um erro ao carregar os posts"))
+        request.catch(erro => alert("Ocorreu um erro ao carregar os seus likes"))
     }, [token])
 
     return(
         <>
-            <GenericPage title={`timeline`} arrayOfPosts={postsList} setArrayOfPosts={setPostsList}/>
+            {myLikesList && <GenericPage title={`My Likes`} arrayOfPosts={myLikesList} setArrayOfPosts={""} />}
         </>
     );
 }
