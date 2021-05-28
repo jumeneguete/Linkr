@@ -29,7 +29,7 @@ const Menu = styled.div`
     cursor: pointer;    
 
     svg {
-        width: 40px;
+        width: 20px;
         color:  #fff;
     }
 
@@ -74,6 +74,8 @@ const ToggleMenu = styled.div`
 const PageTitle = styled.div`
     width: 937px;
     font-size: 43px;
+    font-weight: 700;
+    font-family: "Oswald", sans-serif;
     color: #FFFFFF;
     margin: 125px auto 0 auto;
     @media (max-width: 614px) {
@@ -108,7 +110,7 @@ width: 611px;
 `;
 
 const CreatePost = styled.div`
-    background: #FFF;
+    background: #fff;
     border-radius: 15px;
     color: #707070;
     display: flex;
@@ -117,11 +119,14 @@ const CreatePost = styled.div`
     margin-bottom: 20px;
     padding: 25px;
     width: 600px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     img {
         border-radius: 50%;
         height: 50px;
         margin-right: 20px;
         width: 50px;
+        object-fit: cover;
+
     }
     form {
         display: flex;
@@ -129,12 +134,14 @@ const CreatePost = styled.div`
         align-items: flex-end;
         width: 100%;
         button {
+            font-size: 15px;
             background: ${ props => props.clicked ? '#CCC' : '#1877F2'};
             border-radius: 5px;
             color: #FFF;
             font-weight: 700;
             padding: 10px;
             text-align: center;
+            border: none;
             width: 120px;
         }
         h2 {
@@ -151,23 +158,34 @@ const CreatePost = styled.div`
             overflow-wrap: anywhere;
             padding: 10px;
             width: 100%;
+            border: none;
             box-shadow:none;
         }
         input[type=text] {
             flex-grow: 1;
         }
+
+        input::placeholder{
+            font-size: 15px;
+            color: #949494;
+        }
+
+        input:focus{
+            box-shadow: 0 0 0 0;
+            outline: 0;
+        }
     }
     @media (max-width: 614px) {
         border-radius: 0;
         height: 200px;
-        padding: 15px;
+        padding: 20px;
         width: 100vw;
         form {
+            padding-right: 20px;
             button {
                 font-size: 15px;
                 margin-top: 3px;
-                padding: 3px;
-                width: 120px;
+                padding: 7px;
             }
         
             h2 {
