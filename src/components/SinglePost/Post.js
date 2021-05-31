@@ -1,5 +1,5 @@
 import { useState, useContext, useRef, useEffect } from 'react';
-import { Link, useHistory, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { IoHeartSharp, IoHeartOutline } from "react-icons/io5";
 import { BsTrash } from 'react-icons/bs';
 import { BsPencil } from 'react-icons/bs';
@@ -18,7 +18,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
     const { token } = userProfile
     const textEditRef = useRef();
     const location = useLocation().pathname;
-    const { text, link, linkTitle, linkDescription, linkImage, likes, id } = postDetails;
+    const { text, link, linkTitle, linkDescription, linkImage, likes, id, user } = postDetails;
     const[ postLiked, setPostLiked ] = useState (likes.find(l => l["user.id"] === userProfile.user.id ||l["id"]===userProfile.user.id))
     const { username, avatar } = postDetails.user;
     const [ modalIsOpen, setModalIsOpen ] = useState(false);
@@ -105,7 +105,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
     return(
         <SinglePost>
             <Profile>
-                <Link to={`/user/${postDetails.user.id}`}><img src={avatar} alt={username}/></Link>
+                <Link to={`/user/${user.id}`}><img src={avatar} alt={username}/></Link>
                 {postLiked ? <IoHeartSharp onClick={likePost} color={'#AC0000'} /> : <IoHeartOutline onClick={likePost} color={'#FFFFFF'}  />}
                 <LikesContainer data-tip data-for={`${id}`}>
                     {likes ? `${likes.length} likes` : "0 like" }
