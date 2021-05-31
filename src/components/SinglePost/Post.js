@@ -1,5 +1,5 @@
 import { useState, useContext, useRef, useEffect } from 'react';
-import { Link, useHistory, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { IoHeartSharp, IoHeartOutline } from "react-icons/io5";
 import { BsTrash } from 'react-icons/bs';
 import { BsPencil } from 'react-icons/bs';

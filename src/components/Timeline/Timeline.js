@@ -24,7 +24,7 @@ export default function Timeline() {
         followersRequest.then( response => {
             setFollowers(response.data.users)
         })
-    }, [token])
+    }, [token, setFollowers])
 
     return(
         <>

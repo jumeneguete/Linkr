@@ -29,7 +29,7 @@ export default function UserPosts() {
             setUserPostsList(response.data.posts)
         });
         request.catch(erro => alert("Ocorreu um erro ao carregar os posts do usuario"))
-    }, [id, token])
+    }, [id, token, history, userProfile])
 
     function followUser() {
         if(isFollowing.isDisabled) return;
