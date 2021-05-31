@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
-import { CreatePost } from '../GenericPage/Styles'
+import { CreatePost, StyledButtom } from '../GenericPage/Styles'
 import UserContext from '../../contexts/UserContext';
 
 export default function UserInput ({ setArrayOfPosts }) {
@@ -83,8 +83,8 @@ export default function UserInput ({ setArrayOfPosts }) {
                 />
 
                 {   clicked
-                    ? <button disabled={clicked}>Publicando...</button> 
-                    : <button type='submit'>Publicar</button>  
+                    ? <StyledButtom disabled={clicked}>Publicando...</StyledButtom> 
+                    : <StyledButtom type='submit'>Publicar</StyledButtom>  
                 }  
 
             </form>
