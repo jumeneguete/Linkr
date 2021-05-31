@@ -66,7 +66,15 @@ word-break: break-all;
 .icones {
     display:flex;
     justify-content: space-between;
+    align-items: center;
 }
+
+.iconesseparados {
+    width: 40px;
+    display:flex;
+    justify-content: space-between;
+}
+
 
 input:focus{
             box-shadow: 0 0 0 0;

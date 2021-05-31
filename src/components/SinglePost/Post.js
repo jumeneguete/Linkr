@@ -128,7 +128,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                     
                 <div className='iconesseparados'>
                     {userProfile.user.username === username && 
-                            <BsTrash color="#FFFFFF" onClick={() => setModalIsOpen(!modalIsOpen)}/>
+                            <BsTrash color="#FFFFFF" cursor="pointer" onClick={() => setModalIsOpen(!modalIsOpen)}/>
                         } 
 
                     < Modal 
@@ -139,7 +139,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                     />
 
                     {userProfile.user.username === username && 
-                            <BsPencil color={'#FFFFFF'} onClick={() => {
+                            <BsPencil color={'#FFFFFF'} cursor="pointer" onClick={() => {
                                 setOnEditingPost(!OnEditingPost)
                                 setPostMainDescription(text);
                             }}/>
