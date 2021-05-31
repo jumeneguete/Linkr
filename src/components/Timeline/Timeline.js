@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import useInterval from 'react-useinterval';
 
 import UserContext from '../../contexts/UserContext';
 import UserFollowersContext from '../../contexts/UserFollowersContext';
@@ -11,9 +12,13 @@ export default function Timeline() {
     const { setFollowers } = useContext(UserFollowersContext);
     const { token } = userProfile
     const [postsList, setPostsList] = useState(null);
+    
+    useInterval(callServer, 15000)
+    useEffect(callServer, [token, setFollowers])
 
-    useEffect(() => {
-        const config ={ headers: { Authorization: `Bearer ${token}` }}
+    function callServer() {
+        console.log("teste")
+        const config = { headers: { Authorization: `Bearer ${token}` }};
         const request = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/following/posts', config);
         request.then(response => {
             setPostsList(response.data.posts)
@@ -24,7 +29,7 @@ export default function Timeline() {
         followersRequest.then( response => {
             setFollowers(response.data.users)
         })
-    }, [token, setFollowers])
+    }
 
     return(
         <>

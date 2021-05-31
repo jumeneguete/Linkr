@@ -2,6 +2,7 @@ import Loader from "react-loader-spinner";
 import { useLocation } from 'react-router-dom'
 import { useContext } from 'react';
 
+
 import UserContext from '../../contexts/UserContext';
 import UserFollowersContext from '../../contexts/UserFollowersContext';
 import { PageTitle, ContainerPostsAndTrendings, ContainerPosts, StyledButtom } from "./Styles";
