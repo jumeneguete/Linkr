@@ -75,6 +75,10 @@ word-break: break-all;
     justify-content: space-between;
 }
 
+input {
+    border: none;
+}
+
 
 input:focus{
             box-shadow: 0 0 0 0;
