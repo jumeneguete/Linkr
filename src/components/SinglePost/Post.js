@@ -11,6 +11,7 @@ import axios from 'axios';
 import UserContext from '../../contexts/UserContext'
 import { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag, LikesContainer, StyledReactTooltip, CommentsContainer } from "./Styles";
 import ReactTooltip from 'react-tooltip';
+import PostComments from './PostComments';
 
 export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts}) {
 
@@ -27,6 +28,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
     const [OnEditingPost, setOnEditingPost] = useState(false);
     const [postMainDescription, setPostMainDescription] = useState(text);
     const [onSendingPostEdition, setOnSendingPostEdition] = useState(false);
+    const [ openComments, setOpenComments] = useState(false);
 
     useEffect( () => {
         if (textEditRef.current)
@@ -103,7 +105,15 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
         alert(`Sorry, we couln't delete your post`);
     }
 
+    function toggleComments(e){
+        e.stopPropagation();
+
+        const selection = !openComments;
+        setOpenComments(selection);
+    }
+
     return(
+        <>
         <SinglePost>
             <Profile>
                 <Link to={`/user/${postDetails.user.id}`}><img src={avatar} alt={username}/></Link>
@@ -122,7 +132,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                         : `0 like`}
                     </span>
                 </StyledReactTooltip>
-                <CommentsContainer>
+                <CommentsContainer onClick={(event) => toggleComments(event)} >
                     <AiOutlineComment color={'#FFFFFF'} />
                     <p>0 comments</p>
                 </CommentsContainer>
@@ -185,5 +195,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                 </a>
             </PostContent>
         </SinglePost>
+        <PostComments key={id} openComments={openComments} postId={id} />
+        </>
     );
 }

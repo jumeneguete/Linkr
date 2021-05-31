@@ -11,7 +11,7 @@ const HeaderStyles = styled.header`
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 10;
 
     & > span {
         font-family: "Passion One", sans-serif;

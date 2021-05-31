@@ -9,6 +9,8 @@ margin-bottom: 16px;
 padding:21px;
 background: #171717;
 border-radius: 16px;
+z-index: 1;
+
 @media (max-width: 614px) {
     border-radius: 0;
     padding: 15px;
