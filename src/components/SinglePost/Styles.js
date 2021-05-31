@@ -79,7 +79,6 @@ input {
     border: none;
 }
 
-
 input:focus{
             box-shadow: 0 0 0 0;
             outline: 0;
@@ -176,4 +175,21 @@ padding: 5px !important;
         border-bottom-color: white !important;
     }
 `;
-export { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag, LikesContainer, StyledReactTooltip };
+
+const CommentsContainer = styled.div`
+    margin-top: 18px;
+    display: flex;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    p {
+        margin-top: 5px;
+        font-size: 11px;
+        color: #fff;
+    }
+
+`;
+
+export { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag, LikesContainer, StyledReactTooltip, CommentsContainer };

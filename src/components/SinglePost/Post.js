@@ -3,12 +3,13 @@ import { Link, useHistory, useLocation } from 'react-router-dom'
 import { IoHeartSharp, IoHeartOutline } from "react-icons/io5";
 import { BsTrash } from 'react-icons/bs';
 import { BsPencil } from 'react-icons/bs';
+import {AiOutlineComment} from "react-icons/ai"
 import ReactHashtag from "react-hashtag";
 import Modal from "../UserPosts/Modal";
 import axios from 'axios';
 
 import UserContext from '../../contexts/UserContext'
-import { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag, LikesContainer, StyledReactTooltip } from "./Styles";
+import { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag, LikesContainer, StyledReactTooltip, CommentsContainer } from "./Styles";
 import ReactTooltip from 'react-tooltip';
 
 export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts}) {
@@ -121,6 +122,10 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                         : `0 like`}
                     </span>
                 </StyledReactTooltip>
+                <CommentsContainer>
+                    <AiOutlineComment color={'#FFFFFF'} />
+                    <p>0 comments</p>
+                </CommentsContainer>
             </Profile>
             <PostContent>
                 <div className='icones'>
