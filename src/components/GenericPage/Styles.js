@@ -134,6 +134,7 @@ const CreatePost = styled.div`
         button {
             font-size: 15px;
             background: ${ props => props.clicked ? '#CCC' : '#1877F2'};
+            cursor: ${ props => props.clicked ? 'not-allowed' : 'pointer'};
             border-radius: 5px;
             color: #FFF;
             font-weight: 700;

@@ -67,6 +67,11 @@ word-break: break-all;
     display:flex;
     justify-content: space-between;
 }
+
+input:focus{
+            box-shadow: 0 0 0 0;
+            outline: 0;
+        }
 `;
 
 const BsTrash = styled.div`
