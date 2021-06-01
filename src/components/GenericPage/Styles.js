@@ -187,7 +187,7 @@ const TrendingStyle = styled.div`
     span{
         position: absolute; 
         display: block; 
-        left: 25px; 
+        left: 22px; 
         top: 405px; 
         z-index: 1;
         color: #FFF;
