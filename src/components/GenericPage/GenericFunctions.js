@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Post from '../SinglePost/Post';
 
 function loadMorePosts(arrayOfPosts, setArrayOfPosts, setMorePostsToLoad, url, config) {
 
@@ -32,4 +33,23 @@ function reloadPosts(arrayOfPosts, setArrayOfPosts, url, erroAlert, config) {
     request.catch(erro => alert(erroAlert));
 }
 
-export {loadMorePosts, callServer, reloadPosts}
+function renderPosts(arrayOfPosts, setArrayOfPosts, location, followers) {
+
+    const ListOfPosts = arrayOfPosts && arrayOfPosts.map((p, i) => (
+        <Post key ={p.id} index={i} postDetails={p} setArrayOfPosts={setArrayOfPosts} arrayOfPosts={arrayOfPosts}/>
+        ))
+
+    return(
+        arrayOfPosts!==null ? 
+            arrayOfPosts.length > 0 ? 
+                location === "/timeline" ?
+                    followers && followers.length > 0 ? 
+                        ListOfPosts
+                        : <span>Voce nao segue ninguem ainda, procure por perfis na busca</span>
+                :ListOfPosts
+            : <span>Nenhum post encontrado</span>
+        : ""
+    )
+}
+
+export {loadMorePosts, callServer, reloadPosts, renderPosts}

@@ -200,4 +200,9 @@ const TrendingList = styled.ul`
     }
 `;
 
-export { PageTitle, ContainerPostsAndTrendings, CreatePost, ContainerPosts, TrendingStyle, Title, Separator, TrendingList, StyledButtom };
+const Loading = styled.div`
+display:flex;
+flex-direction: column;
+align-items:center;
+`;
+export { PageTitle, ContainerPostsAndTrendings, CreatePost, ContainerPosts, TrendingStyle, Title, Separator, TrendingList, StyledButtom, Loading };
