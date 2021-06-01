@@ -158,7 +158,7 @@ cursor: pointer;
 
 const TrendingStyle = styled.div`
     width: 301px;
-    height: 406px;
+    height: 450px;
     background: #171717;
     border-radius: 16px;
     color: #fff;
@@ -167,6 +167,31 @@ const TrendingStyle = styled.div`
     position: sticky;
     right: auto;
     top: 200px;
+
+    form {
+        margin-top: 10px;
+        text-align: center;
+        width: 100%;
+    }
+    input {
+        background: #333;
+        border-radius: 5px;
+        cursor: text;
+        font: 400 18px 'Lato', sans-serif;
+        padding: 5px 20px;
+        text-align: left;
+        width: 90%;
+    }
+
+    span{
+        position: absolute; 
+        display: block; 
+        left: 22px; 
+        top: 405px; 
+        z-index: 1;
+        color: #FFF;
+        font: bold 19px "Lato";
+    }
 
     @media (max-width: 614px) {
         display: none;
