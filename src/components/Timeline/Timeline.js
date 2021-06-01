@@ -13,7 +13,6 @@ export default function Timeline() {
     const { setFollowers } = useContext(UserFollowersContext);
     const [postsList, setPostsList] = useState(null);
     const [morePostsToLoad, setMorePostsToLoad] = useState(true);
-    console.log(postsList)
     const pageUrl = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/following/posts';
     const erroAlert = "Ocorreu um erro ao carregar os posts";
     
