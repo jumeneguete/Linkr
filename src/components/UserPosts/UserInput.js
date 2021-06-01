@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { CreatePost, StyledButtom } from '../GenericPage/Styles'
 import UserContext from '../../contexts/UserContext';
+import LocationButton from '../UserPosts/LocationButton'
 
 export default function UserInput ({ setArrayOfPosts }) {
     const { userProfile } = useContext(UserContext);
@@ -9,6 +10,7 @@ export default function UserInput ({ setArrayOfPosts }) {
     const [ clicked, setClicked ] = useState(false);
     const [ userComment, setUserComment ] = useState('');
     const [ userLink, setUserLink ] = useState('');
+    const [location, setLocation] = useState(false);
 
     function submitComment (e) {
         e.preventDefault();
@@ -82,11 +84,13 @@ export default function UserInput ({ setArrayOfPosts }) {
                     disabled={clicked}
                 />
 
+                <div className= "footer">
+                <LocationButton setLocation={setLocation} />
                 {   clicked
                     ? <StyledButtom disabled={clicked}>Publicando...</StyledButtom> 
                     : <StyledButtom type='submit'>Publicar</StyledButtom>  
-                }  
-
+                }
+                </div>  
             </form>
         </CreatePost>
     );
