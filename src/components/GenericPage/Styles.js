@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Button from '../Login_SignUp/Button';
 
 const PageTitle = styled.div`
     display: flex;
