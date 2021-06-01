@@ -1,11 +1,13 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { TrendingStyle, Title, Separator, TrendingList } from "./Styles.js";
 import UserContext from "../../contexts/UserContext";
 
 export default function Trending (){
     const [hashtags, setHashtags] = useState([]);
+    const [ hashtagSearched, setHashtagSearched ] = useState('');
+    let history = useHistory();
     const {userProfile} = useContext(UserContext);
 
     useEffect(() =>{
@@ -18,10 +20,29 @@ export default function Trending (){
         });
     },[userProfile])
 
+    function searchHashtag (event) {
+        event.preventDefault();
+
+        if (hashtagSearched.length) {
+            history.push(`/hashtag/${hashtagSearched}`);
+            setHashtagSearched('');
+        }
+        else {
+            alert('Please fill in the search field');
+        }
+    }
+
     return (
         <TrendingStyle>
             <Title>trending</Title>
             <Separator></Separator>
+            <form onSubmit={(event) => searchHashtag(event)}>
+                <input type='text' 
+                    placeholder='search hashtag' 
+                    onChange={(e) => setHashtagSearched(e.target.value)} 
+                    value={hashtagSearched}
+                />
+            </form>
             <TrendingList>
                 { hashtags.length !== 0 &&
                 hashtags.map(h =>(
