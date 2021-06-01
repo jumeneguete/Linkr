@@ -15,7 +15,7 @@ import MyLikes from './MyPosts_MyLikes/MyLikes';
 
 export default function App() {
     const alreadyLoggedIn = localStorage.getItem("lastLogin");
-    const [userProfile, setUserProfile] = useState(alreadyLoggedIn && JSON.parse(alreadyLoggedIn));  
+    const [userProfile, setUserProfile] = useState(alreadyLoggedIn && JSON.parse(alreadyLoggedIn));
     const [followers, setFollowers] = useState(null);  
 
     return (
