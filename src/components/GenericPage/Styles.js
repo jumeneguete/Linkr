@@ -22,55 +22,10 @@ const HeaderStyles = styled.header`
     }
 `;
 
-const Menu = styled.div`
+const PageTitle = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    cursor: pointer;    
-
-    svg {
-        width: 20px;
-        color:  #fff;
-    }
-
-    img {
-        border-radius: 50%;
-        height: 55px;
-        margin-left: 10px;
-        width: 55px;
-        object-fit: cover;
-    }
-`;
-
-const ToggleMenu = styled.div`
-    width: 150px;
-    height: 125px;
-    background-color: #000;
-    position: fixed;
-    top: 75px;
-    right: 0;
-    border-radius: 0px 0px 0px 20px;
-    display: ${props => props.menuSelected ? "block" : "none"};
-    z-index: 1;
-
-    ul {
-        margin-top: 15px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    li {
-        font-size: 18px;
-        font-weight: 700;
-        color: #fff;
-        margin-top: 7px;
-        cursor: pointer;
-    }
-`;
-
-const PageTitle = styled.div`
     width: 937px;
     font-size: 43px;
     font-weight: 700;
@@ -95,7 +50,7 @@ const ContainerPostsAndTrendings = styled.div`
 `;
 
 const ContainerPosts =styled.div`
-width: 611px;
+    width: 611px;
     & > span {
         display: flex;
         justify-content: center;
@@ -143,11 +98,13 @@ const CreatePost = styled.div`
             border: none;
             width: 120px;
         }
+
         h2 {
             font-size: 20px;
             margin-bottom: 10px;
             width: 100%;
         }
+        
         input, textarea {
             background: #EFEFEF;
             border-radius: 5px;
@@ -220,7 +177,19 @@ const CreatePost = styled.div`
             display: none;
         }
     }
-    }
+`;
+
+const StyledButtom = styled.button`
+font-size: 15px;
+background: ${ props => props.clicked ? '#EFEFEF' : '#1877F2'};
+border-radius: 5px;
+color: ${ props => props.clicked ? '#1877F2' : '#FFF'};
+font-weight: 700;
+padding: 10px;
+text-align: center;
+border: none;
+width: 120px;
+cursor: pointer;
 `;
 
 const TrendingStyle = styled.div`
@@ -267,4 +236,4 @@ const TrendingList = styled.ul`
     }
 `;
 
-export { HeaderStyles, Menu, ToggleMenu, PageTitle, ContainerPostsAndTrendings, CreatePost, ContainerPosts, TrendingStyle, Title, Separator, TrendingList };
+export { PageTitle, ContainerPostsAndTrendings, CreatePost, ContainerPosts, TrendingStyle, Title, Separator, TrendingList, StyledButtom };
