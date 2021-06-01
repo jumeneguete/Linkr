@@ -184,6 +184,16 @@ const TrendingStyle = styled.div`
         width: 90%;
     }
 
+    span{
+        position: absolute; 
+        display: block; 
+        left: 25px; 
+        top: 405px; 
+        z-index: 1;
+        color: #FFF;
+        font: bold 19px "Lato";
+    }
+
     @media (max-width: 614px) {
         display: none;
     }

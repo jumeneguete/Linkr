@@ -36,13 +36,6 @@ export default function Trending (){
         <TrendingStyle>
             <Title>trending</Title>
             <Separator></Separator>
-            <form onSubmit={(event) => searchHashtag(event)}>
-                <input type='text' 
-                    placeholder='search hashtag' 
-                    onChange={(e) => setHashtagSearched(e.target.value)} 
-                    value={hashtagSearched}
-                />
-            </form>
             <TrendingList>
                 { hashtags.length !== 0 &&
                 hashtags.map(h =>(
@@ -51,6 +44,14 @@ export default function Trending (){
                     </>
                 ))}
             </TrendingList>
+            <form onSubmit={(event) => searchHashtag(event)}>
+                <input type='text' 
+                    placeholder='type a hashtag' 
+                    onChange={(e) => setHashtagSearched(e.target.value)} 
+                    value={hashtagSearched}
+                />
+                <span>#</span>
+            </form>
 
         </TrendingStyle>
     );
