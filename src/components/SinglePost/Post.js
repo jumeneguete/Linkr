@@ -29,6 +29,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
     const [postMainDescription, setPostMainDescription] = useState(text);
     const [onSendingPostEdition, setOnSendingPostEdition] = useState(false);
     const [ openComments, setOpenComments] = useState(false);
+    const [comments, setComments] = useState([]);
 
     useEffect( () => {
         if (textEditRef.current)
@@ -112,6 +113,24 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
         setOpenComments(selection);
     }
 
+    function loadComments () {
+        
+    }
+
+    useEffect(function loadComments () {
+        const config = { headers: { Authorization: `Bearer ${userProfile.token}` } };
+
+        const request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts/${id}/comments`, config);
+        request.then(response => {
+            setComments(response.data.comments);
+        });
+        request.catch(error => {
+            console.log(error.response.data) ;
+        });
+
+    }, [])
+
+
     return(
         <>
         <SinglePost>
@@ -134,7 +153,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                 </StyledReactTooltip>
                 <CommentsContainer onClick={(event) => toggleComments(event)} >
                     <AiOutlineComment color={'#FFFFFF'} />
-                    <p>0 comments</p>
+                    <p>{comments.length} comments</p>
                 </CommentsContainer>
             </Profile>
             <PostContent>
@@ -195,7 +214,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                 </a>
             </PostContent>
         </SinglePost>
-        <PostComments key={id} openComments={openComments} postId={id} />
+        <PostComments key={id} PostId={id} openComments={openComments} setComments={setComments} comments={comments} setComments={setComments} />
         </>
     );
 }

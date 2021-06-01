@@ -6,61 +6,76 @@ import { useContext, useEffect, useState } from "react";
 import UserContext from "../../contexts/UserContext";
 import axios from "axios";
 
-export default function PostComments({ openComments, postId }) {
+export default function PostComments({ setComments, openComments, comments, PostId }) {
     const { userProfile } = useContext(UserContext);
-    const [comments, setComments] = useState(null);
+    const [ newComment, setNewComment ] = useState("");
 
+    function SendComment(e){
+        e.preventDefault();
 
-    useEffect(() => {
-        const config = { headers: { Authorization: `Bearer ${userProfile.token}` } };
+        const config ={ headers: { Authorization: `Bearer ${userProfile.token}` }}
+        const body = {text: newComment}
 
-        const request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts/${postId}/comments`, config);
-        request.then(response => {
-            console.log(response.data);
+        const request = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts/${PostId}/comment`, body, config);
+        
+        request.then((response) => {
+            setComments([...comments, {
+                id: response.data.comment.id, 
+                text: response.data.comment.text, 
+                user: {id: userProfile.user.id, username: userProfile.user.username, avatar:userProfile.user.avatar} 
+            }]);
+            setNewComment("");
         });
-        request.catch(error => {
-            console.log(error.response.data) ;
-        });
-
-    }, [])
-
-
-
+        request.catch((error) => {
+           console.log(error)
+        })
+    }
+    console.log(comments)
     return (
-        <CommentBox openComments={openComments}>
-            <div>
-                <Comments>
-                    <Link to="#"><img src={userProfile.user.avatar} alt={userProfile.user.username} /></Link>
-                    <CommentInfo>
-                        <div>
-                            <p>João Tavares</p>
-                            <BsDot color={"#565656"} />
-                            <span>following</span>
-                        </div>
-                        <span> exemplo de comentário </span>
-                    </CommentInfo>
-                    <Divider />
-                </Comments>
-                <Divider />
-            </div>
+        <CommentBox openComments={openComments} >
 
-            <AddCommentForm>
-                <Link to="#"><img src={userProfile.user.avatar} alt={userProfile.user.username} /></Link>
-                <div>
-                    <Input placeholder="write a comment..." />
-                    <ButtonComment><IoPaperPlaneOutline color={"#fff"} /></ButtonComment>
-                </div>
-            </AddCommentForm>
-        </CommentBox>
+            {comments.lenght === 0 ? "" :
+                comments.map((c) => ( 
+                        <div key={c.id}>
+                            <Comments>
+                                <Link to="#"><img src={c.user.avatar} alt={c.user.username} /></Link>
+                                <CommentInfo>
+                                    <div>
+                                        <p>{c.user.username}</p>
+                                        <BsDot color={"#565656"} />
+                                        <span>{c.user.id === userProfile.user.id ? "Post's author" : "following"}</span>
+                                    </div>
+                                    <span>{c.text}</span>
+                                </CommentInfo>
+                                <Divider />
+                            </Comments>
+                            <Divider />
+                        </div>
+                        ))
+            }
+
+                        <AddCommentForm onSubmit={SendComment}>
+                            <Link to="#"><img src={userProfile.user.avatar} alt={userProfile.user.username} /></Link>
+                            <div>
+                                <Input placeholder="write a comment..." onChange={(e)=> setNewComment(e.target.value)} value={newComment} />
+                                <ButtonComment type="submit"><IoPaperPlaneOutline color={"#fff"} /></ButtonComment>
+                            </div>
+                        </AddCommentForm>
+                    </CommentBox>
     );
 }
 
 const CommentBox = styled.div`
     width: 100%;
     background-color: #1e1e1e;
-    margin: -30px 0 16px 0;
+    margin: -25px 0 16px 0;
     border-radius: 0 0 16px 16px;
     display: ${props => props.openComments ? "block" : "none"};
+    z-index: 0;
+
+    @media (max-width: 614px) {
+    border-radius: 0;
+}
     
 `;
 
