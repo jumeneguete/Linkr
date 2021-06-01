@@ -55,6 +55,7 @@ export default function UserPosts() {
         request.catch(erro => alert("Ocorreu um erro ao seguir esse usuario"));
     }
 
+
     return(
         <>
             {userPostsList &&  
