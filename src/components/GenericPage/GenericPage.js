@@ -1,7 +1,7 @@
 import Loader from "react-loader-spinner";
 import { useLocation } from 'react-router-dom'
 import { useContext } from 'react';
-
+import InfiniteScroll from 'react-infinite-scroller';
 
 import UserContext from '../../contexts/UserContext';
 import UserFollowersContext from '../../contexts/UserFollowersContext';
@@ -19,7 +19,9 @@ export default function GenericPage(props) {
     const location = useLocation().pathname;
     const loading = <Loader type="Circles" color="#FFF" height={80} width={80} />;
     const id = arrayOfPosts && arrayOfPosts[0].user.id;
-    const ListOfPosts = arrayOfPosts && arrayOfPosts.map((p, i) => <Post key ={p.id} index={i} postDetails={p} setArrayOfPosts={setArrayOfPosts} arrayOfPosts={arrayOfPosts}/>)
+    const ListOfPosts = arrayOfPosts && arrayOfPosts.map((p, i) => (
+    <Post key ={p.id} index={i} postDetails={p} setArrayOfPosts={setArrayOfPosts} arrayOfPosts={arrayOfPosts}/>
+    ))
 
     return (
         <>
@@ -35,7 +37,7 @@ export default function GenericPage(props) {
                     {arrayOfPosts!==null ? 
                         arrayOfPosts.length > 0 ? 
                             location === "/timeline" ?
-                                followers.length > 0 ? 
+                                followers && followers.length > 0 ? 
                                     ListOfPosts
                                     : <span>Voce nao segue ninguem ainda, procure por perfis na busca</span>
                             :ListOfPosts
