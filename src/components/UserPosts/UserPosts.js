@@ -47,6 +47,7 @@ export default function UserPosts() {
         request.catch(erro => alert("Ocorreu um erro ao seguir esse usuario"));
     }
 
+
     return(
         <>
             {userPostsList &&  <GenericPage title={`${userName}'s Posts`} arrayOfPosts={userPostsList} isFollowing={isFollowing} followUser={followUser}/>}

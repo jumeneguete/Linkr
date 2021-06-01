@@ -1,5 +1,27 @@
 import styled from 'styled-components';
 
+const HeaderStyles = styled.header`
+    width: 100%;
+    height: 75px;
+    background-color: #000;
+    padding: 0 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+
+    & > span {
+        font-family: "Passion One", sans-serif;
+        font-weight: 700;
+        font-size: 50px;
+        letter-spacing: 1px;
+        color: #fff;
+    }
+`;
+
 const PageTitle = styled.div`
     display: flex;
     justify-content: space-between;
@@ -28,7 +50,7 @@ const ContainerPostsAndTrendings = styled.div`
 `;
 
 const ContainerPosts =styled.div`
-width: 611px;
+    width: 611px;
     & > span {
         display: flex;
         justify-content: center;
@@ -64,11 +86,25 @@ const CreatePost = styled.div`
         flex-direction: column;
         align-items: flex-end;
         width: 100%;
+        button {
+            font-size: 15px;
+            background: ${ props => props.clicked ? '#CCC' : '#1877F2'};
+            cursor: ${ props => props.clicked ? 'not-allowed' : 'pointer'};
+            border-radius: 5px;
+            color: #FFF;
+            font-weight: 700;
+            padding: 10px;
+            text-align: center;
+            border: none;
+            width: 120px;
+        }
+
         h2 {
             font-size: 20px;
             margin-bottom: 10px;
             width: 100%;
         }
+        
         input, textarea {
             background: #EFEFEF;
             border-radius: 5px;

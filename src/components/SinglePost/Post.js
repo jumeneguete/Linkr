@@ -3,13 +3,15 @@ import { Link, useLocation } from 'react-router-dom'
 import { IoHeartSharp, IoHeartOutline } from "react-icons/io5";
 import { BsTrash } from 'react-icons/bs';
 import { BsPencil } from 'react-icons/bs';
+import {AiOutlineComment} from "react-icons/ai"
 import ReactHashtag from "react-hashtag";
 import Modal from "../UserPosts/Modal";
 import axios from 'axios';
 
 import UserContext from '../../contexts/UserContext'
-import { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag, LikesContainer, StyledReactTooltip } from "./Styles";
+import { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag, LikesContainer, StyledReactTooltip, CommentsContainer } from "./Styles";
 import ReactTooltip from 'react-tooltip';
+import PostComments from './PostComments';
 
 export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts}) {
 
@@ -26,6 +28,8 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
     const [OnEditingPost, setOnEditingPost] = useState(false);
     const [postMainDescription, setPostMainDescription] = useState(text);
     const [onSendingPostEdition, setOnSendingPostEdition] = useState(false);
+    const [ openComments, setOpenComments] = useState(false);
+    const [comments, setComments] = useState([]);
 
     useEffect( () => {
         if (textEditRef.current)
@@ -102,7 +106,29 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
         alert(`Sorry, we couln't delete your post`);
     }
 
+    function toggleComments(e){
+        e.stopPropagation();
+
+        const selection = !openComments;
+        setOpenComments(selection);
+
+    }
+    
+
+    useEffect(function loadComments () {
+        const config = { headers: { Authorization: `Bearer ${userProfile.token}` } };
+
+        const request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts/${id}/comments`, config);
+        request.then(response => {
+            setComments(response.data.comments);
+        });
+        request.catch(()=> alert("Erro ao carregar comentários"));
+
+    }, [])
+
+
     return(
+        <>
         <SinglePost>
             <Profile>
                 <Link to={`/user/${user.id}`}><img src={avatar} alt={username}/></Link>
@@ -121,6 +147,10 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                         : `0 like`}
                     </span>
                 </StyledReactTooltip>
+                <CommentsContainer onClick={(event) => toggleComments(event)} >
+                    <AiOutlineComment color={'#FFFFFF'} />
+                    <p>{comments.length} comments</p>
+                </CommentsContainer>
             </Profile>
             <PostContent>
                 <div className='icones'>
@@ -128,7 +158,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                     
                 <div className='iconesseparados'>
                     {userProfile.user.username === username && 
-                            <BsTrash color="#FFFFFF" onClick={() => setModalIsOpen(!modalIsOpen)}/>
+                            <BsTrash color="#FFFFFF" cursor="pointer" onClick={() => setModalIsOpen(!modalIsOpen)}/>
                         } 
 
                     < Modal 
@@ -139,7 +169,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                     />
 
                     {userProfile.user.username === username && 
-                            <BsPencil color={'#FFFFFF'} onClick={() => {
+                            <BsPencil color={'#FFFFFF'} cursor="pointer" onClick={() => {
                                 setOnEditingPost(!OnEditingPost)
                                 setPostMainDescription(text);
                             }}/>
@@ -180,5 +210,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                 </a>
             </PostContent>
         </SinglePost>
+        <PostComments key={id} PostId={id} openComments={openComments} setComments={setComments} comments={comments} setComments={setComments} />
+        </>
     );
 }
