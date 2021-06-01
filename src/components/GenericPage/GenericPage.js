@@ -18,10 +18,29 @@ export default function GenericPage(props) {
     const { isFollowing, followUser } = props;
     const location = useLocation().pathname;
     const loading = <Loader type="Circles" color="#FFF" height={80} width={80} />;
-    const id = arrayOfPosts && arrayOfPosts[0].user.id;
+    let id;
+    if(location !== "/timeline") {
+        id = arrayOfPosts && arrayOfPosts[0].user.id;
+    }
+
+
     const ListOfPosts = arrayOfPosts && arrayOfPosts.map((p, i) => (
     <Post key ={p.id} index={i} postDetails={p} setArrayOfPosts={setArrayOfPosts} arrayOfPosts={arrayOfPosts}/>
     ))
+
+    function renderPosts() {
+        return(
+            arrayOfPosts!==null ? 
+                arrayOfPosts.length > 0 ? 
+                    location === "/timeline" ?
+                        followers && followers.length > 0 ? 
+                            ListOfPosts
+                            : <span>Voce nao segue ninguem ainda, procure por perfis na busca</span>
+                    :ListOfPosts
+                : <span>Nenhum post encontrado</span>
+            : <span>{loading}</span>
+        )
+    }
 
     return (
         <>
@@ -34,16 +53,14 @@ export default function GenericPage(props) {
             <ContainerPostsAndTrendings>
                 <ContainerPosts>
                     {location === "/timeline" ? <UserInput setArrayOfPosts={setArrayOfPosts}/> : ""}
-                    {arrayOfPosts!==null ? 
-                        arrayOfPosts.length > 0 ? 
-                            location === "/timeline" ?
-                                followers && followers.length > 0 ? 
-                                    ListOfPosts
-                                    : <span>Voce nao segue ninguem ainda, procure por perfis na busca</span>
-                            :ListOfPosts
-                        : <span>Nenhum post encontrado</span>
-                    : <span>{loading}</span>}
-
+                    <InfiniteScroll
+                        pageStart={0}
+                        loadMore={props.loadMorePosts}
+                        hasMore={props.morePostsToLoad}
+                        loader={<div className="loader" key={0}>Loading ...</div>}
+                    >
+                        {renderPosts()}
+                    </InfiniteScroll>
                 </ContainerPosts>
                 <Trending />
             </ContainerPostsAndTrendings>
