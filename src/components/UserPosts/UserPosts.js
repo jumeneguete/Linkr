@@ -34,7 +34,7 @@ export default function UserPosts() {
     function followUser() {
         if(isFollowing.isDisabled) return;
         setIsFollowing({...isFollowing, isDisabled:true})
-        const url = isFollowing ?
+        const url = isFollowing.status ?
         `https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/users/${id}/unfollow`:
         `https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/users/${id}/follow`
        
