@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { CommentBox, Comments, CommentInfo, Divider, AddCommentForm, InputComment, ButtonComment } from "./Styles"
 import { BsDot } from 'react-icons/bs';
-import { IoPaperPlaneOutline } from 'react-icons/io5';
+import { IoCompassOutline, IoPaperPlaneOutline } from 'react-icons/io5';
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../../contexts/UserContext";
 import UserFollowersContext from "../../contexts/UserFollowersContext";
@@ -28,11 +28,9 @@ export default function PostComments({ setComments, openComments, comments, Post
             }]);
             setNewComment("");
         });
-        request.catch((error) => {
-            console.log(error)
-        })
+        request.catch(()=> alert("Erro ao enviar o comentário"));
     }
-    console.log(comments)
+
     return (
         <CommentBox openComments={openComments} >
 
@@ -40,12 +38,12 @@ export default function PostComments({ setComments, openComments, comments, Post
                 comments.map((c) => (
                     <div key={c.id}>
                         <Comments>
-                            <Link to="#"><img src={c.user.avatar} alt={c.user.username} /></Link>
+                            <Link to={`/user/${c.user.id}`}><img src={c.user.avatar} alt={c.user.username} /></Link>
                             <CommentInfo>
                                 <div>
-                                    <p>{c.user.username}</p>
+                                    <Link to={`/user/${c.user.id}`}><p>{c.user.username}</p></Link>
                                     <BsDot color={"#565656"} />
-                                    <span>{c.user.id === userProfile.user.id ? "Post's author" : "following"}</span>
+                                    <span>{c.user.id === userProfile.user.id ? "Post's author" : followers.find(f => f.id === c.user.id) ? "following" : ""}</span>
                                 </div>
                                 <span>{c.text}</span>
                             </CommentInfo>

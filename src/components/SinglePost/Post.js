@@ -111,11 +111,9 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
 
         const selection = !openComments;
         setOpenComments(selection);
-    }
 
-    function loadComments () {
-        
     }
+    
 
     useEffect(function loadComments () {
         const config = { headers: { Authorization: `Bearer ${userProfile.token}` } };
@@ -124,9 +122,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
         request.then(response => {
             setComments(response.data.comments);
         });
-        request.catch(error => {
-            console.log(error.response.data) ;
-        });
+        request.catch(()=> alert("Erro ao carregar comentários"));
 
     }, [])
 
