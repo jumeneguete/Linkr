@@ -1,16 +1,24 @@
 import styled from 'styled-components';
 
-const GenericSearch = styled.div`
-width: 100%;
-padding: 10px  0;
-background-color: #333;
-display: flex;
-justify-content: center;
-position:fixed;
-top: 75px;
-left:0;
-@media (min-width: 640px) {
-        display: none;
+const HeaderStyles = styled.header`
+    width: 100%;
+    height: 75px;
+    background-color: #000;
+    padding: 0 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+
+    & > span {
+        font-family: "Passion One", sans-serif;
+        font-weight: 700;
+        font-size: 50px;
+        letter-spacing: 1px;
+        color: #fff;
     }
 `;
 
@@ -27,7 +35,7 @@ const PageTitle = styled.div`
     @media (max-width: 614px) {
         width: 100%;
         margin: 91px 0 0 0px;
-        padding: 75px 20px 0 20px;
+        padding: 0 20px;
     }
 `;
 
@@ -41,7 +49,7 @@ const ContainerPostsAndTrendings = styled.div`
     }
 `;
 
-const ContainerPosts = styled.div`
+const ContainerPosts =styled.div`
     width: 611px;
     & > span {
         display: flex;
@@ -80,8 +88,8 @@ const CreatePost = styled.div`
         width: 100%;
         button {
             font-size: 15px;
-            background: ${props => props.clicked ? '#CCC' : '#1877F2'};
-            cursor: ${props => props.clicked ? 'not-allowed' : 'pointer'};
+            background: ${ props => props.clicked ? '#CCC' : '#1877F2'};
+            cursor: ${ props => props.clicked ? 'not-allowed' : 'pointer'};
             border-radius: 5px;
             color: #FFF;
             font-weight: 700;
@@ -173,9 +181,9 @@ const CreatePost = styled.div`
 
 const StyledButtom = styled.button`
 font-size: 15px;
-background: ${props => props.clicked ? '#EFEFEF' : '#1877F2'};
+background: ${ props => props.clicked ? '#EFEFEF' : '#1877F2'};
 border-radius: 5px;
-color: ${props => props.clicked ? '#1877F2' : '#FFF'};
+color: ${ props => props.clicked ? '#1877F2' : '#FFF'};
 font-weight: 700;
 padding: 10px;
 text-align: center;
@@ -186,7 +194,7 @@ cursor: pointer;
 
 const TrendingStyle = styled.div`
     width: 301px;
-    height: 440px;
+    height: 450px;
     background: #171717;
     border-radius: 16px;
     color: #fff;
@@ -194,8 +202,7 @@ const TrendingStyle = styled.div`
     flex-direction: column;
     position: sticky;
     right: auto;
-    top: 150px;
-    z-index: -10;
+    top: 200px;
 
     form {
         margin-top: 10px;
@@ -203,31 +210,16 @@ const TrendingStyle = styled.div`
         width: 100%;
     }
     input {
-        color:#fff;
-        margin-top: -10px;
         background: #333;
         border-radius: 5px;
         cursor: text;
         font: 400 18px 'Lato', sans-serif;
-        padding: 5px 20px 8px 30px;
+        padding: 5px 20px;
         text-align: left;
         width: 90%;
-        border: none;;
     }
 
-        input::placeholder{
-            font-style: italic;
-            font-size: 16px;
-            font-weight: 700;
-            color: #9F9F9F;
-        }
-        input:focus{
-            box-shadow: 0 0 0 0;
-            outline: 0;
-        }
-
     span{
-        margin-top: -10px;
         position: absolute; 
         display: block; 
         left: 22px; 
@@ -275,6 +267,4 @@ flex-direction: column;
 align-items:center;
 color: #6D6D6D;
 `;
-
-export { GenericSearch, PageTitle, ContainerPostsAndTrendings, CreatePost, ContainerPosts, TrendingStyle, Title, Separator, TrendingList, StyledButtom, Loading };
-
+export { PageTitle, ContainerPostsAndTrendings, CreatePost, ContainerPosts, TrendingStyle, Title, Separator, TrendingList, StyledButtom, Loading };
