@@ -1,27 +1,5 @@
 import styled from 'styled-components';
 
-const HeaderStyles = styled.header`
-    width: 100%;
-    height: 75px;
-    background-color: #000;
-    padding: 0 22px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10;
-
-    & > span {
-        font-family: "Passion One", sans-serif;
-        font-weight: 700;
-        font-size: 50px;
-        letter-spacing: 1px;
-        color: #fff;
-    }
-`;
-
 const GenericSearch = styled.div`
 width: 100%;
 padding: 10px  0;
@@ -290,4 +268,12 @@ const TrendingList = styled.ul`
     }
 `;
 
-export { GenericSearch, PageTitle, ContainerPostsAndTrendings, CreatePost, ContainerPosts, TrendingStyle, Title, Separator, TrendingList, StyledButtom };
+const Loading = styled.div`
+display:flex;
+flex-direction: column;
+align-items:center;
+color: #6D6D6D;
+`;
+
+export { GenericSearch, PageTitle, ContainerPostsAndTrendings, CreatePost, ContainerPosts, TrendingStyle, Title, Separator, TrendingList, StyledButtom, Loading };
+

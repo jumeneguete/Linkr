@@ -7,7 +7,7 @@ import UserContext from "../../contexts/UserContext";
 import UserFollowersContext from "../../contexts/UserFollowersContext";
 import axios from "axios";
 
-export default function PostComments({ setComments, openComments, comments, PostId }) {
+export default function PostComments({ setComments, openComments, comments, PostId, authorId }) {
     const { userProfile } = useContext(UserContext);
     const { followers } = useContext(UserFollowersContext);
     const [newComment, setNewComment] = useState("");
@@ -42,7 +42,9 @@ export default function PostComments({ setComments, openComments, comments, Post
                             <CommentInfo>
                                 <div>
                                     <Link to={`/user/${c.user.id}`}><p>{c.user.username}</p></Link>
-                                    <span>{c.user.id === userProfile.user.id ? "• Post's author" : followers.find(f => f.id === c.user.id) ? "• following" : ""}</span>
+
+                                    <span>{authorId === userProfile.user.id ? " • Post's author" : followers.find(f => f.id === c.user.id) ? " • following" : ""}</span>
+
                                 </div>
                                 <span>{c.text}</span>
                             </CommentInfo>

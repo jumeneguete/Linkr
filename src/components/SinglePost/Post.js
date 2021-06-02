@@ -1,12 +1,13 @@
 import { useState, useContext, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom'
-import { IoHeartSharp, IoHeartOutline } from "react-icons/io5";
+import { IoHeartSharp, IoHeartOutline, IoCalculator } from "react-icons/io5";
 import { BsTrash } from 'react-icons/bs';
 import { BsPencil } from 'react-icons/bs';
 import { AiOutlineComment } from "react-icons/ai"
 import ReactHashtag from "react-hashtag";
 import Modal from "../UserPosts/Modal";
 import axios from 'axios';
+import getYouTubeID from 'get-youtube-id';
 
 import UserContext from '../../contexts/UserContext'
 import { SinglePost, Profile, PostContent, CreatorName, Description, Hashtag, LikesContainer, StyledReactTooltip, CommentsContainer } from "./Styles";
@@ -127,82 +128,105 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
 
     }, [])
 
+    const youtubeLink = getYouTubeID(link);
 
-    return (
+       
+    return(
         <>
-            <SinglePost>
-                <Profile>
-                    <Link to={`/user/${user.id}`}><img src={avatar} alt={username} /></Link>
-                    {postLiked ? <IoHeartSharp onClick={likePost} color={'#AC0000'} /> : <IoHeartOutline onClick={likePost} color={'#FFFFFF'} />}
-                    <LikesContainer data-tip data-for={`${id}`}>
-                        {likes ? `${likes.length} likes` : "0 like"}
-                    </LikesContainer>
-                    <StyledReactTooltip border place="bottom" effect="solid" id={`${id}`}>
-                        <span>
-                            {likes[0] ?
-                                likes[1] ?
-                                    likes[2] ?
-                                        `${likes[0]["user.username"] || likes[0]["username"]}, ${likes[1]["user.username"] || likes[1]["username"]} e outras ${likes.length - 2} pessoas`
-                                        : `${likes[0]["user.username"] || likes[0]["username"]}, ${likes[1]["user.username"] || likes[1]["username"]} `
-                                    : `${likes[0]["user.username"] || likes[0]["username"]}`
-                                : `0 like`}
-                        </span>
-                    </StyledReactTooltip>
-                    <CommentsContainer onClick={(event) => toggleComments(event)} >
-                        <AiOutlineComment color={'#FFFFFF'} />
-                        <p>{comments.length} comments</p>
-                    </CommentsContainer>
-                </Profile>
-                <PostContent>
-                    <div className='icones'>
-                        <Link to={`/user/${postDetails.user.id}`}><CreatorName>{username}</CreatorName></Link>
+        <SinglePost>
+            <Profile>
+                <Link to={`/user/${user.id}`}><img src={avatar} alt={username}/></Link>
+                {postLiked ? <IoHeartSharp onClick={likePost} color={'#AC0000'} /> : <IoHeartOutline onClick={likePost} color={'#FFFFFF'}  />}
+                <LikesContainer data-tip data-for={`${id}`}>
+                    {likes ? `${likes.length} likes` : "0 like" }
+                </LikesContainer>
+                <StyledReactTooltip border place="bottom" effect="solid" id={`${id}`}>
+                    <span>
+                        {likes[0] ? 
+                            likes[1] ? 
+                                likes[2] ? 
+                                    `${likes[0]["user.username"]||likes[0]["username"]}, ${likes[1]["user.username"]||likes[1]["username"]} e outras ${likes.length - 2} pessoas` 
+                                : `${likes[0]["user.username"]||likes[0]["username"]}, ${likes[1]["user.username"]||likes[1]["username"]} ` 
+                            : `${likes[0]["user.username"]||likes[0]["username"]}`
+                        : `0 like`}
+                    </span>
+                </StyledReactTooltip>
+                <CommentsContainer onClick={(event) => toggleComments(event)} >
+                    <AiOutlineComment color={'#FFFFFF'} />
+                    <p>{comments.length} comments</p>
+                </CommentsContainer>
+            </Profile>
+            <PostContent>
+                <div className='icones'>
+                    <Link to={`/user/${postDetails.user.id}`}><CreatorName>{username}</CreatorName></Link>
+                    
+                <div className='iconesseparados'>
+                    {userProfile.user.username === username && 
+                            <BsTrash color="#FFFFFF" cursor="pointer" onClick={() => setModalIsOpen(!modalIsOpen)}/>
+                        } 
 
-                        <div className='iconesseparados'>
-                            {userProfile.user.username === username &&
-                                <BsTrash color="#FFFFFF" cursor="pointer" onClick={() => setModalIsOpen(!modalIsOpen)} />
-                            }
+                    < Modal 
+                        modalIsOpen = { modalIsOpen }
+                        setModalIsOpen = { setModalIsOpen }
+                        Delete={Delete}
+                        isLoading = { isLoading }
+                    />
 
-                            < Modal
-                                modalIsOpen={modalIsOpen}
-                                setModalIsOpen={setModalIsOpen}
-                                Delete={Delete}
-                                isLoading={isLoading}
-                            />
+                    {userProfile.user.username === username && 
+                            <BsPencil color={'#FFFFFF'} cursor="pointer" onClick={() => {
+                                setOnEditingPost(!OnEditingPost)
+                                setPostMainDescription(text);
+                            }}/>
+                    }
+                </div>
+                </div>
 
-                            {userProfile.user.username === username &&
-                                <BsPencil color={'#FFFFFF'} cursor="pointer" onClick={() => {
-                                    setOnEditingPost(!OnEditingPost)
-                                    setPostMainDescription(text);
-                                }} />
-                            }
-                        </div>
-                    </div>
+                {OnEditingPost ? 
+                    <input 
+                        ref = {textEditRef}
+                        disabled = {onSendingPostEdition}
+                        value = {postMainDescription}
+                        onChange ={e => setPostMainDescription(e.target.value)}
+                        onKeyDown = { (event) => {
+                            if(event.key === "Escape") {
+                                setOnEditingPost(false);
+                                setPostMainDescription(text);
+                            }                               
+                            else if (event.key === "Enter") 
+                                sendEditedPostToServer();
+                        }}
+                    /> : <Description>
+                    <ReactHashtag renderHashtag={(val) => (
+                        <Link to={`/hashtag/${val.replace("#", "")}`} ><Hashtag >{val}</Hashtag></Link>)}>
+                        {text}
+                    </ReactHashtag>
+                    </Description> }
+        
+                {youtubeLink ? 
+                    <>
+                        <iframe id={youtubeLink} type="text/html" width="100%" height="300"
+                        src={`http://www.youtube.com/embed/${youtubeLink}`}
+                        frameBorder="0"/>
+                        <div id={youtubeLink}></div>
+                        <span style={{color: '#B7B7B7'}}>{link}</span>
+                    </>
+                     :<a href={link} target="_blank" rel="noreferrer">
+                        <LinkContainer>
+                            <LinkInfo>
+                            <h1>{linkTitle}</h1>
+                            <p>{linkDescription}</p>
+                            <span>{link}</span>
+                            </LinkInfo>
+                            <LinkImg backgroud={linkImage} />
+                        </LinkContainer>
+                    </a> }        
+                <LInkBox linkTitle={linkTitle} linkDescription={linkDescription} link={link} linkImage={linkImage}/>  
+            </PostContent>
+        </SinglePost>
+        <PostComments key={id} PostId={id} authorId={user.id} openComments={openComments} setComments={setComments} comments={comments} setComments={setComments} />
 
-                    {OnEditingPost ?
-                        <input
-                            ref={textEditRef}
-                            disabled={onSendingPostEdition}
-                            value={postMainDescription}
-                            onChange={e => setPostMainDescription(e.target.value)}
-                            onKeyDown={(event) => {
-                                if (event.key === "Escape") {
-                                    setOnEditingPost(false);
-                                    setPostMainDescription(text);
-                                }
-                                else if (event.key === "Enter")
-                                    sendEditedPostToServer();
-                            }}
-                        /> : <Description>
-                            <ReactHashtag renderHashtag={(val) => (
-                                <Link to={`/hashtag/${val.replace("#", "")}`} ><Hashtag >{val}</Hashtag></Link>)}>
-                                {text}
-                            </ReactHashtag>
-                        </Description>}
-
-                   <LInkBox linkTitle={linkTitle} linkDescription={linkDescription} link={link} linkImage={linkImage}/>
-                </PostContent >
-            </SinglePost>
-            <PostComments key={id} PostId={id} openComments={openComments} setComments={setComments} comments={comments} setComments={setComments} />
         </>
     );
 }
+
+/**/
