@@ -10,7 +10,7 @@ import axios from 'axios';
 import getYouTubeID from 'get-youtube-id';
 
 import UserContext from '../../contexts/UserContext'
-import { SinglePost, Profile, PostContent, CreatorName, Description, Hashtag, LikesContainer, StyledReactTooltip, CommentsContainer, LinkContainer, LinkInfo, LinkImg } from "./Styles";
+import { SinglePost, Profile, PostContent, CreatorName, Description, Hashtag, LikesContainer, StyledReactTooltip, CommentsContainer } from "./Styles";
 import ReactTooltip from 'react-tooltip';
 import PostComments from './PostComments';
 import LInkBox from './LinkBox';
@@ -210,17 +210,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                         <div id={youtubeLink}></div>
                         <span style={{color: '#B7B7B7'}}>{link}</span>
                     </>
-                     :<a href={link} target="_blank" rel="noreferrer">
-                        <LinkContainer>
-                            <LinkInfo>
-                            <h1>{linkTitle}</h1>
-                            <p>{linkDescription}</p>
-                            <span>{link}</span>
-                            </LinkInfo>
-                            <LinkImg backgroud={linkImage} />
-                        </LinkContainer>
-                    </a> }        
-                <LInkBox linkTitle={linkTitle} linkDescription={linkDescription} link={link} linkImage={linkImage}/>  
+                     : <LInkBox linkTitle={linkTitle} linkDescription={linkDescription} link={link} linkImage={linkImage}/> }
             </PostContent>
         </SinglePost>
         <PostComments key={id} PostId={id} authorId={user.id} openComments={openComments} setComments={setComments} comments={comments} setComments={setComments} />
