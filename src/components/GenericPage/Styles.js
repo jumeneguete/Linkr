@@ -63,7 +63,7 @@ const ContainerPostsAndTrendings = styled.div`
     }
 `;
 
-const ContainerPosts =styled.div`
+const ContainerPosts = styled.div`
     width: 611px;
     & > span {
         display: flex;
@@ -102,8 +102,8 @@ const CreatePost = styled.div`
         width: 100%;
         button {
             font-size: 15px;
-            background: ${ props => props.clicked ? '#CCC' : '#1877F2'};
-            cursor: ${ props => props.clicked ? 'not-allowed' : 'pointer'};
+            background: ${props => props.clicked ? '#CCC' : '#1877F2'};
+            cursor: ${props => props.clicked ? 'not-allowed' : 'pointer'};
             border-radius: 5px;
             color: #FFF;
             font-weight: 700;
@@ -195,9 +195,9 @@ const CreatePost = styled.div`
 
 const StyledButtom = styled.button`
 font-size: 15px;
-background: ${ props => props.clicked ? '#EFEFEF' : '#1877F2'};
+background: ${props => props.clicked ? '#EFEFEF' : '#1877F2'};
 border-radius: 5px;
-color: ${ props => props.clicked ? '#1877F2' : '#FFF'};
+color: ${props => props.clicked ? '#1877F2' : '#FFF'};
 font-weight: 700;
 padding: 10px;
 text-align: center;
@@ -208,7 +208,7 @@ cursor: pointer;
 
 const TrendingStyle = styled.div`
     width: 301px;
-    height: 450px;
+    height: 440px;
     background: #171717;
     border-radius: 16px;
     color: #fff;
@@ -216,7 +216,7 @@ const TrendingStyle = styled.div`
     flex-direction: column;
     position: sticky;
     right: auto;
-    top: 200px;
+    top: 150px;
 
     form {
         margin-top: 10px;
@@ -224,16 +224,31 @@ const TrendingStyle = styled.div`
         width: 100%;
     }
     input {
+        color:#fff;
+        margin-top: -10px;
         background: #333;
         border-radius: 5px;
         cursor: text;
         font: 400 18px 'Lato', sans-serif;
-        padding: 5px 20px;
+        padding: 5px 20px 8px 30px;
         text-align: left;
         width: 90%;
+        border: none;;
     }
 
+        input::placeholder{
+            font-style: italic;
+            font-size: 16px;
+            font-weight: 700;
+            color: #9F9F9F;
+        }
+        input:focus{
+            box-shadow: 0 0 0 0;
+            outline: 0;
+        }
+
     span{
+        margin-top: -10px;
         position: absolute; 
         display: block; 
         left: 22px; 
