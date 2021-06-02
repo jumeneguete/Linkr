@@ -1,12 +1,13 @@
 import { useState, useContext, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom'
-import { IoHeartSharp, IoHeartOutline } from "react-icons/io5";
+import { IoHeartSharp, IoHeartOutline, IoCalculator } from "react-icons/io5";
 import { BsTrash } from 'react-icons/bs';
 import { BsPencil } from 'react-icons/bs';
 import {AiOutlineComment} from "react-icons/ai"
 import ReactHashtag from "react-hashtag";
 import Modal from "../UserPosts/Modal";
 import axios from 'axios';
+import getYouTubeID from 'get-youtube-id';
 
 import UserContext from '../../contexts/UserContext'
 import { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag, LikesContainer, StyledReactTooltip, CommentsContainer } from "./Styles";
@@ -126,7 +127,9 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
 
     }, [])
 
+    const youtubeLink = getYouTubeID(link);
 
+       
     return(
         <>
         <SinglePost>
@@ -198,19 +201,30 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                     </ReactHashtag>
                     </Description> }
         
-                <a href={link} target="_blank" rel="noreferrer">
-                    <LinkContainer>
-                        <LinkInfo>
-                        <h1>{linkTitle}</h1>
-                        <p>{linkDescription}</p>
-                        <span>{link}</span>
-                        </LinkInfo>
-                        <LinkImg backgroud={linkImage} />
-                    </LinkContainer>
-                </a>
+                {youtubeLink ? 
+                    <>
+                        <iframe id={youtubeLink} type="text/html" width="100%" height="300"
+                        src={`http://www.youtube.com/embed/${youtubeLink}`}
+                        frameBorder="0"/>
+                        <div id={youtubeLink}></div>
+                        <span style={{color: '#B7B7B7'}}>{link}</span>
+                    </>
+                     :<a href={link} target="_blank" rel="noreferrer">
+                        <LinkContainer>
+                            <LinkInfo>
+                            <h1>{linkTitle}</h1>
+                            <p>{linkDescription}</p>
+                            <span>{link}</span>
+                            </LinkInfo>
+                            <LinkImg backgroud={linkImage} />
+                        </LinkContainer>
+                    </a> }        
+                
             </PostContent>
         </SinglePost>
-        <PostComments key={id} PostId={id} openComments={openComments} setComments={setComments} comments={comments} setComments={setComments} />
+        <PostComments key={id} PostId={id} authorId={user.id} openComments={openComments} setComments={setComments} comments={comments} setComments={setComments} />
         </>
     );
 }
+
+/**/

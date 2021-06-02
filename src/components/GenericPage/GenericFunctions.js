@@ -7,7 +7,7 @@ function loadMorePosts(arrayOfPosts, setArrayOfPosts, setMorePostsToLoad, url, c
     const request = axios.get( url, config );
     request.then(response => {
         if(response.data.posts.length > 0){
-            setArrayOfPosts(arrayOfPosts.concat(response.data.posts))
+            setArrayOfPosts([...arrayOfPosts, ...response.data.posts])
         } else {
             setMorePostsToLoad(false)
         }
@@ -27,8 +27,13 @@ function reloadPosts(arrayOfPosts, setArrayOfPosts, url, erroAlert, config) {
     if(!arrayOfPosts || arrayOfPosts.length === 0) return;
     const request = axios.get(url, config);
     request.then(response => {
-        const newPosts = (arrayOfPosts.filter(p => response.data.posts.includes(p)))
-        setArrayOfPosts(newPosts.concat(arrayOfPosts))
+        const newPosts = [];
+        (response.data.posts.forEach(p => {
+            if(!arrayOfPosts.find(a => a.id === p.id)){
+                newPosts.push(p)
+            }
+        }))
+        setArrayOfPosts([...newPosts, ...arrayOfPosts])
     });
     request.catch(erro => alert(erroAlert));
 }
