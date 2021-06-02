@@ -22,7 +22,7 @@ export default function GenericPage(props) {
     const loading = <Loader type="Oval" color="#6D6D6D" height={40} width={40} />;
     let id;
     if(location !== "/timeline") {
-        id = arrayOfPosts && arrayOfPosts[0].user.id;
+        id = arrayOfPosts && arrayOfPosts.lenght > 0 && arrayOfPosts[0].user.id;
     }
 
     return (
