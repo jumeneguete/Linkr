@@ -241,6 +241,7 @@ const CommentInfo = styled.div`
 
         span {
             color: #565656;
+            margin-left: 5px;;
         }
     }
 

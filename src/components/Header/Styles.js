@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const HeaderStyles = styled.header`
     width: 100%;
     height: 75px;
-    background-color: #000;
+    background-color: #151515;
     padding: 0 22px;
     display: flex;
     justify-content: space-between;
@@ -11,7 +11,6 @@ const HeaderStyles = styled.header`
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1;
 
     & > span {
         font-family: "Passion One", sans-serif;
@@ -70,4 +69,10 @@ const ToggleMenu = styled.div`
     }
 `;
 
-export { HeaderStyles, Menu, ToggleMenu };
+const HeaderSearch = styled.div`
+@media (max-width: 640px) {
+        display: none;
+    }
+`;
+
+export { HeaderStyles, Menu, ToggleMenu, HeaderSearch };

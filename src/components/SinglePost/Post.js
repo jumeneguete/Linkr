@@ -3,51 +3,52 @@ import { Link, useLocation } from 'react-router-dom'
 import { IoHeartSharp, IoHeartOutline, IoCalculator } from "react-icons/io5";
 import { BsTrash } from 'react-icons/bs';
 import { BsPencil } from 'react-icons/bs';
-import {AiOutlineComment} from "react-icons/ai"
+import { AiOutlineComment } from "react-icons/ai"
 import ReactHashtag from "react-hashtag";
 import Modal from "../UserPosts/Modal";
 import axios from 'axios';
 import getYouTubeID from 'get-youtube-id';
 
 import UserContext from '../../contexts/UserContext'
-import { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag, LikesContainer, StyledReactTooltip, CommentsContainer } from "./Styles";
+import { SinglePost, Profile, PostContent, CreatorName, Description, Hashtag, LikesContainer, StyledReactTooltip, CommentsContainer } from "./Styles";
 import ReactTooltip from 'react-tooltip';
 import PostComments from './PostComments';
+import LInkBox from './LinkBox';
 
-export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts}) {
+export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts }) {
 
-    
+
     const { userProfile } = useContext(UserContext);
     const { token } = userProfile
     const textEditRef = useRef();
     const location = useLocation().pathname;
     const { text, link, linkTitle, linkDescription, linkImage, likes, id, user } = postDetails;
-    const[ postLiked, setPostLiked ] = useState (likes.find(l => l["user.id"] === userProfile.user.id ||l["id"]===userProfile.user.id))
+    const [postLiked, setPostLiked] = useState(likes.find(l => l["user.id"] === userProfile.user.id || l["id"] === userProfile.user.id))
     const { username, avatar } = postDetails.user;
-    const [ modalIsOpen, setModalIsOpen ] = useState(false);
-    const [ isLoading, setIsLoading ] = useState(false);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [OnEditingPost, setOnEditingPost] = useState(false);
     const [postMainDescription, setPostMainDescription] = useState(text);
     const [onSendingPostEdition, setOnSendingPostEdition] = useState(false);
-    const [ openComments, setOpenComments] = useState(false);
+    const [openComments, setOpenComments] = useState(false);
     const [comments, setComments] = useState([]);
 
-    useEffect( () => {
+    useEffect(() => {
         if (textEditRef.current)
-          textEditRef.current.focus();
-     }, [OnEditingPost]);
+            textEditRef.current.focus();
+    }, [OnEditingPost]);
 
-     function sendEditedPostToServer() {
+    function sendEditedPostToServer() {
         setOnSendingPostEdition(true);
-        const config ={ headers: { Authorization: `Bearer ${token}` }}
-        const request = axios.put(`https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts/${id}`, {'text': postMainDescription}, config);
+        const config = { headers: { Authorization: `Bearer ${token}` } }
+        const request = axios.put(`https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts/${id}`, { 'text': postMainDescription }, config);
 
-        request.then( ({data}) => {
+        request.then(({ data }) => {
             setOnSendingPostEdition(false);  //input desabilitado
             setOnEditingPost(false);  //edição finalizada
             getPost(true);   //refresh Timeline
         })
-        request.catch( () => {
+        request.catch(() => {
             setOnSendingPostEdition(false);
             setOnEditingPost(false);
             alert("A alteração não foi possível de ser concluída!");
@@ -58,41 +59,41 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
     function likePost() {
         ReactTooltip.rebuild();
         const newArrayOfPosts = [...arrayOfPosts];
-        const config ={ headers: { Authorization: `Bearer ${token}` }}
+        const config = { headers: { Authorization: `Bearer ${token}` } }
         let request;
-        if(!postLiked){
-            request = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts/${id}/like`,{}, config);
-        }else {
-            request = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts/${id}/dislike`,{}, config);
+        if (!postLiked) {
+            request = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts/${id}/like`, {}, config);
+        } else {
+            request = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts/${id}/dislike`, {}, config);
         }
-        request.then( response => {
-            const newPost = {...postDetails, likes: response.data.post.likes};
+        request.then(response => {
+            const newPost = { ...postDetails, likes: response.data.post.likes };
             newArrayOfPosts[index] = newPost;
             setArrayOfPosts(newArrayOfPosts)
             setPostLiked(!postLiked);
-            
+
         })
     }
 
-    function Delete () {
-        const config ={ headers: { Authorization: `Bearer ${token}` }}
+    function Delete() {
+        const config = { headers: { Authorization: `Bearer ${token}` } }
         setIsLoading(true);
-        const request = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts/${id}`,config);
+        const request = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts/${id}`, config);
         request.then(deleteSucceeded).catch(errorHandle);
     }
 
-    function deleteSucceeded () {
+    function deleteSucceeded() {
         setIsLoading(false);
         setModalIsOpen(!modalIsOpen);
         getPost();
     }
 
-    function getPost(){
-        const config ={ headers: { Authorization: `Bearer ${token}` }}
+    function getPost() {
+        const config = { headers: { Authorization: `Bearer ${token}` } }
         let request;
-        if(location === "/timeline"){
+        if (location === "/timeline") {
             request = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts', config);
-        } else{
+        } else {
             request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/users/${userProfile.user.id}/posts`, config);
         }
         request.then(response => {
@@ -101,29 +102,29 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
         request.catch(erro => alert("Ocorreu um erro ao carregar os posts"))
     }
 
-    function errorHandle () {
+    function errorHandle() {
         setIsLoading(false);
         setModalIsOpen(!modalIsOpen);
         alert(`Sorry, we couln't delete your post`);
     }
 
-    function toggleComments(e){
+    function toggleComments(e) {
         e.stopPropagation();
 
         const selection = !openComments;
         setOpenComments(selection);
 
     }
-    
 
-    useEffect(function loadComments () {
+
+    useEffect(function loadComments() {
         const config = { headers: { Authorization: `Bearer ${userProfile.token}` } };
 
         const request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts/${id}/comments`, config);
         request.then(response => {
             setComments(response.data.comments);
         });
-        request.catch(()=> alert("Erro ao carregar comentários"));
+        request.catch(() => alert("Erro ao carregar comentários"));
 
     }, [])
 
@@ -208,20 +209,11 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                         <div id={youtubeLink}></div>
                         <span style={{color: '#B7B7B7'}}>{link}</span>
                     </>
-                     :<a href={link} target="_blank" rel="noreferrer">
-                        <LinkContainer>
-                            <LinkInfo>
-                            <h1>{linkTitle}</h1>
-                            <p>{linkDescription}</p>
-                            <span>{link}</span>
-                            </LinkInfo>
-                            <LinkImg backgroud={linkImage} />
-                        </LinkContainer>
-                    </a> }        
-                
+                     : <LInkBox linkTitle={linkTitle} linkDescription={linkDescription} link={link} linkImage={linkImage}/> }
             </PostContent>
         </SinglePost>
         <PostComments key={id} PostId={id} authorId={user.id} openComments={openComments} setComments={setComments} comments={comments} setComments={setComments} />
+
         </>
     );
 }

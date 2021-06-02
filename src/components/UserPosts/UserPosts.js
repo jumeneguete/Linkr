@@ -17,7 +17,7 @@ export default function UserPosts() {
     const history = useHistory();
     const [userPostsList, setUserPostsList] = useState(null);
     const [isFollowing, setIsFollowing] = useState({status: followers && followers.find(f => f.id === Number(id)), isDisabled: false})
-    const userName = userPostsList && userPostsList[0].user.username;
+    const userName = userPostsList && userPostsList.length > 0 && userPostsList[0].user.username;
     const [morePostsToLoad, setMorePostsToLoad] = useState(true)
 
     const pageUrl = `https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/users/${id}/posts`;
