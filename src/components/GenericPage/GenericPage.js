@@ -37,7 +37,6 @@ export default function GenericPage(props) {
             <ContainerPostsAndTrendings>
                 <ContainerPosts>
                     {location === "/timeline" ? <UserInput setArrayOfPosts={setArrayOfPosts}/> : ""}
-                    {arrayOfPosts && arrayOfPosts.lenght > 0 ? 
                     <InfiniteScroll
                         pageStart={0}
                         loadMore={() => loadMorePosts(arrayOfPosts,setArrayOfPosts, setMorePostsToLoad, props.url, config)}
@@ -49,7 +48,6 @@ export default function GenericPage(props) {
                     >
                         {renderPosts(arrayOfPosts, setArrayOfPosts, location, followers)}
                     </InfiniteScroll>
-                    : ""}
                 </ContainerPosts>
                 <Trending />
             </ContainerPostsAndTrendings>
