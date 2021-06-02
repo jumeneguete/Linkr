@@ -5,10 +5,11 @@ import InfiniteScroll from 'react-infinite-scroller';
 
 import UserContext from '../../contexts/UserContext';
 import UserFollowersContext from '../../contexts/UserFollowersContext';
-import { PageTitle, ContainerPostsAndTrendings, ContainerPosts, StyledButtom, Loading } from "./Styles";
+import { GenericSearch, PageTitle, ContainerPostsAndTrendings, ContainerPosts, StyledButtom, Loading } from "./Styles";
 import UserInput from '../UserPosts/UserInput'
 import Trending from "./Trending";
 import {loadMorePosts , renderPosts} from'./GenericFunctions';
+import Search from "../Header/Search";
 
 export default function GenericPage(props) {
 
@@ -21,11 +22,12 @@ export default function GenericPage(props) {
     const loading = <Loader type="Oval" color="#6D6D6D" height={40} width={40} />;
     let id;
     if(location !== "/timeline") {
-        id = arrayOfPosts && arrayOfPosts[0].user.id;
+        id = arrayOfPosts && arrayOfPosts.lenght > 0 && arrayOfPosts[0].user.id;
     }
 
     return (
         <>
+            <GenericSearch><Search/></GenericSearch>
             <PageTitle>
                 <span>{title}</span> 
                 {location === `/user/${id}` && id !== userProfile.user.id ? 
