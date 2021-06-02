@@ -43,7 +43,7 @@ export default function PostComments({ setComments, openComments, comments, Post
                                 <div>
                                     <Link to={`/user/${c.user.id}`}><p>{c.user.username}</p></Link>
                                     <BsDot color={"#565656"} />
-                                    <span>{authorId === userProfile.user.id ? "Post's author" : followers.find(f => f.id === c.user.id) ? "following" : ""}</span>
+                                    <span>{authorId === c.user.id ? "Post's author" : followers.find(f => f.id === c.user.id) ? "following" : ""}</span>
                                 </div>
                                 <span>{c.text}</span>
                             </CommentInfo>

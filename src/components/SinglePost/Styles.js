@@ -174,7 +174,7 @@ border-radius: 3px !important;
 padding: 5px !important;
 
     &:after{
-        border-bottom-color: white !important;
+        border-bottom-color: #e7e7e7 !important;
     }
 `;
 

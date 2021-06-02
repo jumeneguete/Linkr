@@ -128,7 +128,6 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
     }, [])
 
     const youtubeLink = getYouTubeID(link);
-
        
     return(
         <>
