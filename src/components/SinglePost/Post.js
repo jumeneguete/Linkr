@@ -205,7 +205,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                     <>
                         <iframe id={youtubeLink} type="text/html" width="100%" height="300"
                         src={`http://www.youtube.com/embed/${youtubeLink}`}
-                        frameborder="0"/>
+                        frameBorder="0"/>
                         <div id={youtubeLink}></div>
                         <span style={{color: '#B7B7B7'}}>{link}</span>
                     </>
@@ -222,7 +222,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                 
             </PostContent>
         </SinglePost>
-        <PostComments key={id} PostId={id} openComments={openComments} setComments={setComments} comments={comments} setComments={setComments} />
+        <PostComments key={id} PostId={id} authorId={user.id} openComments={openComments} setComments={setComments} comments={comments} setComments={setComments} />
         </>
     );
 }

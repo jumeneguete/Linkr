@@ -27,7 +27,12 @@ function reloadPosts(arrayOfPosts, setArrayOfPosts, url, erroAlert, config) {
     if(!arrayOfPosts || arrayOfPosts.length === 0) return;
     const request = axios.get(url, config);
     request.then(response => {
-        const newPosts = (arrayOfPosts.filter(p => response.data.posts.includes(p)))
+        const newPosts = [];
+        (response.data.posts.forEach(p => {
+            if(!arrayOfPosts.find(a => a.id === p.id)){
+                newPosts.push(p)
+            }
+        }))
         setArrayOfPosts([...newPosts, ...arrayOfPosts])
     });
     request.catch(erro => alert(erroAlert));
