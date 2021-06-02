@@ -105,7 +105,8 @@ const CreatePost = styled.div`
 
         .footer{
             display: flex;
-            justify-content: space-around; 
+            width: 100%;
+            justify-content: space-between; 
         }
     }
     @media (max-width: 614px) {

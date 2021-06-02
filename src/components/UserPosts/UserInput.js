@@ -28,6 +28,13 @@ export default function UserInput ({ setArrayOfPosts }) {
         const postObj = userComment.length
             ? {link: userLink, text: userComment}
             : {link: userLink};
+
+        if (location) {
+            postObj.geolocation = {};
+            postObj.geolocation.latitude = location.latitude;
+            postObj.geolocation.longitude = location.longitude;
+          }
+
         return postObj;
     }
 

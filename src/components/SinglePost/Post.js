@@ -6,6 +6,7 @@ import { BsPencil } from 'react-icons/bs';
 import ReactHashtag from "react-hashtag";
 import Modal from "../UserPosts/Modal";
 import axios from 'axios';
+import LocationPost from './LocationPost'
 
 import UserContext from '../../contexts/UserContext'
 import { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag, LikesContainer, StyledReactTooltip } from "./Styles";
@@ -18,7 +19,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
     const { token } = userProfile
     const textEditRef = useRef();
     const location = useLocation().pathname;
-    const { text, link, linkTitle, linkDescription, linkImage, likes, id, user } = postDetails;
+    const { text, link, linkTitle, linkDescription, linkImage, likes, id, user, geolocation } = postDetails;
     const[ postLiked, setPostLiked ] = useState (likes.find(l => l["user.id"] === userProfile.user.id ||l["id"]===userProfile.user.id))
     const { username, avatar } = postDetails.user;
     const [ modalIsOpen, setModalIsOpen ] = useState(false);
@@ -144,6 +145,13 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                                 setPostMainDescription(text);
                             }}/>
                     }
+
+                {geolocation && (
+                <LocationPost
+                  user={user.username}
+                  geolocation={geolocation}
+                />
+              )}
                 </div>
                 </div>
 
