@@ -5,6 +5,7 @@ import { DebounceInput } from 'react-debounce-input';
 import axios from "axios";
 import { Link } from "react-router-dom";
 import UserFollowersContext from "../../contexts/UserFollowersContext";
+import ClickAwayListener from 'react-click-away-listener';
 
 export default function Search() {
     const { userProfile } = useContext(UserContext);
@@ -27,26 +28,41 @@ export default function Search() {
 
     return (
 
-        <SearchStyle>
-            <StyledInput
-                minLength={3}
-                debounceTimeout={300}
-                onChange={(e) => setSearch(e.target.value)} value={search}
-                searching={search !== "" ? true : false}
-                placeholder="Search for people and friends" />
-            <Suggestions searching={search !== "" ? true : false}>
-                {usersFound === null ? "" : usersFound.length === 0 ? <NotFound>Nenhum usuário encontrado</NotFound> :
-                    usersFound.map(f => (
-                        <Link to={`/user/${f.id}`}>
-                            <UserSearched key={f.id}>
-                                <img src={f.avatar} alt={f.username} />
-                                <p>{f.username}</p>
-                                <span> {followers.find(fol => fol.id === f.id) ? "• following" : ""}</span>
-                            </UserSearched>
-                        </Link>
-                    ))}
-            </Suggestions>
-        </SearchStyle>
+        <ClickAwayListener onClickAway={() => setSearch("")}>
+            <SearchStyle>
+                <StyledInput
+                    minLength={3}
+                    debounceTimeout={300}
+                    onChange={(e) => setSearch(e.target.value)} value={search}
+                    searching={search !== "" ? true : false}
+                    placeholder="Search for people and friends" />
+                <Suggestions searching={search !== "" ? true : false}>
+                    {usersFound === null ? "" : usersFound.length === 0 ? <NotFound>Nenhum usuário encontrado</NotFound> :
+                        usersFound.map(f => (
+                            followers.find(fol => fol.id === f.id) ? (
+                                <Link to={`/user/${f.id}`}>
+                                    <UserSearched key={f.id}>
+                                        <img src={f.avatar} alt={f.username} />
+                                        <p>{f.username}</p>
+                                        <span> • following</span>
+                                    </UserSearched>
+                                </Link>
+                            ) : ""
+                        ))}
+                    {usersFound === null ? "" :
+                        usersFound.map(u => (
+                            followers.find(foll => foll.id === u.id) ? "" : (
+                                <Link to={`/user/${u.id}`}>
+                                    <UserSearched key={u.id}>
+                                        <img src={u.avatar} alt={u.username} />
+                                        <p>{u.username}</p>
+                                    </UserSearched>
+                                </Link>
+                            )
+                        ))}
+                </Suggestions>
+            </SearchStyle>
+        </ClickAwayListener>
     );
 }
 
