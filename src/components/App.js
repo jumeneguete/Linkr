@@ -18,13 +18,15 @@ export default function App() {
     const alreadyLoggedIn = localStorage.getItem("lastLogin");
     const [userProfile, setUserProfile] = useState(alreadyLoggedIn && JSON.parse(alreadyLoggedIn));  
     const [followers, setFollowers] = useState(null);
-
+    
     useEffect(() => {
+        if (userProfile){
         const config = { headers: { Authorization: `Bearer ${userProfile.token}` }};
         const request = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/users/follows', config);
         request.then( response => {
             setFollowers(response.data.users)
         })
+    }
     }, [followers])
 
 
