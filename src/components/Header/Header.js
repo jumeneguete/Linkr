@@ -33,7 +33,7 @@ export default function Header() {
             <HeaderStyles>
                 <span><Link to="/">linkr</Link></span>
                 <Search>
-                    <DebounceInput
+                    <StyledInput
                         minLength={2}
                         debounceTimeout={300}
                         onChange={(e) => setSearch(e.target.value)} value={search}
@@ -64,14 +64,33 @@ const Search = styled.div`
     position: relative;
 `;
 
-const SearchStyle = styled.div`
-    
+const StyledInput = styled(DebounceInput)`
+    width: 350px;
+    height: 35px;
+    border:none;
+    border-radius: 5px;
+    box-shadow: 0;
+    padding: 20px 10px;
+
+
+    &:focus{
+        box-shadow: 0 0 0 0;
+        outline: 0;
+    }
+
+    &::placeholder {
+        font-family: "Lato", sans-serif;
+        font-size: 15px;
+        color: #C6C6C6;
+    }
+
 `;
 
 const Suggestions = styled.div`
 width: 100%;
-height: 200px;
-background-color: red;
+height: 100px;
+background-color: whitesmoke;
+border-radius: 0 0 5px 5px;
 position: absolute;
 top:30px;
 left: 0;
