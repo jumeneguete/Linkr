@@ -265,5 +265,6 @@ const Loading = styled.div`
 display:flex;
 flex-direction: column;
 align-items:center;
+color: #6D6D6D;
 `;
 export { PageTitle, ContainerPostsAndTrendings, CreatePost, ContainerPosts, TrendingStyle, Title, Separator, TrendingList, StyledButtom, Loading };
