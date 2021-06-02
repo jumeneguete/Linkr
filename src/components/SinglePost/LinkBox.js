@@ -12,6 +12,8 @@ export default function LInkBox({linkTitle,linkDescription, link, linkImage }) {
             < Modal
                 modalIsOpen={modalIsOpen}
                 setModalIsOpen={setModalIsOpen}
+                link={link}
+                linkTitle ={linkTitle}
             />
 
             <LinkContainer onClick={() => setModalIsOpen(!modalIsOpen)}>

@@ -1,32 +1,41 @@
 import React from "react";
 import ReactModal from 'react-modal';
+import styled from 'styled-components';
+import ClickAwayListener from 'react-click-away-listener';
 
 ReactModal.setAppElement("body");
 
+export default function Modal({ modalIsOpen, setModalIsOpen, link, linkTitle }) {
 
-const customStyles = {
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-      background: "#333333",
-      borderRadius: "20px",
-      margin: "20px 50px",
-      margin: "0 auto",
-      padding: "20px 50px",
-    },
-  };
-  
-  export default function Modal({ modalIsOpen,setModalIsOpen,style={customStyles} }) {
-      
-    return (
-      <ReactModal isOpen={modalIsOpen}>
+  return (
+    <ModalStyle isOpen={modalIsOpen} link={link}>
 
-           <button onClick={()=> setModalIsOpen(!modalIsOpen)}>Close Modal</button>
-       
-      </ReactModal>
-    );
-  }
+      <a href={link} target="_blank"><button>Open in new tab</button></a>
+      <ClickAwayListener onClickAway={() => setModalIsOpen(!modalIsOpen)}>
+        <iframe src={link} width="100%" height="100%" title={linkTitle}></iframe>
+      </ClickAwayListener>
+
+    </ModalStyle>
+  );
+}
+
+const ModalStyle = styled(ReactModal)`
+    width:100%;
+    height: 100vh;
+    padding: 30px;
+    background-color: #333333;
+    position: fixed;
+    top:0;
+    left:0;
+    z-index: 50;
+
+    button {
+      font-weight: 700;
+      padding:10px 20px;
+      margin-bottom: 15px;
+      background-color: #1877F2;
+      color: #FFF;
+      border:none;
+      border-radius: 7px;
+    }
+`;

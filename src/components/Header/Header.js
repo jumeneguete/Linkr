@@ -34,7 +34,6 @@ export default function Header() {
                 <span><Link to="/">linkr</Link></span>
                 <Search>
                     <DebounceInput
-                        element={SearchStyle}
                         minLength={2}
                         debounceTimeout={300}
                         onChange={(e) => setSearch(e.target.value)} value={search}
@@ -66,8 +65,7 @@ const Search = styled.div`
 `;
 
 const SearchStyle = styled.div`
-    width: 100%;
-    height: 45px;
+    
 `;
 
 const Suggestions = styled.div`
@@ -75,6 +73,7 @@ width: 100%;
 height: 200px;
 background-color: red;
 position: absolute;
-top:80px;
-left:0;
+top:30px;
+left: 0;
+
 `;
