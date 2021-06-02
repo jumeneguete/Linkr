@@ -2,11 +2,18 @@ import axios from 'axios';
 import Post from '../SinglePost/Post';
 
 function loadMorePosts(arrayOfPosts, setArrayOfPosts, setMorePostsToLoad, url, config) {
-
+    
+    if(arrayOfPosts && arrayOfPosts.length === 0) {
+        setMorePostsToLoad(false)
+        return;
+    }
     if(!url) return;
+    
     const request = axios.get( url, config );
     request.then(response => {
-        if(response.data.posts.length > 0){
+        console.log(`teste${response.data.posts}`)
+        const morePosts = response.data.posts;
+        if( morePosts && morePosts.length > 0){
             setArrayOfPosts([...arrayOfPosts, ...response.data.posts])
         } else {
             setMorePostsToLoad(false)
