@@ -10,7 +10,7 @@ import axios from 'axios';
 import getYouTubeID from 'get-youtube-id';
 
 import UserContext from '../../contexts/UserContext'
-import { SinglePost, Profile, PostContent, CreatorName, Description, Hashtag, LikesContainer, StyledReactTooltip, CommentsContainer } from "./Styles";
+import { SinglePost, Profile, PostContent, CreatorName, Description, Hashtag, LikesContainer, StyledReactTooltip, CommentsContainer, LinkContainer, LinkInfo, LinkImg } from "./Styles";
 import ReactTooltip from 'react-tooltip';
 import PostComments from './PostComments';
 import LInkBox from './LinkBox';

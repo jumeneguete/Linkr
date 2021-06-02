@@ -5,7 +5,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 
 import UserContext from '../../contexts/UserContext';
 import UserFollowersContext from '../../contexts/UserFollowersContext';
-import { PageTitle, ContainerPostsAndTrendings, ContainerPosts, StyledButtom, Loading } from "./Styles";
+import { GenericSearch, PageTitle, ContainerPostsAndTrendings, ContainerPosts, StyledButtom, Loading } from "./Styles";
 import UserInput from '../UserPosts/UserInput'
 import Trending from "./Trending";
 import {loadMorePosts , renderPosts} from'./GenericFunctions';
