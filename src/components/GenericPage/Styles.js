@@ -22,6 +22,20 @@ const HeaderStyles = styled.header`
     }
 `;
 
+const GenericSearch = styled.div`
+width: 100%;
+padding: 10px  0;
+background-color: #333;
+display: flex;
+justify-content: center;
+position:fixed;
+top: 75px;
+left:0;
+@media (min-width: 640px) {
+        display: none;
+    }
+`;
+
 const PageTitle = styled.div`
     display: flex;
     justify-content: space-between;
@@ -35,7 +49,7 @@ const PageTitle = styled.div`
     @media (max-width: 614px) {
         width: 100%;
         margin: 91px 0 0 0px;
-        padding: 0 20px;
+        padding: 75px 20px 0 20px;
     }
 `;
 
@@ -261,4 +275,4 @@ const TrendingList = styled.ul`
     }
 `;
 
-export { PageTitle, ContainerPostsAndTrendings, CreatePost, ContainerPosts, TrendingStyle, Title, Separator, TrendingList, StyledButtom };
+export { GenericSearch, PageTitle, ContainerPostsAndTrendings, CreatePost, ContainerPosts, TrendingStyle, Title, Separator, TrendingList, StyledButtom };

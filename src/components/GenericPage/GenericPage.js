@@ -5,10 +5,11 @@ import InfiniteScroll from 'react-infinite-scroller';
 
 import UserContext from '../../contexts/UserContext';
 import UserFollowersContext from '../../contexts/UserFollowersContext';
-import { PageTitle, ContainerPostsAndTrendings, ContainerPosts, StyledButtom } from "./Styles";
+import { GenericSearch, PageTitle, ContainerPostsAndTrendings, ContainerPosts, StyledButtom } from "./Styles";
 import Post from '../SinglePost/Post';
 import UserInput from '../UserPosts/UserInput'
 import Trending from "./Trending";
+import Search from "../Header/Search";
 
 export default function GenericPage(props) {
 
@@ -25,6 +26,7 @@ export default function GenericPage(props) {
 
     return (
         <>
+            <GenericSearch><Search/></GenericSearch>
             <PageTitle>
                 <span>{title}</span> 
                 {location === `/user/${id}` && id !== userProfile.user.id ? 

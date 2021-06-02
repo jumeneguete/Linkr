@@ -69,4 +69,10 @@ const ToggleMenu = styled.div`
     }
 `;
 
-export { HeaderStyles, Menu, ToggleMenu };
+const HeaderSearch = styled.div`
+@media (max-width: 640px) {
+        display: none;
+    }
+`;
+
+export { HeaderStyles, Menu, ToggleMenu, HeaderSearch };
