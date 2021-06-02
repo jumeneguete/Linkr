@@ -195,6 +195,7 @@ const TrendingStyle = styled.div`
     position: sticky;
     right: auto;
     top: 150px;
+    z-index: -10;
 
     form {
         margin-top: 10px;
