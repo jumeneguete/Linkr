@@ -102,13 +102,13 @@ const StyledInput = styled(DebounceInput)`
 `;
 
 const Suggestions = styled.div`
-width: 100%;
-background-color: whitesmoke;
-border-radius: 0 0 5px 5px;
-position: absolute;
-top:40px;
-left: 0;
-display: ${props => props.searching ? "block" : "none"};
+    width: 100%;
+    background-color: whitesmoke;
+    border-radius: 0 0 5px 5px;
+    position: absolute;
+    top:40px;
+    left: 0;
+    display: ${props => props.searching ? "block" : "none"};
 `;
 
 const NotFound = styled.div`
