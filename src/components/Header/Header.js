@@ -1,12 +1,13 @@
 import { useContext, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { HeaderStyles, Menu, ToggleMenu, HeaderSearch } from "./Styles"
+import { HeaderStyles, Menu, ToggleMenu } from "./Styles"
 import UserContext from "../../contexts/UserContext"
 import ClickAwayListener from 'react-click-away-listener';
 import Search from "./Search";
 
 export default function Header() {
     const [menuSelected, setMenuSelected] = useState(false);
+    const [search, setSearch] = useState("");
     const { userProfile, setUserProfile } = useContext(UserContext);
     const history = useHistory();
     const arrowUp = <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-up" class="svg-inline--fa fa-chevron-up fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M240.971 130.524l194.343 194.343c9.373 9.373 9.373 24.569 0 33.941l-22.667 22.667c-9.357 9.357-24.522 9.375-33.901.04L224 227.495 69.255 381.516c-9.379 9.335-24.544 9.317-33.901-.04l-22.667-22.667c-9.373-9.373-9.373-24.569 0-33.941L207.03 130.525c9.372-9.373 24.568-9.373 33.941-.001z"></path></svg>;
@@ -28,9 +29,9 @@ export default function Header() {
 
     return (
         <>
-            <HeaderStyles>
+            <HeaderStyles searching={search !== "" ? true : false}>
                 <span><Link to="/">linkr</Link></span>
-                <HeaderSearch><Search /></HeaderSearch>
+                <div><Search search={search} setSearch={setSearch}/></div>
                 <Menu onClick={(event) => toggle(event)}>
                     <span>{menuSelected ? arrowUp : arrowDown}</span>
                     <img src={userProfile.user.avatar} alt={userProfile.user.username} />
