@@ -13,9 +13,31 @@ export default function RepostButton({ post, counter, setCounter }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+  const { userProfile } = useContext(UserContext);
+  const { token } = userProfile
 
   function repostPost() {
-    console.log(post);
+    const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const repostRequest = axios.post(
+        `https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts/${post.id}/share`,
+        {},
+        config
+      );
+      setIsLoading(true);
+      repostRequest.then(() => {
+        setIsOpen(false);
+        setIsLoading(false);
+        setCounter(counter + 1);
+        //   recarregar a tela();
+      });
+      repostRequest.catch(() => {
+        setError(true);
+        setIsLoading(false);
+      });
   }
 
   console.log(post);
@@ -65,7 +87,7 @@ export default function RepostButton({ post, counter, setCounter }) {
                   No, cancel
                 </button>
                 <button onClick={repostPost} disabled={isLoading}>
-                  {isLoading ? "Deleting..." : "Yes, share!"}
+                  {isLoading ? "Sharing..." : "Yes, share!"}
                 </button>
               </div>
             </>
