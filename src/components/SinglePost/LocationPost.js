@@ -10,7 +10,7 @@ Modal.setAppElement("body");
 
 export default function LocationIndicator({ user, geolocation }) {
   const [isOpen, setIsOpen] = useState(false);
-  const keyy = process.env.REACT_APP_GOOGLE_API_KEY;
+  const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
   function toggleModal() {
     setIsOpen(!isOpen);
   }
@@ -37,7 +37,7 @@ export default function LocationIndicator({ user, geolocation }) {
           <iframe
             loading="lazy"
             allowFullScreen
-            src={`https://www.google.com/maps/embed/v1/place?q=${geolocation.latitude},${geolocation.longitude}&key=${keyy}`}
+            src={`https://www.google.com/maps/embed/v1/place?q=${geolocation.latitude},${geolocation.longitude}&key=${API_KEY}`}
           ></iframe>
         </MapsFrame>
       </Modal>
