@@ -78,6 +78,11 @@ width: calc(15% - 20px);
       font-weight: bold;
     }
   }
+
+.Topo{
+    display: flex;
+    flex-direction: column;
+}
 `;
 const PostContent = styled.div`
 width: calc(90% - 20px);
