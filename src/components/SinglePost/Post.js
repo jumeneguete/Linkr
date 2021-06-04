@@ -148,6 +148,13 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                                 {postDetails.repostedBy.id === user.Id ? "you" : postDetails.repostedBy.username}
                             </Link>
                         </span>
+                        {postDetails.repostedBy.id === user.Id && (
+                            <BsTrash 
+                                postId={postDetails.repostId}
+                                userId={postDetails.repostedBy.id}
+                                color="#FFFFFF" cursor="pointer" onClick={() => setModalIsOpen(!modalIsOpen)}
+                            />
+                        )}
                     </div>
                 )}
                 <Link to={`/user/${user.id}`}><img src={avatar} alt={username}/></Link>
