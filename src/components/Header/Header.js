@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { HeaderStyles, Menu, ToggleMenu } from "./Styles"
+import { HeaderStyles, Menu, ToggleMenu, SearchHeader} from "./Styles"
 import UserContext from "../../contexts/UserContext"
 import ClickAwayListener from 'react-click-away-listener';
 import Search from "./Search";
@@ -31,7 +31,7 @@ export default function Header() {
         <>
             <HeaderStyles searching={search !== "" ? true : false}>
                 <span><Link to="/">linkr</Link></span>
-                <div><Search search={search} setSearch={setSearch}/></div>
+                <SearchHeader><Search search={search} setSearch={setSearch}/></SearchHeader>
                 <Menu onClick={(event) => toggle(event)}>
                     <span>{menuSelected ? arrowUp : arrowDown}</span>
                     <img src={userProfile.user.avatar} alt={userProfile.user.username} />

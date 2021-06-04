@@ -117,6 +117,11 @@ align-items: center;
 border-radius: 16px 16px 0px 0px;
 margin-bottom: -20px;
 
+@media (max-width: 614px) {
+     
+    border-radius: 0;
+}
+
 span{
     margin-left: 5px;
     color: #fff;

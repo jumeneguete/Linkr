@@ -21,6 +21,7 @@ const HeaderStyles = styled.header`
         letter-spacing: 1px;
         color: #fff;
     }
+
 `;
 
 const Menu = styled.div`
@@ -156,4 +157,11 @@ const UserSearched = styled.div`
     }
 `;
 
-export { HeaderStyles, Menu, ToggleMenu, SearchStyle, StyledInput, Suggestions, NotFound, UserSearched };
+const SearchHeader = styled.div`
+@media (max-width: 640px) {
+        display: none;
+    }
+
+`;
+
+export { HeaderStyles, Menu, ToggleMenu, SearchStyle, StyledInput, Suggestions, NotFound, UserSearched , SearchHeader};
