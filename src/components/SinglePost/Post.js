@@ -143,7 +143,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                         <span>
                             Re-posted by{" "}
                             <Link to={`/user/${postDetails.repostedBy.id}`}>
-                                {postDetails.repostedBy.id === user.Id ? "you" : postDetails.repostedBy.username}
+                                {postDetails.repostedBy.id === user.id ? "you" : postDetails.repostedBy.username}
                             </Link>
                         </span>
                         {postDetails.repostedBy.id === user.Id && (

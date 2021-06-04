@@ -33,7 +33,6 @@ export default function RepostButton({ post, counter, setCounter, setArrayOfPost
         setIsLoading(false);
         setCounter(counter + 1);
         getPost();
-        //   recarregar a tela();
       });
       repostRequest.catch(() => {
         setError(true);
