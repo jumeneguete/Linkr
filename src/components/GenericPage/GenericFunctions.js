@@ -41,7 +41,7 @@ function reloadPosts(arrayOfPosts, setArrayOfPosts, url, erroAlert, config) {
 function renderPosts(arrayOfPosts, setArrayOfPosts, location, followers) {
 
     const ListOfPosts = arrayOfPosts && arrayOfPosts.map((p, i) => (
-        <Post key ={p.id} index={i} postDetails={p} setArrayOfPosts={setArrayOfPosts} arrayOfPosts={arrayOfPosts}/>
+        <Post key ={p.repostId || p.id} index={i} postDetails={p} setArrayOfPosts={setArrayOfPosts} arrayOfPosts={arrayOfPosts}/>
         ))
 
     return(

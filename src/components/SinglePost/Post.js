@@ -8,12 +8,13 @@ import ReactHashtag from "react-hashtag";
 import Modal from "../UserPosts/Modal";
 import axios from 'axios';
 import getYouTubeID from 'get-youtube-id';
-
+import RepostButton from '../repost/ButtonRepost'
 import UserContext from '../../contexts/UserContext'
-import { SinglePost, Profile, PostContent, CreatorName, Description, Hashtag, LikesContainer, StyledReactTooltip, CommentsContainer } from "./Styles";
+import { SinglePost, Profile, PostContent, CreatorName, Description, Hashtag, LikesContainer, StyledReactTooltip, CommentsContainer, Commention, Repost } from "./Styles";
 import ReactTooltip from 'react-tooltip';
 import PostComments from './PostComments';
 import LInkBox from './LinkBox';
+import { BiRepost } from "react-icons/bi";
 
 export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts }) {
 
@@ -32,6 +33,9 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
     const [onSendingPostEdition, setOnSendingPostEdition] = useState(false);
     const [openComments, setOpenComments] = useState(false);
     const [comments, setComments] = useState([]);
+    const [repostCounter, setRepostCounter] = useState(postDetails.repostCount);
+    const [counter, setCounter] = useState(postDetails.commentCount);
+    const [commentCounter, setCommentCounter] = useState(postDetails.commentCount);
 
     useEffect(() => {
         if (textEditRef.current)
@@ -133,6 +137,24 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
        
     return(
         <>
+        {postDetails.repostId && (
+                    <Repost>
+                        <BiRepost color={"#fff"}/>
+                        <span>
+                            Re-posted by{" "}
+                            <Link to={`/user/${postDetails.repostedBy.id}`}>
+                                {postDetails.repostedBy.id === user.id ? "you" : postDetails.repostedBy.username}
+                            </Link>
+                        </span>
+                        {postDetails.repostedBy.id === user.Id && (
+                            <BsTrash 
+                                postId={postDetails.repostId}
+                                userId={postDetails.repostedBy.id}
+                                color="#FFFFFF" cursor="pointer" onClick={() => setModalIsOpen(!modalIsOpen)}
+                            />
+                        )}
+                    </Repost>
+                )}
         <SinglePost>
             <Profile>
                 <Link to={`/user/${user.id}`}><img src={avatar} alt={username}/></Link>
@@ -155,6 +177,12 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                     <AiOutlineComment color={'#FFFFFF'} />
                     <p>{comments.length} comments</p>
                 </CommentsContainer>
+                <RepostButton
+            post={postDetails}
+            counter={repostCounter}
+            setCounter={setRepostCounter}
+            setArrayOfPosts={setArrayOfPosts}
+          />
             </Profile>
             <PostContent>
                 <div className='icones'>
@@ -211,6 +239,9 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                         <span style={{color: '#B7B7B7'}}>{link}</span>
                     </>
                      : <LInkBox linkTitle={linkTitle} linkDescription={linkDescription} link={link} linkImage={linkImage}/> }
+        <div className="comment-section">
+        <Commention post={postDetails} setCounter={setCommentCounter} />
+        </div>
             </PostContent>
         </SinglePost>
         <PostComments key={id} PostId={id} authorId={user.id} openComments={openComments} setComments={setComments} comments={comments} setComments={setComments} />
@@ -218,5 +249,3 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
         </>
     );
 }
-
-/**/
