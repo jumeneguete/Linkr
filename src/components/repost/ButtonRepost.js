@@ -124,6 +124,10 @@ const ModalContent = styled.div`
     font-size: 34px;
     line-height: 41px;
     margin-bottom: 47px;
+
+    @media (max-width: 614px) {
+    font-size: 20px;
+}
   }
   div {
     display: flex;
@@ -140,6 +144,12 @@ const ModalContent = styled.div`
       border: none;
       color: #ffffff;
       background: #1877f2;
+
+      @media (max-width: 614px) {
+      padding: 5px 20px;
+      font-size: 14px;  
+      margin-right: 5px;
+    }
     }
     button.cancel {
       background: #ffffff;
