@@ -61,6 +61,28 @@ width: calc(15% - 20px);
         font-size: 15px;
     }
 }
+
+.repost {
+    height: 33px;
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+    color: #ffffff;
+    padding: 0px 13px;
+    span {
+      margin-left: 6px;
+      font-size: 11px;
+      line-height: 13px;
+    }
+    a {
+      font-weight: bold;
+    }
+  }
+
+.Topo{
+    display: flex;
+    flex-direction: column;
+}
 `;
 const PostContent = styled.div`
 width: calc(90% - 20px);
@@ -85,6 +107,25 @@ input:focus{
             box-shadow: 0 0 0 0;
             outline: 0;
         }
+`;
+
+const Repost = styled.div`
+background-color: #1e1e1e;
+padding: 10px 20px 28px 20px;
+display: flex;
+align-items: center;
+border-radius: 16px 16px 0px 0px;
+margin-bottom: -20px;
+
+span{
+    margin-left: 5px;
+    color: #fff;
+    font-size: 12px;
+}
+`;
+
+const Commention = styled.div`
+color: white;
 `;
 
 const BsTrash = styled.div`
@@ -313,4 +354,4 @@ const ButtonComment = styled.button`
     justify-content: center;
 `;
 
-export { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag, LikesContainer, StyledReactTooltip, CommentsContainer, CommentBox, Comments, CommentInfo, Divider, AddCommentForm, InputComment, ButtonComment };
+export { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag, LikesContainer, StyledReactTooltip, CommentsContainer, CommentBox, Comments, CommentInfo, Divider, AddCommentForm, InputComment, ButtonComment, Commention, Repost};
