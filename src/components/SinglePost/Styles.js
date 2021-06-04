@@ -130,6 +130,10 @@ const Commention = styled.div`
 color: white;
 `;
 
+const Commention = styled.div`
+color: white;
+`;
+
 const BsTrash = styled.div`
 color: white;
 `;

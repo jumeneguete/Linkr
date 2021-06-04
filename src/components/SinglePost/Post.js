@@ -137,10 +137,8 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
        
     return(
         <>
-        <SinglePost>
-            <Profile>
-                {postDetails.repostId && (
-                    <div className="repost">
+        {postDetails.repostId && (
+                    <Repost>
                         <BiRepost />
                         <span>
                             Reposted by{" "}
@@ -155,8 +153,10 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                                 color="#FFFFFF" cursor="pointer" onClick={() => setModalIsOpen(!modalIsOpen)}
                             />
                         )}
-                    </div>
+                    </Repost>
                 )}
+        <SinglePost>
+            <Profile>
                 <Link to={`/user/${user.id}`}><img src={avatar} alt={username}/></Link>
                 {postLiked ? <IoHeartSharp onClick={likePost} color={'#AC0000'} /> : <IoHeartOutline onClick={likePost} color={'#FFFFFF'}  />}
                 <LikesContainer data-tip data-for={`${id}`}>

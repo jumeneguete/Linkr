@@ -114,7 +114,7 @@ const StyledRepostButton = styled.button`
   padding: 0;
   border: none;
   background-color: transparent;
-  color: inherit;
+  color: #FFFFFF;
 `;
 
 const ModalContent = styled.div`
