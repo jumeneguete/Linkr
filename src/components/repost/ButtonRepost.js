@@ -3,9 +3,11 @@ import styled from "styled-components";
 import UserContext from '../../contexts/UserContext'
 import axios from "axios";
 import Modal from "react-modal";
+import './Modal.css'
 import { useContext, useState } from "react";
 
 Modal.setAppElement("body");
+
 
 export default function RepostButton({ post, counter, setCounter }) {
   const [isOpen, setIsOpen] = useState(false);

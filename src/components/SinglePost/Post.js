@@ -219,6 +219,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                         <span style={{color: '#B7B7B7'}}>{link}</span>
                     </>
                      : <LInkBox linkTitle={linkTitle} linkDescription={linkDescription} link={link} linkImage={linkImage}/> }
+                     
             </PostContent>
         </SinglePost>
         <PostComments key={id} PostId={id} authorId={user.id} openComments={openComments} setComments={setComments} comments={comments} setComments={setComments} />
