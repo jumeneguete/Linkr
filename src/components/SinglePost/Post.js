@@ -139,18 +139,18 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
         <>
         <SinglePost>
             <Profile>
-                <Link to={`/user/${user.id}`}><img src={avatar} alt={username}/></Link>
                 {postDetails.repostId && (
-                <div className="repost">
-                <BiRepost />
-                <span>
-                Reposted by{" "}
-                <Link to={`/user/${postDetails.repostedBy.id}`}>
-                {postDetails.repostedBy.id === user.Id ? "you" : postDetails.repostedBy.username}
-                </Link>
-                </span>
-                </div>
+                    <div className="repost">
+                        <BiRepost />
+                        <span>
+                            Reposted by{" "}
+                            <Link to={`/user/${postDetails.repostedBy.id}`}>
+                                {postDetails.repostedBy.id === user.Id ? "you" : postDetails.repostedBy.username}
+                            </Link>
+                        </span>
+                    </div>
                 )}
+                <Link to={`/user/${user.id}`}><img src={avatar} alt={username}/></Link>
                 {postLiked ? <IoHeartSharp onClick={likePost} color={'#AC0000'} /> : <IoHeartOutline onClick={likePost} color={'#FFFFFF'}  />}
                 <LikesContainer data-tip data-for={`${id}`}>
                     {likes ? `${likes.length} likes` : "0 like" }

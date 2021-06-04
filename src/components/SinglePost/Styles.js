@@ -61,6 +61,23 @@ width: calc(15% - 20px);
         font-size: 15px;
     }
 }
+
+.repost {
+    height: 33px;
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+    color: #ffffff;
+    padding: 0px 13px;
+    span {
+      margin-left: 6px;
+      font-size: 11px;
+      line-height: 13px;
+    }
+    a {
+      font-weight: bold;
+    }
+  }
 `;
 const PostContent = styled.div`
 width: calc(90% - 20px);
