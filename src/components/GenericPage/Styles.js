@@ -129,6 +129,12 @@ const CreatePost = styled.div`
             box-shadow: 0 0 0 0;
             outline: 0;
         }
+
+        .footer{
+            display: flex;
+            width: 100%;
+            justify-content: space-between; 
+        }
     }
     @media (max-width: 614px) {
         border-radius: 0;

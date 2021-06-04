@@ -7,6 +7,7 @@ import { AiOutlineComment } from "react-icons/ai"
 import ReactHashtag from "react-hashtag";
 import Modal from "../UserPosts/Modal";
 import axios from 'axios';
+import LocationPost from './LocationPost'
 import getYouTubeID from 'get-youtube-id';
 import RepostButton from '../repost/ButtonRepost'
 import UserContext from '../../contexts/UserContext'
@@ -23,8 +24,8 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
     const { token } = userProfile
     const textEditRef = useRef();
     const location = useLocation().pathname;
-    const { text, link, linkTitle, linkDescription, linkImage, likes, id, user } = postDetails;
-    const [postLiked, setPostLiked] = useState(likes.find(l => l["user.id"] === userProfile.user.id || l["id"] === userProfile.user.id))
+    const { text, link, linkTitle, linkDescription, linkImage, likes, id, user, geolocation } = postDetails;
+    const[ postLiked, setPostLiked ] = useState (likes.find(l => l["user.id"] === userProfile.user.id ||l["id"]===userProfile.user.id))
     const { username, avatar } = postDetails.user;
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -206,6 +207,13 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                                 setPostMainDescription(text);
                             }}/>
                     }
+
+                {geolocation && (
+                <LocationPost
+                  user={user.username}
+                  geolocation={geolocation}
+                />
+              )}
                 </div>
                 </div>
 
