@@ -9,7 +9,7 @@ import { useContext, useState } from "react";
 Modal.setAppElement("body");
 
 
-export default function RepostButton({ post, counter, setCounter }) {
+export default function RepostButton({ post, counter, setCounter, setArrayOfPosts }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -32,6 +32,7 @@ export default function RepostButton({ post, counter, setCounter }) {
         setIsOpen(false);
         setIsLoading(false);
         setCounter(counter + 1);
+        getPost();
         //   recarregar a tela();
       });
       repostRequest.catch(() => {
@@ -39,6 +40,15 @@ export default function RepostButton({ post, counter, setCounter }) {
         setIsLoading(false);
       });
   }
+
+  function getPost(){
+    const config ={ headers: { Authorization: `Bearer ${token}` }}
+    const request = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts', config);
+    request.then(response => {
+        setArrayOfPosts(response.data.posts)
+    });
+    request.catch(erro => alert("Ocorreu um erro ao carregar os posts"))
+}
   
   return (
     <>

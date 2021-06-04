@@ -181,6 +181,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
             post={postDetails}
             counter={repostCounter}
             setCounter={setRepostCounter}
+            setArrayOfPosts={setArrayOfPosts}
           />
             </Profile>
             <PostContent>
