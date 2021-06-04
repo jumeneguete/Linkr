@@ -10,7 +10,7 @@ import axios from 'axios';
 import getYouTubeID from 'get-youtube-id';
 import RepostButton from '../repost/ButtonRepost'
 import UserContext from '../../contexts/UserContext'
-import { SinglePost, Profile, PostContent, CreatorName, Description, Hashtag, LikesContainer, StyledReactTooltip, CommentsContainer } from "./Styles";
+import { SinglePost, Profile, PostContent, CreatorName, Description, Hashtag, LikesContainer, StyledReactTooltip, CommentsContainer, Commention } from "./Styles";
 import ReactTooltip from 'react-tooltip';
 import PostComments from './PostComments';
 import LInkBox from './LinkBox';
@@ -22,7 +22,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
     const { token } = userProfile
     const textEditRef = useRef();
     const location = useLocation().pathname;
-    const { text, link, linkTitle, linkDescription, linkImage, likes, id, user, post, repostCount, commentCount, repostedBy } = postDetails;
+    const { text, link, linkTitle, linkDescription, linkImage, likes, id, user } = postDetails;
     const [postLiked, setPostLiked] = useState(likes.find(l => l["user.id"] === userProfile.user.id || l["id"] === userProfile.user.id))
     const { username, avatar } = postDetails.user;
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -159,7 +159,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                     <p>{comments.length} comments</p>
                 </CommentsContainer>
                 <RepostButton
-            post={post}
+            post={postDetails}
             counter={repostCounter}
             setCounter={setRepostCounter}
           />
@@ -219,7 +219,9 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                         <span style={{color: '#B7B7B7'}}>{link}</span>
                     </>
                      : <LInkBox linkTitle={linkTitle} linkDescription={linkDescription} link={link} linkImage={linkImage}/> }
-                     
+        <div className="comment-section">
+        <Commention post={postDetails} setCounter={setCommentCounter} />
+        </div>
             </PostContent>
         </SinglePost>
         <PostComments key={id} PostId={id} authorId={user.id} openComments={openComments} setComments={setComments} comments={comments} setComments={setComments} />
@@ -227,5 +229,3 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
         </>
     );
 }
-
-/**/

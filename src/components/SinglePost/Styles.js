@@ -85,6 +85,27 @@ input:focus{
             box-shadow: 0 0 0 0;
             outline: 0;
         }
+
+.repost {
+    height: 33px;
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+    color: #ffffff;
+    padding: 0px 13px;
+    span {
+        margin-left: 6px;
+        font-size: 11px;
+        line-height: 13px;
+        }
+        a {
+            font-weight: bold;
+            }
+          }
+`;
+
+const Commention = styled.div`
+color: white;
 `;
 
 const BsTrash = styled.div`
@@ -313,4 +334,4 @@ const ButtonComment = styled.button`
     justify-content: center;
 `;
 
-export { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag, LikesContainer, StyledReactTooltip, CommentsContainer, CommentBox, Comments, CommentInfo, Divider, AddCommentForm, InputComment, ButtonComment };
+export { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag, LikesContainer, StyledReactTooltip, CommentsContainer, CommentBox, Comments, CommentInfo, Divider, AddCommentForm, InputComment, ButtonComment, Commention};

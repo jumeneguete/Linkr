@@ -39,14 +39,13 @@ export default function RepostButton({ post, counter, setCounter }) {
         setIsLoading(false);
       });
   }
-
-  console.log(post);
+  
   return (
     <>
       <StyledRepostButton onClick={() => setIsOpen(true)}>
-        <BiRepost />
+        <BiRepost color={'#FFFFFF'} />
         <p>
-          {counter} repost{counter > 0 ? "s" : null}
+          {counter} repost{counter > 0 ? "s" : null }
         </p>
       </StyledRepostButton>
       <Modal
