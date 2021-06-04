@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import UserContext from '../contexts/UserContext';
 import UserFollowersContext from '../contexts/UserFollowersContext';
 
@@ -12,11 +12,23 @@ import UserPosts from "./UserPosts/UserPosts";
 import HashtagPosts from "./HashtagPosts/HashtagPosts";
 import MyPosts from './MyPosts_MyLikes/MyPosts';
 import MyLikes from './MyPosts_MyLikes/MyLikes';
+import axios from "axios";
 
 export default function App() {
     const alreadyLoggedIn = localStorage.getItem("lastLogin");
     const [userProfile, setUserProfile] = useState(alreadyLoggedIn && JSON.parse(alreadyLoggedIn));  
-    const [followers, setFollowers] = useState(null);  
+    const [followers, setFollowers] = useState(null);
+    
+    useEffect(() => {
+        if (userProfile){
+        const config = { headers: { Authorization: `Bearer ${userProfile.token}` }};
+        const request = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/users/follows', config);
+        request.then( response => {
+            setFollowers(response.data.users)
+        })
+    }
+    }, [followers])
+
 
     return (
         <UserContext.Provider value={{ userProfile, setUserProfile }}>

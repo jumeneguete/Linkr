@@ -1,5 +1,18 @@
 import styled from 'styled-components';
-import Button from '../Login_SignUp/Button';
+
+const GenericSearch = styled.div`
+width: 100%;
+padding: 10px  0;
+background-color: #333;
+display: flex;
+justify-content: center;
+position:fixed;
+top: 75px;
+left:0;
+@media (min-width: 640px) {
+        display: none;
+    }
+`;
 
 const PageTitle = styled.div`
     display: flex;
@@ -14,7 +27,7 @@ const PageTitle = styled.div`
     @media (max-width: 614px) {
         width: 100%;
         margin: 91px 0 0 0px;
-        padding: 0 20px;
+        padding: 75px 20px 0 20px;
     }
 `;
 
@@ -28,8 +41,8 @@ const ContainerPostsAndTrendings = styled.div`
     }
 `;
 
-const ContainerPosts =styled.div`
-width: 611px;
+const ContainerPosts = styled.div`
+    width: 611px;
     & > span {
         display: flex;
         justify-content: center;
@@ -65,11 +78,25 @@ const CreatePost = styled.div`
         flex-direction: column;
         align-items: flex-end;
         width: 100%;
+        button {
+            font-size: 15px;
+            background: ${props => props.clicked ? '#CCC' : '#1877F2'};
+            cursor: ${props => props.clicked ? 'not-allowed' : 'pointer'};
+            border-radius: 5px;
+            color: #FFF;
+            font-weight: 700;
+            padding: 10px;
+            text-align: center;
+            border: none;
+            width: 120px;
+        }
+
         h2 {
             font-size: 20px;
             margin-bottom: 10px;
             width: 100%;
         }
+        
         input, textarea {
             background: #EFEFEF;
             border-radius: 5px;
@@ -152,9 +179,9 @@ const CreatePost = styled.div`
 
 const StyledButtom = styled.button`
 font-size: 15px;
-background: ${ props => props.clicked ? '#EFEFEF' : '#1877F2'};
+background: ${props => props.clicked ? '#EFEFEF' : '#1877F2'};
 border-radius: 5px;
-color: ${ props => props.clicked ? '#1877F2' : '#FFF'};
+color: ${props => props.clicked ? '#1877F2' : '#FFF'};
 font-weight: 700;
 padding: 10px;
 text-align: center;
@@ -165,7 +192,7 @@ cursor: pointer;
 
 const TrendingStyle = styled.div`
     width: 301px;
-    height: 406px;
+    height: 440px;
     background: #171717;
     border-radius: 16px;
     color: #fff;
@@ -173,7 +200,47 @@ const TrendingStyle = styled.div`
     flex-direction: column;
     position: sticky;
     right: auto;
-    top: 200px;
+    top: 150px;
+
+    form {
+        margin-top: 10px;
+        text-align: center;
+        width: 100%;
+    }
+    input {
+        color:#fff;
+        margin-top: -10px;
+        background: #333;
+        border-radius: 5px;
+        cursor: text;
+        font: 400 18px 'Lato', sans-serif;
+        padding: 5px 20px 8px 30px;
+        text-align: left;
+        width: 90%;
+        border: none;;
+    }
+
+        input::placeholder{
+            font-style: italic;
+            font-size: 16px;
+            font-weight: 700;
+            color: #9F9F9F;
+        }
+        input:focus{
+            box-shadow: 0 0 0 0;
+            outline: 0;
+        }
+
+    span{
+        margin-top: -10px;
+        position: absolute; 
+        display: block; 
+        left: 22px; 
+        top: 405px; 
+        z-index: 1;
+        color: #FFF;
+        font: bold 19px "Lato";
+    }
 
     @media (max-width: 614px) {
         display: none;
@@ -207,4 +274,12 @@ const TrendingList = styled.ul`
     }
 `;
 
-export { PageTitle, ContainerPostsAndTrendings, CreatePost, ContainerPosts, TrendingStyle, Title, Separator, TrendingList, StyledButtom };
+const Loading = styled.div`
+display:flex;
+flex-direction: column;
+align-items:center;
+color: #6D6D6D;
+`;
+
+export { GenericSearch, PageTitle, ContainerPostsAndTrendings, CreatePost, ContainerPosts, TrendingStyle, Title, Separator, TrendingList, StyledButtom, Loading };
+

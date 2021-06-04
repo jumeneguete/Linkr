@@ -3,6 +3,7 @@ import axios from 'axios';
 import { CreatePost, StyledButtom } from '../GenericPage/Styles'
 import UserContext from '../../contexts/UserContext';
 import LocationButton from '../UserPosts/LocationButton'
+import { Link } from 'react-router-dom';
 
 export default function UserInput ({ setArrayOfPosts }) {
     const { userProfile } = useContext(UserContext);
@@ -72,7 +73,7 @@ export default function UserInput ({ setArrayOfPosts }) {
 
     return (
         <CreatePost clicked={clicked}>
-            <img src={userProfile.user.avatar} alt={userProfile.user.username}/>
+            <Link to="/my-posts"><img src={userProfile.user.avatar} alt={userProfile.user.username}/></Link>
             <form onSubmit={(event) => submitComment(event)}>
 
                 <h2>O que você tem pra favoritar hoje?</h2>
