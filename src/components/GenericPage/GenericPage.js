@@ -1,6 +1,6 @@
 import Loader from "react-loader-spinner";
 import { useLocation } from 'react-router-dom'
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import UserContext from '../../contexts/UserContext';
@@ -18,6 +18,7 @@ export default function GenericPage(props) {
     const { followers } = useContext(UserFollowersContext);
     const { title, arrayOfPosts, setArrayOfPosts, morePostsToLoad, setMorePostsToLoad } = props;
     const { isFollowing, followUser } = props;
+    const [search, setSearch] = useState("");
     const location = useLocation().pathname;
     const loading = <Loader type="Oval" color="#6D6D6D" height={40} width={40} />;
     let id;
@@ -27,7 +28,7 @@ export default function GenericPage(props) {
 
     return (
         <>
-            <GenericSearch><Search/></GenericSearch>
+            <GenericSearch><Search search={search} setSearch={setSearch}/></GenericSearch>
             <PageTitle>
                 <span>{title}</span> 
                 {location === `/user/${id}` && id !== userProfile.user.id ? 
