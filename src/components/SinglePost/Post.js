@@ -10,7 +10,7 @@ import axios from 'axios';
 import getYouTubeID from 'get-youtube-id';
 import RepostButton from '../repost/ButtonRepost'
 import UserContext from '../../contexts/UserContext'
-import { SinglePost, Profile, PostContent, CreatorName, Description, Hashtag, LikesContainer, StyledReactTooltip, CommentsContainer, Commention } from "./Styles";
+import { SinglePost, Profile, PostContent, CreatorName, Description, Hashtag, LikesContainer, StyledReactTooltip, CommentsContainer, Commention, Repost } from "./Styles";
 import ReactTooltip from 'react-tooltip';
 import PostComments from './PostComments';
 import LInkBox from './LinkBox';
@@ -139,9 +139,9 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
         <>
         {postDetails.repostId && (
                     <Repost>
-                        <BiRepost />
+                        <BiRepost color={"#fff"}/>
                         <span>
-                            Reposted by{" "}
+                            Re-posted by{" "}
                             <Link to={`/user/${postDetails.repostedBy.id}`}>
                                 {postDetails.repostedBy.id === user.Id ? "you" : postDetails.repostedBy.username}
                             </Link>
