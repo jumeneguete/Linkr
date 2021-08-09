@@ -8,7 +8,8 @@ This is an web application with which lots of people can share and access intere
 
 - Sign Up
 - Login
-- Follow your friends
+- Use the search bar to find your friends
+- Follow anyone you want to
 - See their posts
 - Comment your opinion
 - Like a post and see who else liked it
