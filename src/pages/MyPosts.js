@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from 'react';
 
-import UserContext from '../../contexts/UserContext';
-import GenericPage from '../GenericPage/GenericPage';
-import {callServer} from '../GenericPage/GenericFunctions';
+import UserContext from '../contexts/UserContext';
+import GenericPage from '../components/GenericPage/GenericPage';
+import {callServer} from '../components/GenericPage/GenericFunctions';
 
 export default function UserPosts() {
 
@@ -12,11 +12,12 @@ export default function UserPosts() {
     const [myPostsList, setMyPostsList] = useState(null);
     const [morePostsToLoad, setMorePostsToLoad] = useState(true);
 
-    const pageUrl = `https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/users/${id}/posts`;
+    const pageUrl = `${process.env.REACT_APP_API_BASE_URL}/linkr/users/${id}/posts`;
     const erroAlert = "Ocorreu um erro ao carregar os seus posts";
 
+    const lastPostId = myPostsList[myPostsList.length - 1].id;
     const urlToGetMorePosts = (!myPostsList || myPostsList.length === 0) ? "": 
-    `https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/users/${id}/posts?olderThan=${myPostsList[myPostsList.length - 1].id}`;
+    `${process.env.REACT_APP_API_BASE_URL}/linkr/users/${id}/posts?olderThan=${lastPostId}`;
 
     useEffect(() => {
         const config = { headers: { Authorization: `Bearer ${userProfile.token}` }};

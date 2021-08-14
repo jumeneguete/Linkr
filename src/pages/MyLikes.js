@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from 'react';
 
-import UserContext from '../../contexts/UserContext';
-import GenericPage from '../GenericPage/GenericPage';
-import {callServer} from '../GenericPage/GenericFunctions';
+import UserContext from '../contexts/UserContext';
+import GenericPage from '../components/GenericPage/GenericPage';
+import {callServer} from '../components/GenericPage/GenericFunctions';
 
 export default function UserPosts() {
 
@@ -10,11 +10,12 @@ export default function UserPosts() {
     const [myLikesList, setMyLikesList] = useState(null);
     const [morePostsToLoad, setMorePostsToLoad] = useState(true);
 
-    const pageUrl = `https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts/liked`;
+    const pageUrl = `${process.env.REACT_APP_API_BASE_URL}/linkr/posts/liked`;
     const erroAlert = "Ocorreu um erro ao carregar os seus likes";
 
+    const lastPostId = myLikesList[myLikesList.length - 1].id;
     const urlToGetMorePosts = (!myLikesList || myLikesList.length === 0) ? "": 
-    `https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts/liked?olderThan=${myLikesList[myLikesList.length - 1].id}`;
+    `${process.env.REACT_APP_API_BASE_URL}/linkr/posts/liked?olderThan=${lastPostId}`;
 
     useEffect(() => {
         const config = { headers: { Authorization: `Bearer ${userProfile.token}` }};

@@ -2,10 +2,10 @@ import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import useInterval from 'react-useinterval';
 
-import UserContext from '../../contexts/UserContext';
-import UserFollowersContext from '../../contexts/UserFollowersContext';
-import GenericPage from '../GenericPage/GenericPage';
-import {callServer, reloadPosts} from '../GenericPage/GenericFunctions';
+import UserContext from '../contexts/UserContext';
+import UserFollowersContext from '../contexts/UserFollowersContext';
+import GenericPage from '../components/GenericPage/GenericPage';
+import {callServer, reloadPosts} from '../components/GenericPage/GenericFunctions';
 
 export default function Timeline() {
 
@@ -13,21 +13,22 @@ export default function Timeline() {
     const { setFollowers } = useContext(UserFollowersContext);
     const [postsList, setPostsList] = useState(null);
     const [morePostsToLoad, setMorePostsToLoad] = useState(true);
-    const pageUrl = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/following/posts';
+    const pageUrl = `${process.env.REACT_APP_API_BASE_URL}/linkr/following/posts`;
     const erroAlert = "Ocorreu um erro ao carregar os posts";
     
+    const lastPostId = postsList[postsList.length - 1].id;
     const urlToGetMorePosts = (!postsList || postsList.length === 0) ? "": 
-    `https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/following/posts?olderThan=${postsList[postsList.length - 1].id}`;
+    `${process.env.REACT_APP_API_BASE_URL}/linkr/following/posts?olderThan=${lastPostId}`;
 
     useEffect(() => {
         const config = { headers: { Authorization: `Bearer ${userProfile.token}` }};
         callServer(setPostsList, pageUrl, erroAlert, config);
 
-        const request = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/users/follows', config);
+        const request = axios.get(`${process.env.REACT_APP_API_BASE_URL}/linkr/users/follows`, config);
         request.then( response => {
             setFollowers(response.data.users)
         })
-    }, [userProfile, setFollowers]);
+    }, [userProfile, setFollowers, pageUrl]);
     
     useInterval(() => {
         const config = { headers: { Authorization: `Bearer ${userProfile.token}` }};

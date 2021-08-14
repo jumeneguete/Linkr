@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from "react";
-import UserContext from "../../contexts/UserContext";
 import styled from "styled-components";
 import { DebounceInput } from 'react-debounce-input';
 import axios from "axios";
 import { Link } from "react-router-dom";
-import UserFollowersContext from "../../contexts/UserFollowersContext";
 import ClickAwayListener from 'react-click-away-listener';
+
+import UserFollowersContext from "../contexts/UserFollowersContext";
+import UserContext from "../contexts/UserContext";
 
 export default function Search() {
     const { userProfile } = useContext(UserContext);

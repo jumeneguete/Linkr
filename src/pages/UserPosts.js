@@ -3,13 +3,12 @@ import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import useInterval from 'react-useinterval';
 
-import UserContext from '../../contexts/UserContext';
-import UserFollowersContext from '../../contexts/UserFollowersContext';
-import GenericPage from '../GenericPage/GenericPage';
-import {callServer, reloadPosts} from '../GenericPage/GenericFunctions';
+import UserContext from '../contexts/UserContext';
+import UserFollowersContext from '../contexts/UserFollowersContext';
+import GenericPage from '../components/GenericPage/GenericPage';
+import {callServer, reloadPosts} from '../components/GenericPage/GenericFunctions';
 
 export default function UserPosts() {
-
     
     const { userProfile } = useContext(UserContext);
     const { followers } = useContext(UserFollowersContext);
@@ -20,11 +19,12 @@ export default function UserPosts() {
     const userName = userPostsList && userPostsList.length > 0 && userPostsList[0].user.username;
     const [morePostsToLoad, setMorePostsToLoad] = useState(true)
 
-    const pageUrl = `https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/users/${id}/posts`;
+    const pageUrl = `${process.env.REACT_APP_API_BASE_URL}/linkr/users/${id}/posts`;
     const erroAlert = "Ocorreu um erro ao carregar os posts do usuario";
     
+    const lastPostId = userPostsList[userPostsList.length - 1].id
     const urlToGetMorePosts = (!userPostsList || userPostsList.length === 0) ? "": 
-    `https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/users/${id}/posts?olderThan=${userPostsList[userPostsList.length - 1].id}`;
+    `${process.env.REACT_APP_API_BASE_URL}/linkr/users/${id}/posts?olderThan=${lastPostId}`;
 
     useInterval(() => {
         const config = { headers: { Authorization: `Bearer ${userProfile.token}` }};
@@ -45,8 +45,8 @@ export default function UserPosts() {
         if(isFollowing.isDisabled) return;
         setIsFollowing({...isFollowing, isDisabled:true})
         const url = isFollowing.status ?
-        `https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/users/${id}/unfollow`:
-        `https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/users/${id}/follow`
+        `${process.env.REACT_APP_API_BASE_URL}/linkr/users/${id}/unfollow`:
+        `${process.env.REACT_APP_API_BASE_URL}/linkr/users/${id}/follow`
 
         const request = axios.post(url, {}, config);
         request.then(response => {
@@ -54,7 +54,6 @@ export default function UserPosts() {
         });
         request.catch(erro => alert("Ocorreu um erro ao seguir esse usuario"));
     }
-
 
     return(
         <>

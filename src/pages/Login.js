@@ -2,18 +2,18 @@ import axios from "axios";
 import { useState, useContext, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 
-import UserContext from '../../contexts/UserContext';
-import {Container, Fields } from "./Styles"
-import Banner from "./Banner"
-import Button from "./Button";
-import Input from "./Input";
+import UserContext from '../contexts/UserContext';
+import {Page, FieldsContainer, FormContainer} from "../components/Login_SignUp/Styles"
+import Banner from "../components/Login_SignUp/Banner"
+import Button from "../components/Login_SignUp/Button";
+import Input from "../components/Login_SignUp/Input";
 
 export default function Login() {
 
     const { userProfile, setUserProfile } = useContext(UserContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(false);
     const history = useHistory();
 
     useEffect(()=>{
@@ -21,21 +21,21 @@ export default function Login() {
             history.push("/timeline");
             return ;
         }
-    }, [])
+    }, [history, userProfile])
 
     function SigningUp (e){
         e.preventDefault();
 
         const body = {email, password}
 
-        const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/sign-in", body);
-        setLoading(true);
+        const request = axios.post(`${process.env.REACT_APP_API_BASE_URL}/linkr/sign-in`, body);
+        setIsDisabled(true);
         request.then((response) => {
             setUserProfile(response.data)
             const loginSaved = JSON.stringify(response.data);
             localStorage.setItem("lastLogin", loginSaved);
             history.push("/timeline");
-            setLoading(false);
+            setIsDisabled(false);
         });
         request.catch((resp) => {
             if (resp.response.status === 403){
@@ -43,21 +43,21 @@ export default function Login() {
             } else {
                 alert("Preencha os campos corretamente!")
             }
-            setLoading(false);
+            setIsDisabled(false);
         })
     }
 
     return(
-        <Container>
+        <Page>
             <Banner />
-            <Fields>
-                <form onSubmit={SigningUp}>
-                    <Input type="email" placeholder="e-mail" onChange={(e)=> setEmail(e.target.value)} value={email} disabled={loading ? true : false} />
-                    <Input type="password" placeholder="password" onChange={(e)=> setPassword(e.target.value)} value={password} disabled={loading ? true : false}  />
-                    <Button  disabled={loading ? true : false} >Sign Up</Button>
-                </form>
+            <FieldsContainer>
+                <FormContainer onSubmit={SigningUp}>
+                    <Input type="email" placeholder="e-mail" onChange={(e)=> setEmail(e.target.value)} value={email} disabled={isDisabled} />
+                    <Input type="password" placeholder="password" onChange={(e)=> setPassword(e.target.value)} value={password} disabled={isDisabled}  />
+                    <Button  disabled={isDisabled} >Sign Up</Button>
+                </FormContainer>
                 <Link to={"/sign-up"}><p>First time? Create an account!</p></Link>
-            </Fields>
-        </Container>
+            </FieldsContainer>
+        </Page>
     );
 }
