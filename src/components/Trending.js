@@ -14,8 +14,7 @@ export default function Trending (){
     useEffect(() =>{
         const config = { headers: { Authorization: `Bearer ${userProfile.token}` }}
 
-        const request = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/hashtags/trending", config);
-
+        const request = axios.get(`${process.env.REACT_APP_API_BASE_URL}/linkr/hashtags/trending`, config);
         request.then(response => {
             setHashtags(response.data.hashtags)
         });
@@ -36,23 +35,23 @@ export default function Trending (){
     return (
         <TrendingStyle>
             <Title>trending</Title>
-            <Separator></Separator>
+            <Separator />
+
             <TrendingList>
                 { hashtags.length !== 0 &&
-                hashtags.map(h =>(
-                    <>
-                    <Link to={`/hashtag/${h.name}`}><li key ={h.id}>#&nbsp;{h.name}</li></Link>
-                    </>
-                ))}
+                    hashtags.map(h =>(
+                        <Link to={`/hashtag/${h.name}`}><li key ={h.id}>#&nbsp;{h.name}</li></Link>
+                    ))
+                }
             </TrendingList>
-            <form onSubmit={(event) => searchHashtag(event)}>
+            <FormContainer onSubmit={(event) => searchHashtag(event)}>
                 <input type='text' 
                     placeholder='type a hashtag' 
                     onChange={(e) => setHashtagSearched(e.target.value)} 
                     value={hashtagSearched}
                 />
                 <span>#</span>
-            </form>
+            </FormContainer>
 
         </TrendingStyle>
     );
@@ -69,31 +68,6 @@ const TrendingStyle = styled.div`
     position: sticky;
     right: auto;
     top: 200px;
-
-    form {
-        margin-top: 10px;
-        text-align: center;
-        width: 100%;
-    }
-    input {
-        background: #333;
-        border-radius: 5px;
-        cursor: text;
-        font: 400 18px 'Lato', sans-serif;
-        padding: 5px 20px;
-        text-align: left;
-        width: 90%;
-    }
-
-    span{
-        position: absolute; 
-        display: block; 
-        left: 22px; 
-        top: 405px; 
-        z-index: 1;
-        color: #FFF;
-        font: bold 19px "Lato";
-    }
 
     @media (max-width: 614px) {
         display: none;
@@ -124,5 +98,31 @@ const TrendingList = styled.ul`
         margin-top: 12px;
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+`;
+
+const FormContainer = styled.form`
+    margin-top: 10px;
+    text-align: center;
+    width: 100%;
+
+    input {
+        background: #333;
+        border-radius: 5px;
+        cursor: text;
+        font: 400 18px 'Lato', sans-serif;
+        padding: 5px 20px;
+        text-align: left;
+        width: 90%;
+    }
+
+    span{
+        position: absolute; 
+        display: block; 
+        left: 22px; 
+        top: 405px; 
+        z-index: 1;
+        color: #FFF;
+        font: bold 19px "Lato";
     }
 `;
