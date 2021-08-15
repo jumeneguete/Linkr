@@ -2,10 +2,11 @@ import { useState, useContext } from 'react';
 import { BsTrash } from 'react-icons/bs';
 import axios from 'axios';
 
+import { callServer } from '../GenericPage/GenericFunctions';
 import UserContext from '../../contexts/UserContext';
 import DeleteModal from "../UserPosts/DeleteModal";
 
-export default function DeletePost({postDetails}) {
+export default function DeletePost({ postDetails, setArrayOfPosts, pageUrl }) {
 
     const { userProfile } = useContext(UserContext);
     const { token } = userProfile
@@ -17,19 +18,17 @@ export default function DeletePost({postDetails}) {
         const config = { headers: { Authorization: `Bearer ${token}` } }
         setIsLoading(true);
         const request = axios.delete(`${process.env.REACT_APP_API_BASE_URL}/posts/${id}`, config);
-        request.then(deleteSucceeded).catch(errorHandle);
-    }
-
-    function deleteSucceeded() {
-        setIsLoading(false);
-        setModalIsOpen(!modalIsOpen);
-        //getPost();
-    }
-
-    function errorHandle() {
-        setIsLoading(false);
-        setModalIsOpen(!modalIsOpen);
-        alert(`Sorry, we couln't delete your post`);
+        request.then(() => {
+            setIsLoading(false);
+            setModalIsOpen(!modalIsOpen);
+            const erroAlert = "Ocorreu um erro ao carregar os posts";
+            callServer(setArrayOfPosts, pageUrl, erroAlert, config);
+        })
+        request.catch(() => {
+            setIsLoading(false);
+            setModalIsOpen(!modalIsOpen);
+            alert(`Sorry, we couln't delete your post`);
+        });
     }
 
     return(

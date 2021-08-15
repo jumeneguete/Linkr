@@ -1,9 +1,10 @@
 import { useState, useContext, useRef, useEffect } from 'react';
 import axios from 'axios';
+import { callServer } from '../GenericPage/GenericFunctions';
 
 import UserContext from '../../contexts/UserContext';
 
-export default function EditPost({ postDetails, setOnEditingPost }) {
+export default function EditPost({ postDetails, setOnEditingPost, setArrayOfPosts, pageUrl }) {
 
     const { userProfile } = useContext(UserContext);
     const { token } = userProfile
@@ -24,10 +25,11 @@ export default function EditPost({ postDetails, setOnEditingPost }) {
         const config = { headers: { Authorization: `Bearer ${token}` } }
         const request = axios.put(`${process.env.REACT_APP_API_BASE_URL}/posts/${id}`, { 'text': postMainDescription }, config);
 
-        request.then(({ data }) => {
+        request.then(() => {
             setOnSendingPostEdition(false);  //input desabilitado
             setOnEditingPost(false);  //edição finalizada
-            //getPost(true);   //refresh Timeline
+            const erroAlert = "Ocorreu um erro ao carregar os posts";
+            callServer(setArrayOfPosts, pageUrl, erroAlert, config);
         })
         request.catch(() => {
             setOnSendingPostEdition(false);

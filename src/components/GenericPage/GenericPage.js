@@ -16,7 +16,7 @@ export default function GenericPage(props) {
     const { userProfile } = useContext(UserContext);
     const config = { headers: { Authorization: `Bearer ${userProfile.token}` }};
     const { followers } = useContext(UserFollowersContext);
-    const { title, arrayOfPosts, setArrayOfPosts, morePostsToLoad, setMorePostsToLoad } = props;
+    const { title, arrayOfPosts, setArrayOfPosts, morePostsToLoad, setMorePostsToLoad, urlToGetMorePosts, pageUrl } = props;
     const { isFollowing, followUser } = props;
     const location = useLocation().pathname;
     const loading = <Loader type="Oval" color="#6D6D6D" height={40} width={40} />;
@@ -38,14 +38,14 @@ export default function GenericPage(props) {
                     {location === "/timeline" ? <UserInput setArrayOfPosts={setArrayOfPosts}/> : ""}
                     <InfiniteScroll
                         pageStart={0}
-                        loadMore={() => loadMorePosts(arrayOfPosts,setArrayOfPosts, setMorePostsToLoad, props.url, config)}
+                        loadMore={() => loadMorePosts(arrayOfPosts,setArrayOfPosts, setMorePostsToLoad, urlToGetMorePosts, config)}
                         hasMore={morePostsToLoad}
                         loader={<Loading key={0}>
                             <span>{loading}</span>
                             <span>Loading more posts...</span>
                         </Loading>}
                     >
-                        {renderPosts(arrayOfPosts, setArrayOfPosts, location, followers)}
+                        {renderPosts(arrayOfPosts, setArrayOfPosts, location, followers, pageUrl)}
                     </InfiniteScroll>
                 </ContainerPosts>
                 <Trending />

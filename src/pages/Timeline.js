@@ -41,12 +41,13 @@ export default function Timeline() {
     return(
         <>
             <GenericPage 
-            title={`timeline`} 
-            arrayOfPosts={postsList} 
-            setArrayOfPosts={setPostsList}
-            morePostsToLoad={morePostsToLoad}
-            setMorePostsToLoad={setMorePostsToLoad}
-            url={urlToGetMorePosts}
+                title={`timeline`} 
+                arrayOfPosts={postsList} 
+                setArrayOfPosts={setPostsList}
+                morePostsToLoad={morePostsToLoad}
+                setMorePostsToLoad={setMorePostsToLoad}
+                urlToGetMorePosts={urlToGetMorePosts}
+                pageUrl={pageUrl}
             />
         </>
     );

@@ -39,17 +39,21 @@ export default function DeleteModal({
 }
 
 const ModalStyle = styled(ReactModal)`
-  top: 50%;
-  left: 50%;
-  right: auto;
-  bottom: auto;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  transform: translate(50%, 150%);
   background: #333333;
   border-radius: 20px;
-  margin: 20px 50px;
-  margin: 0 auto;
+  width:50%;
   padding: 20px 50px;
+  z-index: 10;
+  @media (max-width: 600px) {
+      width: 100%;
+      flex-direction: column;
+      transform: translate(0, 150%);
+      border-radius: 0;
+      padding: 20px 0;
+  }
 `;
 
 const Title = styled.h1`

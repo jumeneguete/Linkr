@@ -13,7 +13,6 @@ export function loadMorePosts(arrayOfPosts, setArrayOfPosts, setMorePostsToLoad,
     
     const request = axios.get( url, config );
     request.then(response => {
-        console.log(`teste${response.data.posts}`)
         const morePosts = response.data.posts;
         if( morePosts && morePosts.length > 0){
             setArrayOfPosts([...arrayOfPosts, ...response.data.posts])
@@ -33,7 +32,7 @@ export function loadComments(url, setArrayOfComments, config) {
 }
 
 export function callServer(setArrayOfPosts, url, erroAlert, config) {
-       
+    
     const request = axios.get(url, config);
     request.then(response => {
         setArrayOfPosts(response.data.posts)
@@ -59,22 +58,22 @@ export function reloadPosts(arrayOfPosts, setArrayOfPosts, url, erroAlert, confi
 
 
 
-export function renderPosts(arrayOfPosts, setArrayOfPosts, location, followers) {
+export function renderPosts(arrayOfPosts, setArrayOfPosts, location, followers, pageUrl) {
 
     return(
         arrayOfPosts!==null ? 
             arrayOfPosts.length > 0 ? 
                 location === "/timeline" ?
                     followers && followers.length > 0 ? 
-                        listOfPosts(arrayOfPosts, setArrayOfPosts)
+                        listOfPosts(arrayOfPosts, setArrayOfPosts, pageUrl)
                         : <Info>Voce nao segue ninguem ainda, procure por perfis na busca</Info>
-                :listOfPosts(arrayOfPosts, setArrayOfPosts)
+                :listOfPosts(arrayOfPosts, setArrayOfPosts, pageUrl)
             : <Info>Nenhum post encontrado</Info>
         : ''
     )
 }
 
-function listOfPosts(arrayOfPosts, setArrayOfPosts) {
+function listOfPosts(arrayOfPosts, setArrayOfPosts, pageUrl) {
     
     return (
         arrayOfPosts?.map((p, i) => (
@@ -84,6 +83,7 @@ function listOfPosts(arrayOfPosts, setArrayOfPosts) {
                 postDetails={p} 
                 setArrayOfPosts={setArrayOfPosts} 
                 arrayOfPosts={arrayOfPosts}
+                pageUrl={pageUrl}
             />
         ))
     );
