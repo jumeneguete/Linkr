@@ -25,7 +25,8 @@ export default function Search() {
                 SetUsersFound(response.data.users);
             })
         }
-    }, [search])
+        // eslint-disable-next-line
+    }, [])
 
     return (
 
@@ -35,9 +36,9 @@ export default function Search() {
                     minLength={3}
                     debounceTimeout={300}
                     onChange={(e) => setSearch(e.target.value)} value={search}
-                    searching={search !== "" ? true : false}
+                    searching={search}
                     placeholder="Search for people and friends" />
-                <Suggestions searching={search !== "" ? true : false}>
+                <Suggestions searching={search}>
                     {usersFound === null ? "" : usersFound.length === 0 ? <NotFound>Nenhum usuário encontrado</NotFound> :
                         usersFound.map(f => (
                             followers.find(fol => fol.id === f.id) ? (

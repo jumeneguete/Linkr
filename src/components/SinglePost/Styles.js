@@ -1,6 +1,6 @@
 
 import styled from 'styled-components';
-import ReactTooltip from 'react-tooltip';
+
 
 const SinglePost = styled.div`
 display:flex;
@@ -87,10 +87,6 @@ input:focus{
         }
 `;
 
-const BsTrash = styled.div`
-color: white;
-`;
-
 const CreatorName = styled.div`
 height: 23px;
 font-size: 19px;
@@ -159,24 +155,7 @@ const LinkImg = styled.div`
     border-radius: 0px 12px 13px 0px;
 `;
 
-const LikesContainer = styled.div`
- margin-top: 5px;
-font-size: 11px;
-color: #fff;
-cursor: pointer;
-`;
 
-const StyledReactTooltip = styled(ReactTooltip)`
-
-background: rgba(255, 255, 255, 0.9) !important;
-color: #505050 !important;
-border-radius: 3px !important;
-padding: 5px !important;
-
-    &:after{
-        border-bottom-color: #e7e7e7 !important;
-    }
-`;
 
 const CommentsContainer = styled.div`
     margin-top: 18px;
@@ -313,4 +292,4 @@ const ButtonComment = styled.button`
     justify-content: center;
 `;
 
-export { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag, LikesContainer, StyledReactTooltip, CommentsContainer, CommentBox, Comments, CommentInfo, Divider, AddCommentForm, InputComment, ButtonComment };
+export { SinglePost, Profile, PostContent, CreatorName, Description, LinkContainer, LinkInfo, LinkImg, Hashtag, CommentsContainer, CommentBox, Comments, CommentInfo, Divider, AddCommentForm, InputComment, ButtonComment };

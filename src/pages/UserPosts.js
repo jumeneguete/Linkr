@@ -19,18 +19,11 @@ export default function UserPosts() {
     const userName = userPostsList && userPostsList.length > 0 && userPostsList[0].user.username;
     const [morePostsToLoad, setMorePostsToLoad] = useState(true)
 
-    const pageUrl = `${process.env.REACT_APP_API_BASE_URL}/linkr/users/${id}/posts`;
+    const pageUrl = `${process.env.REACT_APP_API_BASE_URL}/users/${id}/posts`;
     const erroAlert = "Ocorreu um erro ao carregar os posts do usuario";
     
-    const lastPostId = userPostsList[userPostsList.length - 1].id
-    const urlToGetMorePosts = (!userPostsList || userPostsList.length === 0) ? "": 
-    `${process.env.REACT_APP_API_BASE_URL}/linkr/users/${id}/posts?olderThan=${lastPostId}`;
+    let urlToGetMorePosts = "";
 
-    useInterval(() => {
-        const config = { headers: { Authorization: `Bearer ${userProfile.token}` }};
-        reloadPosts(userPostsList, setUserPostsList, pageUrl, erroAlert, config)
-    }, 15000);
-    
     useEffect(() => {
         const config = { headers: { Authorization: `Bearer ${userProfile.token}` }};
         if(Number(id) === userProfile.user.id) {
@@ -40,13 +33,23 @@ export default function UserPosts() {
         callServer(setUserPostsList, pageUrl, erroAlert, config);
     }, [history, pageUrl, id, userProfile])
 
+    if(userPostsList && userPostsList.length > 0) {
+        const lastPostId = userPostsList[userPostsList.length - 1].id;
+        urlToGetMorePosts = `${process.env.REACT_APP_API_BASE_URL}/users/${id}/posts?olderThan=${lastPostId}`;
+    }
+
+    useInterval(() => {
+        const config = { headers: { Authorization: `Bearer ${userProfile.token}` }};
+        reloadPosts(userPostsList, setUserPostsList, pageUrl, erroAlert, config)
+    }, 15000);
+
     function followUser() {
         const config = { headers: { Authorization: `Bearer ${userProfile.token}` }};
         if(isFollowing.isDisabled) return;
         setIsFollowing({...isFollowing, isDisabled:true})
         const url = isFollowing.status ?
-        `${process.env.REACT_APP_API_BASE_URL}/linkr/users/${id}/unfollow`:
-        `${process.env.REACT_APP_API_BASE_URL}/linkr/users/${id}/follow`
+        `${process.env.REACT_APP_API_BASE_URL}/users/${id}/unfollow`:
+        `${process.env.REACT_APP_API_BASE_URL}/users/${id}/follow`
 
         const request = axios.post(url, {}, config);
         request.then(response => {

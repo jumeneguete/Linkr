@@ -4,7 +4,7 @@ import UserContext from '../contexts/UserContext';
 import GenericPage from '../components/GenericPage/GenericPage';
 import {callServer} from '../components/GenericPage/GenericFunctions';
 
-export default function UserPosts() {
+export default function MyPosts() {
 
     const { userProfile } = useContext(UserContext);
     const { user } = userProfile
@@ -12,17 +12,21 @@ export default function UserPosts() {
     const [myPostsList, setMyPostsList] = useState(null);
     const [morePostsToLoad, setMorePostsToLoad] = useState(true);
 
-    const pageUrl = `${process.env.REACT_APP_API_BASE_URL}/linkr/users/${id}/posts`;
+    const pageUrl = `${process.env.REACT_APP_API_BASE_URL}/users/${id}/posts`;
     const erroAlert = "Ocorreu um erro ao carregar os seus posts";
 
-    const lastPostId = myPostsList[myPostsList.length - 1].id;
-    const urlToGetMorePosts = (!myPostsList || myPostsList.length === 0) ? "": 
-    `${process.env.REACT_APP_API_BASE_URL}/linkr/users/${id}/posts?olderThan=${lastPostId}`;
+    let urlToGetMorePosts = "";
+
+    if(myPostsList && myPostsList.length > 0) {
+        const lastPostId = myPostsList[myPostsList.length - 1].id;
+        urlToGetMorePosts = `${process.env.REACT_APP_API_BASE_URL}/users/${id}/posts?olderThan=${lastPostId}`;
+    }
 
     useEffect(() => {
         const config = { headers: { Authorization: `Bearer ${userProfile.token}` }};
         callServer(setMyPostsList, pageUrl, erroAlert, config);
-    }, [pageUrl, userProfile])
+        // eslint-disable-next-line
+    }, [])
 
     return(
         <>

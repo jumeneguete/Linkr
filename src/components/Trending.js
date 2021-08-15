@@ -14,7 +14,7 @@ export default function Trending (){
     useEffect(() =>{
         const config = { headers: { Authorization: `Bearer ${userProfile.token}` }}
 
-        const request = axios.get(`${process.env.REACT_APP_API_BASE_URL}/linkr/hashtags/trending`, config);
+        const request = axios.get(`${process.env.REACT_APP_API_BASE_URL}/hashtags/trending`, config);
         request.then(response => {
             setHashtags(response.data.hashtags)
         });
@@ -40,7 +40,7 @@ export default function Trending (){
             <TrendingList>
                 { hashtags.length !== 0 &&
                     hashtags.map(h =>(
-                        <Link to={`/hashtag/${h.name}`}><li key ={h.id}>#&nbsp;{h.name}</li></Link>
+                        <Link to={`/hashtag/${h.name}`} key ={h.id}><li>#&nbsp;{h.name}</li></Link>
                     ))
                 }
             </TrendingList>

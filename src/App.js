@@ -2,17 +2,17 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useEffect, useState } from 'react';
 
 import './assets/styles/reset.css';
-import UserContext from '../contexts/UserContext';
-import UserFollowersContext from '../contexts/UserFollowersContext';
-import GlobalStyle from "../styles/GlobalStyle";
-import Login from './Login_SignUp/Login';
-import SignUp from './Login_SignUp/SignUp';
-import Header from "./Header/Header";
-import Timeline from './Timeline/Timeline';
-import UserPosts from "./UserPosts/UserPosts";
-import HashtagPosts from "./HashtagPosts/HashtagPosts";
-import MyPosts from './MyPosts_MyLikes/MyPosts';
-import MyLikes from './MyPosts_MyLikes/MyLikes';
+import UserContext from './contexts/UserContext';
+import UserFollowersContext from './contexts/UserFollowersContext';
+import GlobalStyle from "./assets/styles/GlobalStyle";
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
+import Header from "./components/Header";
+import Timeline from './pages/Timeline';
+import UserPosts from "./pages/UserPosts";
+import HashtagPosts from "./pages/HashtagPosts";
+import MyPosts from './pages/MyPosts';
+import MyLikes from './pages/MyLikes';
 import axios from "axios";
 
 export default function App() {
@@ -22,13 +22,14 @@ export default function App() {
     
     useEffect(() => {
         if (userProfile){
-        const config = { headers: { Authorization: `Bearer ${userProfile.token}` }};
-        const request = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/users/follows', config);
-        request.then( response => {
-            setFollowers(response.data.users)
-        })
-    }
-    }, [followers])
+            const config = { headers: { Authorization: `Bearer ${userProfile.token}` }};
+            const request = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/users/follows', config);
+            request.then( response => {
+                setFollowers(response.data.users)
+            })
+        }
+        // eslint-disable-next-line
+    }, [])
 
 
     return (

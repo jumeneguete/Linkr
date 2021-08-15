@@ -1,68 +1,5 @@
 import styled from 'styled-components';
 
-const HeaderStyles = styled.header`
-    width: 100%;
-    height: 75px;
-    background-color: #000;
-    padding: 0 22px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10;
-
-    & > span {
-        font-family: "Passion One", sans-serif;
-        font-weight: 700;
-        font-size: 50px;
-        letter-spacing: 1px;
-        color: #fff;
-    }
-`;
-
-const PageTitle = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 937px;
-    font-size: 43px;
-    font-weight: 700;
-    font-family: "Oswald", sans-serif;
-    color: #FFFFFF;
-    margin: 125px auto 0 auto;
-    @media (max-width: 614px) {
-        width: 100%;
-        margin: 91px 0 0 0px;
-        padding: 0 20px;
-    }
-`;
-
-const ContainerPostsAndTrendings = styled.div`
-    display: flex;
-    justify-content: space-between;
-    width: 937px;
-    margin: 29px auto;
-    @media (max-width: 614px) {
-        width: 100%;
-    }
-`;
-
-const ContainerPosts =styled.div`
-    width: 611px;
-    & > span {
-        display: flex;
-        justify-content: center;
-        color: #FFFFFF;
-        font-size: 23px;
-        margin-top: 50px;
-    }
-    @media (max-width: 614px) {
-        width: 100%;
-    }
-`;
-
 const CreatePost = styled.div`
     background: #fff;
     border-radius: 15px;
@@ -192,12 +129,10 @@ width: 120px;
 cursor: pointer;
 `;
 
-
-
 const Loading = styled.div`
 display:flex;
 flex-direction: column;
 align-items:center;
 color: #6D6D6D;
 `;
-export { PageTitle, ContainerPostsAndTrendings, CreatePost, ContainerPosts, StyledButtom, Loading };
+export { CreatePost, StyledButtom, Loading };

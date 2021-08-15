@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { CommentBox, Comments, CommentInfo, Divider, AddCommentForm, InputComment, ButtonComment } from "./Styles"
 import { BsDot } from 'react-icons/bs';
-import { IoCompassOutline, IoPaperPlaneOutline } from 'react-icons/io5';
-import { useContext, useEffect, useState } from "react";
+import { IoPaperPlaneOutline } from 'react-icons/io5';
+import { useContext, useState } from "react";
 import UserContext from "../../contexts/UserContext";
 import UserFollowersContext from "../../contexts/UserFollowersContext";
 import axios from "axios";

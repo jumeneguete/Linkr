@@ -1,12 +1,21 @@
 import axios from 'axios';
+import styled from "styled-components";
+
 import Post from '../SinglePost/Post';
 
-function loadMorePosts(arrayOfPosts, setArrayOfPosts, setMorePostsToLoad, url, config) {
-
+export function loadMorePosts(arrayOfPosts, setArrayOfPosts, setMorePostsToLoad, url, config) {
+    
+    if(arrayOfPosts && arrayOfPosts.length === 0) {
+        setMorePostsToLoad(false)
+        return;
+    }
     if(!url) return;
+    
     const request = axios.get( url, config );
     request.then(response => {
-        if(response.data.posts.length > 0){
+        console.log(`teste${response.data.posts}`)
+        const morePosts = response.data.posts;
+        if( morePosts && morePosts.length > 0){
             setArrayOfPosts([...arrayOfPosts, ...response.data.posts])
         } else {
             setMorePostsToLoad(false)
@@ -14,8 +23,17 @@ function loadMorePosts(arrayOfPosts, setArrayOfPosts, setMorePostsToLoad, url, c
     });
 }
 
-function callServer(setArrayOfPosts, url, erroAlert, config) {
-        
+export function loadComments(url, setArrayOfComments, config) {
+
+    const request = axios.get(url, config);
+    request.then(response => {
+        setArrayOfComments(response.data.comments);
+    });
+    request.catch(() => alert("Erro ao carregar comentários"));
+}
+
+export function callServer(setArrayOfPosts, url, erroAlert, config) {
+       
     const request = axios.get(url, config);
     request.then(response => {
         setArrayOfPosts(response.data.posts)
@@ -23,7 +41,8 @@ function callServer(setArrayOfPosts, url, erroAlert, config) {
     request.catch(erro => alert(erroAlert))
 }
 
-function reloadPosts(arrayOfPosts, setArrayOfPosts, url, erroAlert, config) {
+//Melhorar Performace
+export function reloadPosts(arrayOfPosts, setArrayOfPosts, url, erroAlert, config) {
     if(!arrayOfPosts || arrayOfPosts.length === 0) return;
     const request = axios.get(url, config);
     request.then(response => {
@@ -38,23 +57,43 @@ function reloadPosts(arrayOfPosts, setArrayOfPosts, url, erroAlert, config) {
     request.catch(erro => alert(erroAlert));
 }
 
-function renderPosts(arrayOfPosts, setArrayOfPosts, location, followers) {
 
-    const ListOfPosts = arrayOfPosts && arrayOfPosts.map((p, i) => (
-        <Post key ={p.id} index={i} postDetails={p} setArrayOfPosts={setArrayOfPosts} arrayOfPosts={arrayOfPosts}/>
-        ))
+
+export function renderPosts(arrayOfPosts, setArrayOfPosts, location, followers) {
 
     return(
         arrayOfPosts!==null ? 
             arrayOfPosts.length > 0 ? 
                 location === "/timeline" ?
                     followers && followers.length > 0 ? 
-                        ListOfPosts
-                        : <span>Voce nao segue ninguem ainda, procure por perfis na busca</span>
-                :ListOfPosts
-            : <span>Nenhum post encontrado</span>
-        : ""
+                        listOfPosts(arrayOfPosts, setArrayOfPosts)
+                        : <Info>Voce nao segue ninguem ainda, procure por perfis na busca</Info>
+                :listOfPosts(arrayOfPosts, setArrayOfPosts)
+            : <Info>Nenhum post encontrado</Info>
+        : ''
     )
 }
 
-export {loadMorePosts, callServer, reloadPosts, renderPosts}
+function listOfPosts(arrayOfPosts, setArrayOfPosts) {
+    
+    return (
+        arrayOfPosts?.map((p, i) => (
+            <Post 
+                key ={p.id} 
+                index={i} 
+                postDetails={p} 
+                setArrayOfPosts={setArrayOfPosts} 
+                arrayOfPosts={arrayOfPosts}
+            />
+        ))
+    );
+    
+}
+
+const Info = styled.div`
+    display:flex;
+    justify-content: center;
+    color: #FFFFFF;
+    font-size: 18px;
+    margin-top: 50px;
+`;

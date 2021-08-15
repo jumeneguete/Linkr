@@ -94,7 +94,7 @@ const Menu = styled.div`
 const ToggleMenu = styled.div`
     width: 150px;
     height: 125px;
-    background-color: #000;
+    background-color: #151515;
     position: fixed;
     top: 75px;
     right: 0;

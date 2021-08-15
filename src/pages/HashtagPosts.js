@@ -13,12 +13,15 @@ export default function HashtagPosts() {
     const [hashtagPostsList, setHashtagPostsList] = useState(null);
     const [morePostsToLoad, setMorePostsToLoad] = useState(true);
 
-    const pageUrl = `${process.env.REACT_APP_API_BASE_URL}/linkr/hashtags/${hashtag}/posts`;
+    const pageUrl = `${process.env.REACT_APP_API_BASE_URL}/hashtags/${hashtag}/posts`;
     const erroAlert = "Ocorreu um erro ao carregar os posts da hashtag";
 
-    const lastPostId = hashtagPostsList[hashtagPostsList.length - 1].id
-    const urlToGetMorePosts = (!hashtagPostsList || hashtagPostsList.length === 0) ? "": 
-    `${process.env.REACT_APP_API_BASE_URL}/linkr/hashtags/${hashtag}/posts?olderThan=${lastPostId}`;
+    let urlToGetMorePosts = "";
+
+    if(hashtagPostsList && hashtagPostsList.length > 0) {
+        const lastPostId = hashtagPostsList[hashtagPostsList.length - 1].id;
+        urlToGetMorePosts = `${process.env.REACT_APP_API_BASE_URL}/hashtags/${hashtag}/posts?olderThan=${lastPostId}`;
+    }
 
     useEffect(() => {
         const config = { headers: { Authorization: `Bearer ${userProfile.token}` }};

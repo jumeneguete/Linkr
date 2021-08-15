@@ -4,24 +4,27 @@ import UserContext from '../contexts/UserContext';
 import GenericPage from '../components/GenericPage/GenericPage';
 import {callServer} from '../components/GenericPage/GenericFunctions';
 
-export default function UserPosts() {
+export default function MyLikes() {
 
     const { userProfile } = useContext(UserContext);
     const [myLikesList, setMyLikesList] = useState(null);
     const [morePostsToLoad, setMorePostsToLoad] = useState(true);
 
-    const pageUrl = `${process.env.REACT_APP_API_BASE_URL}/linkr/posts/liked`;
+    const pageUrl = `${process.env.REACT_APP_API_BASE_URL}/posts/liked`;
     const erroAlert = "Ocorreu um erro ao carregar os seus likes";
 
-    const lastPostId = myLikesList[myLikesList.length - 1].id;
-    const urlToGetMorePosts = (!myLikesList || myLikesList.length === 0) ? "": 
-    `${process.env.REACT_APP_API_BASE_URL}/linkr/posts/liked?olderThan=${lastPostId}`;
+    let urlToGetMorePosts = "";
+
+    if(myLikesList && myLikesList.length > 0) {
+        const lastPostId = myLikesList[myLikesList.length - 1].id;
+        urlToGetMorePosts = `${process.env.REACT_APP_API_BASE_URL}/posts/liked?olderThan=${lastPostId}`;
+    }
 
     useEffect(() => {
         const config = { headers: { Authorization: `Bearer ${userProfile.token}` }};
         callServer(setMyLikesList, pageUrl, erroAlert, config);
-
-    }, [pageUrl, userProfile])
+    // eslint-disable-next-line
+    }, [])
 
     return(
         <>

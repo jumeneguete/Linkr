@@ -4,23 +4,7 @@ import styled from 'styled-components';
 
 ReactModal.setAppElement("body");
 
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    background: "#333333",
-    borderRadius: "20px",
-    margin: "20px 50px",
-    margin: "0 auto",
-    padding: "20px 50px",
-  },
-};
-
-export default function Modal({
+export default function DeleteModal({
   modalIsOpen,
   setModalIsOpen,
   Delete,
@@ -28,9 +12,8 @@ export default function Modal({
 }) {
 
   return (
-    <ReactModal
+    <ModalStyle
       isOpen={modalIsOpen}
-      style={customStyles}
       contentLabel='Delete Modal'
     >
       {isLoading 
@@ -51,9 +34,23 @@ export default function Modal({
             </ButtonsContainer>
           </>
       }
-    </ReactModal>
+    </ModalStyle>
   );
 }
+
+const ModalStyle = styled(ReactModal)`
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  background: #333333;
+  border-radius: 20px;
+  margin: 20px 50px;
+  margin: 0 auto;
+  padding: 20px 50px;
+`;
 
 const Title = styled.h1`
   color: white;

@@ -2,14 +2,14 @@ import Loader from "react-loader-spinner";
 import { useLocation } from 'react-router-dom'
 import { useContext } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
+import styled from "styled-components";
 
 import UserContext from '../../contexts/UserContext';
 import UserFollowersContext from '../../contexts/UserFollowersContext';
-import { GenericSearch, PageTitle, ContainerPostsAndTrendings, ContainerPosts, StyledButtom, Loading } from "./Styles";
+import { StyledButtom, Loading } from "./Styles";
 import UserInput from '../UserPosts/UserInput'
-import Trending from "./Trending";
+import Trending from "../Trending";
 import {loadMorePosts , renderPosts} from'./GenericFunctions';
-import Search from "../Header/Search";
 
 export default function GenericPage(props) {
 
@@ -21,13 +21,12 @@ export default function GenericPage(props) {
     const location = useLocation().pathname;
     const loading = <Loader type="Oval" color="#6D6D6D" height={40} width={40} />;
     let id;
-    if(location !== "/timeline") {
-        id = arrayOfPosts && arrayOfPosts.lenght > 0 && arrayOfPosts[0].user.id;
+    if(location !== "/timeline" && arrayOfPosts.length) {
+        id = arrayOfPosts[0].user.id;
     }
-
+    
     return (
         <>
-            <GenericSearch><Search/></GenericSearch>
             <PageTitle>
                 <span>{title}</span> 
                 {location === `/user/${id}` && id !== userProfile.user.id ? 
@@ -54,3 +53,44 @@ export default function GenericPage(props) {
         </>
     );
 }
+
+const PageTitle = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 937px;
+    font-size: 43px;
+    font-weight: 700;
+    font-family: "Oswald", sans-serif;
+    color: #FFFFFF;
+    margin: 125px auto 0 auto;
+    @media (max-width: 614px) {
+        width: 100%;
+        margin: 91px 0 0 0px;
+        padding: 0 20px;
+    }
+`;
+
+const ContainerPostsAndTrendings = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 937px;
+    margin: 29px auto;
+    @media (max-width: 614px) {
+        width: 100%;
+    }
+`;
+
+const ContainerPosts =styled.div`
+    width: 611px;
+    & > span {
+        display: flex;
+        justify-content: center;
+        color: #FFFFFF;
+        font-size: 23px;
+        margin-top: 50px;
+    }
+    @media (max-width: 614px) {
+        width: 100%;
+    }
+`;

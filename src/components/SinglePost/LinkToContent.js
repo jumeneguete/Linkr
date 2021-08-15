@@ -1,15 +1,14 @@
 import { LinkContainer, LinkInfo, LinkImg } from "./Styles"
-import Modal from './Modal';
+import LinkPageContentModal from './LinkPageContentModal';
 import { useState } from "react";
 
-export default function LInkBox({linkTitle,linkDescription, link, linkImage }) {
+export default function LinkToContent({linkTitle,linkDescription, link, linkImage }) {
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
-
-
+    
     return (
         <div >
-            < Modal
+            < LinkPageContentModal
                 modalIsOpen={modalIsOpen}
                 setModalIsOpen={setModalIsOpen}
                 link={link}

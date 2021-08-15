@@ -3,9 +3,9 @@ import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import {Page, FieldsContainer, FormContainer} from "../components/Login_SignUp/Styles"
-import Banner from "../components/Login_SignUp/Banner"
-import Button from "../components/Login_SignUp/Button";
-import Input from "../components/Login_SignUp/Input";
+import Banner from "../components/Banner"
+import Button from "../components/Button";
+import Input from "../components/Input";
 
 export default function SignUp() {
 
@@ -22,7 +22,7 @@ export default function SignUp() {
 
         const body = {email, password, username, pictureUrl: url }
 
-        const request = axios.post(`${process.env.REACT_APP_API_BASE_URL}/linkr/sign-up`, body);
+        const request = axios.post(`${process.env.REACT_APP_API_BASE_URL}/sign-up`, body);
         setIsDisabled(true);
         request.then(() => {
             history.push("/");

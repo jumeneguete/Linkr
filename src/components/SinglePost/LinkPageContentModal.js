@@ -5,12 +5,12 @@ import ClickAwayListener from 'react-click-away-listener';
 
 ReactModal.setAppElement("body");
 
-export default function Modal({ modalIsOpen, setModalIsOpen, link, linkTitle }) {
-
+export default function LinkPageContentModal({ modalIsOpen, setModalIsOpen, link, linkTitle }) {
+  
   return (
     <ModalStyle isOpen={modalIsOpen} link={link}>
 
-      <a href={link} target="_blank"><button>Open in new tab</button></a>
+      <a href={link} target="_blank" rel="noreferrer"><button>Open in new tab</button></a>
       <ClickAwayListener onClickAway={() => setModalIsOpen(!modalIsOpen)}>
         <iframe src={link} width="100%" height="100%" title={linkTitle}></iframe>
       </ClickAwayListener>

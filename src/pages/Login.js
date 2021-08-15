@@ -4,9 +4,9 @@ import { Link, useHistory } from "react-router-dom";
 
 import UserContext from '../contexts/UserContext';
 import {Page, FieldsContainer, FormContainer} from "../components/Login_SignUp/Styles"
-import Banner from "../components/Login_SignUp/Banner"
-import Button from "../components/Login_SignUp/Button";
-import Input from "../components/Login_SignUp/Input";
+import Banner from "../components/Banner"
+import Button from "../components/Button";
+import Input from "../components/Input";
 
 export default function Login() {
 
@@ -28,7 +28,7 @@ export default function Login() {
 
         const body = {email, password}
 
-        const request = axios.post(`${process.env.REACT_APP_API_BASE_URL}/linkr/sign-in`, body);
+        const request = axios.post(`${process.env.REACT_APP_API_BASE_URL}/sign-in`, body);
         setIsDisabled(true);
         request.then((response) => {
             setUserProfile(response.data)
