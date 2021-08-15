@@ -12,7 +12,6 @@ export default function YoutubeVideo({youtubeLink, postDetails}) {
                 height="300" 
                 title={linkTitle}>
             </object>
-            <div id={youtubeLink}></div>
             <span style={{color: '#B7B7B7'}}>{link}</span>
         </>
     );

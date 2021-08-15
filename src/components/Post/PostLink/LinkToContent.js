@@ -1,6 +1,7 @@
-import { LinkContainer, LinkInfo, LinkImg } from "./Styles"
-import LinkPageContentModal from './LinkPageContentModal';
 import { useState } from "react";
+
+import LinkPageContentModal from './LinkPageContentModal';
+import { LinkContainer, LinkInfo, LinkImg } from "../../SinglePost/Styles"
 
 export default function LinkToContent({linkTitle,linkDescription, link, linkImage }) {
 

@@ -4,8 +4,8 @@ import useInterval from 'react-useinterval';
 
 import UserContext from '../contexts/UserContext';
 import UserFollowersContext from '../contexts/UserFollowersContext';
-import GenericPage from '../components/GenericPage/GenericPage';
-import {callServer, reloadPosts} from '../components/GenericPage/GenericFunctions';
+import GenericPage from '../components/GenericPage';
+import { callServer, reloadPosts } from '../functions/apiFunctions';
 
 export default function Timeline() {
 
@@ -39,7 +39,7 @@ export default function Timeline() {
     }, 15000);
     
     return(
-        <>
+        postsList &&
             <GenericPage 
                 title={`timeline`} 
                 arrayOfPosts={postsList} 
@@ -49,6 +49,5 @@ export default function Timeline() {
                 urlToGetMorePosts={urlToGetMorePosts}
                 pageUrl={pageUrl}
             />
-        </>
     );
 }

@@ -7,7 +7,7 @@ import UserFollowersContext from './contexts/UserFollowersContext';
 import GlobalStyle from "./assets/styles/GlobalStyle";
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
-import Header from "./components/Header";
+import Header from "./components/Header/Header";
 import Timeline from './pages/Timeline';
 import UserPosts from "./pages/UserPosts";
 import HashtagPosts from "./pages/HashtagPosts";
@@ -23,7 +23,7 @@ export default function App() {
     useEffect(() => {
         if (userProfile){
             const config = { headers: { Authorization: `Bearer ${userProfile.token}` }};
-            const request = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/users/follows', config);
+            const request = axios.get(`${process.env.REACT_APP_API_BASE_URL}/users/follows`, config);
             request.then( response => {
                 setFollowers(response.data.users)
             })

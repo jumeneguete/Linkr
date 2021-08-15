@@ -5,8 +5,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import ClickAwayListener from 'react-click-away-listener';
 
-import UserFollowersContext from "../contexts/UserFollowersContext";
-import UserContext from "../contexts/UserContext";
+import UserFollowersContext from "../../contexts/UserFollowersContext";
+import UserContext from "../../contexts/UserContext";
 
 export default function Search() {
     const { userProfile } = useContext(UserContext);

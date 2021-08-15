@@ -4,9 +4,9 @@ import { Link, useHistory } from "react-router-dom";
 
 import UserContext from '../contexts/UserContext';
 import {Page, FieldsContainer, FormContainer} from "../components/Login_SignUp/Styles"
-import Banner from "../components/Banner"
-import Button from "../components/Button";
-import Input from "../components/Input";
+import Banner from "../components/Login_SignUp/Banner"
+import Button from "../components/Login_SignUp/Button";
+import Input from "../components/Login_SignUp/Input";
 
 export default function Login() {
 

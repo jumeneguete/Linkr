@@ -5,8 +5,8 @@ import useInterval from 'react-useinterval';
 
 import UserContext from '../contexts/UserContext';
 import UserFollowersContext from '../contexts/UserFollowersContext';
-import GenericPage from '../components/GenericPage/GenericPage';
-import {callServer, reloadPosts} from '../components/GenericPage/GenericFunctions';
+import GenericPage from '../components/GenericPage';
+import { callServer, reloadPosts } from '../functions/apiFunctions';
 
 export default function UserPosts() {
     
@@ -59,18 +59,16 @@ export default function UserPosts() {
     }
 
     return(
-        <>
-            {userPostsList &&  
+        userPostsList &&  
             <GenericPage 
-            title={`${userName}'s Posts`} 
-            arrayOfPosts={userPostsList} 
-            setArrayOfPosts={setUserPostsList}
-            isFollowing={isFollowing} 
-            followUser={followUser}
-            morePostsToLoad={morePostsToLoad}
-            setMorePostsToLoad={setMorePostsToLoad}
-            url={urlToGetMorePosts}
-            />}
-        </>
+                title={`${userName}'s Posts`} 
+                arrayOfPosts={userPostsList} 
+                setArrayOfPosts={setUserPostsList}
+                isFollowing={isFollowing} 
+                followUser={followUser}
+                morePostsToLoad={morePostsToLoad}
+                setMorePostsToLoad={setMorePostsToLoad}
+                url={urlToGetMorePosts}
+            />
     );
 }

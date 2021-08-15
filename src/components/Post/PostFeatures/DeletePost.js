@@ -2,9 +2,9 @@ import { useState, useContext } from 'react';
 import { BsTrash } from 'react-icons/bs';
 import axios from 'axios';
 
-import { callServer } from '../GenericPage/GenericFunctions';
-import UserContext from '../../contexts/UserContext';
-import DeleteModal from "../UserPosts/DeleteModal";
+import { callServer } from'../../../functions/apiFunctions';
+import UserContext from '../../../contexts/UserContext';
+import DeleteModal from "./DeleteModal";
 
 export default function DeletePost({ postDetails, setArrayOfPosts, pageUrl }) {
 

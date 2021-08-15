@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import ClickAwayListener from 'react-click-away-listener';
 
 import Search from "./Search";
-import UserContext from "../contexts/UserContext"
+import UserContext from "../../contexts/UserContext"
 
 export default function Header() {
     const [menuSelected, setMenuSelected] = useState(false);

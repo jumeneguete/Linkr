@@ -1,15 +1,16 @@
 import axios from 'axios';
-import styled from "styled-components";
-
-import Post from '../SinglePost/Post';
 
 export function loadMorePosts(arrayOfPosts, setArrayOfPosts, setMorePostsToLoad, url, config) {
     
+    if(!url) {
+        setMorePostsToLoad(false);
+        return;
+    }
+   
     if(arrayOfPosts && arrayOfPosts.length === 0) {
         setMorePostsToLoad(false)
         return;
     }
-    if(!url) return;
     
     const request = axios.get( url, config );
     request.then(response => {
@@ -32,7 +33,7 @@ export function loadComments(url, setArrayOfComments, config) {
 }
 
 export function callServer(setArrayOfPosts, url, erroAlert, config) {
-    
+
     const request = axios.get(url, config);
     request.then(response => {
         setArrayOfPosts(response.data.posts)
@@ -55,45 +56,3 @@ export function reloadPosts(arrayOfPosts, setArrayOfPosts, url, erroAlert, confi
     });
     request.catch(erro => alert(erroAlert));
 }
-
-
-
-export function renderPosts(arrayOfPosts, setArrayOfPosts, location, followers, pageUrl) {
-
-    return(
-        arrayOfPosts!==null ? 
-            arrayOfPosts.length > 0 ? 
-                location === "/timeline" ?
-                    followers && followers.length > 0 ? 
-                        listOfPosts(arrayOfPosts, setArrayOfPosts, pageUrl)
-                        : <Info>Voce nao segue ninguem ainda, procure por perfis na busca</Info>
-                :listOfPosts(arrayOfPosts, setArrayOfPosts, pageUrl)
-            : <Info>Nenhum post encontrado</Info>
-        : ''
-    )
-}
-
-function listOfPosts(arrayOfPosts, setArrayOfPosts, pageUrl) {
-    
-    return (
-        arrayOfPosts?.map((p, i) => (
-            <Post 
-                key ={p.id} 
-                index={i} 
-                postDetails={p} 
-                setArrayOfPosts={setArrayOfPosts} 
-                arrayOfPosts={arrayOfPosts}
-                pageUrl={pageUrl}
-            />
-        ))
-    );
-    
-}
-
-const Info = styled.div`
-    display:flex;
-    justify-content: center;
-    color: #FFFFFF;
-    font-size: 18px;
-    margin-top: 50px;
-`;

@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from 'react';
 
 import UserContext from '../contexts/UserContext';
-import GenericPage from '../components/GenericPage/GenericPage';
-import {callServer} from '../components/GenericPage/GenericFunctions';
+import GenericPage from '../components/GenericPage';
+import { callServer } from '../functions/apiFunctions';
 
 export default function MyLikes() {
 
@@ -27,16 +27,14 @@ export default function MyLikes() {
     }, [])
 
     return(
-        <>
-            {myLikesList && 
+        myLikesList && 
             <GenericPage 
-            title={`My Likes`} 
-            arrayOfPosts={myLikesList} 
-            setArrayOfPosts={setMyLikesList} 
-            morePostsToLoad={morePostsToLoad}
-            setMorePostsToLoad={setMorePostsToLoad}
-            url={urlToGetMorePosts}
-            />}
-        </>
+                title={`My Likes`} 
+                arrayOfPosts={myLikesList} 
+                setArrayOfPosts={setMyLikesList} 
+                morePostsToLoad={morePostsToLoad}
+                setMorePostsToLoad={setMorePostsToLoad}
+                url={urlToGetMorePosts}
+            />
     );
 }

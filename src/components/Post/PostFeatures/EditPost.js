@@ -1,8 +1,9 @@
 import { useState, useContext, useRef, useEffect } from 'react';
 import axios from 'axios';
-import { callServer } from '../GenericPage/GenericFunctions';
+import styled from 'styled-components';
 
-import UserContext from '../../contexts/UserContext';
+import { callServer } from'../../../functions/apiFunctions';
+import UserContext from '../../../contexts/UserContext';
 
 export default function EditPost({ postDetails, setOnEditingPost, setArrayOfPosts, pageUrl }) {
 
@@ -39,7 +40,7 @@ export default function EditPost({ postDetails, setOnEditingPost, setArrayOfPost
         })
     }
     return(
-        <input 
+        <EditInput 
             ref = {textEditRef}
             disabled = {onSendingPostEdition}
             value = {postMainDescription}
@@ -55,3 +56,19 @@ export default function EditPost({ postDetails, setOnEditingPost, setArrayOfPost
         /> 
     );
 }
+
+const EditInput = styled.input`
+    background: #EFEFEF;
+    border-radius: 5px;
+    border: none;
+    cursor: text;
+    flex-grow: grow;
+    margin-bottom: 10px;
+    overflow-wrap: anywhere;
+    padding: 10px;
+    width: 100%;
+    box-shadow:none;
+    flex-grow: 1;
+    box-shadow: 0 0 0 0;
+    outline: 0;
+`;

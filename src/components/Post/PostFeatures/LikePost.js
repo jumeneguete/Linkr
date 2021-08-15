@@ -4,7 +4,7 @@ import axios from 'axios';
 import { IoHeartSharp, IoHeartOutline } from "react-icons/io5";
 import styled from 'styled-components';
 
-import UserContext from '../../contexts/UserContext';
+import UserContext from '../../../contexts/UserContext';
 
 export default function LikePost({postDetails, index, arrayOfPosts, setArrayOfPosts}) {
 

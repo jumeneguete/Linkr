@@ -1,39 +1,27 @@
 import { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { AiOutlineComment } from "react-icons/ai";
 import ReactHashtag from "react-hashtag";
 import getYouTubeID from 'get-youtube-id';
-
+import styled from 'styled-components';
 
 import UserContext from '../../contexts/UserContext';
-import { SinglePost, Profile, PostContent, Description, Hashtag, CommentsContainer } from "./Styles";
-
-import {loadComments} from '../GenericPage/GenericFunctions';
+import Profile from "./Profile";
+import { loadComments } from'../../functions/apiFunctions';
 import PostComments from './PostComments';
-import LinkToContent from './LinkToContent';
-import LikePost from '../PostFunctions/LikePost';
-import DeleteAndEditIcons from './DeleteAndEditIcons'
-import EditPost from '../PostFunctions/EditPost';
-import YoutubeVideo from '../PostFunctions/YoutubeVideo';
+import LinkToContent from './PostLink/LinkToContent';
+import PostHeader from './PostHeader'
+import EditPost from './PostFeatures/EditPost';
+import YoutubeVideo from './PostFeatures/YoutubeVideo';
 
 export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts, pageUrl }) {
     
-
     const { userProfile } = useContext(UserContext);
     const { token } = userProfile
     const { text, link, linkTitle, linkDescription, linkImage, id, user } = postDetails;
-    const { username, avatar } = postDetails.user;
     const [OnEditingPost, setOnEditingPost] = useState(false);
     const [openComments, setOpenComments] = useState(false);
     const [comments, setComments] = useState([]);
     const youtubeLink = getYouTubeID(link);
-
-    function toggleComments(e) {
-        e.stopPropagation();
-
-        const selection = !openComments;
-        setOpenComments(selection);
-    }
 
     useEffect(() => {
         const config = { headers: { Authorization: `Bearer ${token}` } };
@@ -44,27 +32,25 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
     
     return(
         <>
-            <SinglePost>
-                <Profile>
-                    <Link to={`/user/${user.id}`}><img src={avatar} alt={username}/></Link>
-
-                    <LikePost postDetails={postDetails} index={index} arrayOfPosts={arrayOfPosts} setArrayOfPosts={setArrayOfPosts} />
+            <PostContainer>
+                <Profile 
+                    index={index}
+                    postDetails={postDetails} 
+                    openComments={openComments}
+                    setOpenComments={setOpenComments}
+                    comments={comments}
+                    arrayOfPosts={arrayOfPosts}
+                    setArrayOfPosts={setArrayOfPosts}
+                />
                     
-                    <CommentsContainer onClick={(event) => toggleComments(event)} >
-                        <AiOutlineComment color={'#FFFFFF'} />
-                        <p>{comments.length} comments</p>
-                    </CommentsContainer>
-                </Profile>
                 <PostContent>
-                    
-                    <DeleteAndEditIcons 
+                    <PostHeader 
                         postDetails={postDetails} 
                         OnEditingPost={OnEditingPost}
                         setOnEditingPost={setOnEditingPost}
                         setArrayOfPosts={setArrayOfPosts}
                         pageUrl={pageUrl}
-                    />
-
+                    /> 
                     {OnEditingPost ? 
                         <EditPost 
                             postDetails={postDetails} 
@@ -81,14 +67,47 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                                 </Link>)}>
                                 {text}
                             </ReactHashtag>
-                        </Description> }
-            
+                        </Description> 
+                    }
                     {youtubeLink ? 
                         <YoutubeVideo youtubeLink={youtubeLink} postDetails={postDetails}/>
-                        : <LinkToContent linkTitle={linkTitle} linkDescription={linkDescription} link={link} linkImage={linkImage}/> }
+                        : <LinkToContent linkTitle={linkTitle} linkDescription={linkDescription} link={link} linkImage={linkImage}/> 
+                    }
                 </PostContent>
-            </SinglePost>
+            </PostContainer>
             <PostComments key={id} PostId={id} authorId={user.id} openComments={openComments} setComments={setComments} comments={comments} />
         </>
     );
 }
+
+const PostContainer = styled.div`
+display:flex;
+justify-content: space-between;
+margin-bottom: 16px;
+padding:21px;
+background: #171717;
+border-radius: 16px;
+z-index: 1;
+
+@media (max-width: 614px) {
+    border-radius: 0;
+    padding: 15px;
+}
+`;
+
+const PostContent = styled.div`
+width: calc(90% - 20px);
+word-break: break-all;
+`;
+
+const Description = styled.div`
+    font-size: 17px;
+    line-height: 20px;
+    color: #B7B7B7;
+    margin: 10px 0;
+   
+`;
+const Hashtag = styled.span`
+    color: #FFFFFF;
+    cursor: pointer;
+`;

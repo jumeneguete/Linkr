@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import useInterval from 'react-useinterval';
 
 import UserContext from '../contexts/UserContext';
-import GenericPage from '../components/GenericPage/GenericPage';
-import {callServer, reloadPosts} from '../components/GenericPage/GenericFunctions';
+import GenericPage from '../components/GenericPage';
+import { callServer, reloadPosts } from '../functions/apiFunctions';
 
 export default function HashtagPosts() {
 
@@ -34,15 +34,14 @@ export default function HashtagPosts() {
     }, 15000);
 
     return(
-        <>
-            {hashtagPostsList && 
-            <GenericPage title={`# ${hashtag}`} 
-            arrayOfPosts={hashtagPostsList} 
-            setArrayOfPosts={setHashtagPostsList}
-            morePostsToLoad={morePostsToLoad}
-            setMorePostsToLoad={setMorePostsToLoad}
-            url={urlToGetMorePosts}
-            />}
-        </>
+        hashtagPostsList && 
+            <GenericPage 
+                title={`# ${hashtag}`} 
+                arrayOfPosts={hashtagPostsList} 
+                setArrayOfPosts={setHashtagPostsList}
+                morePostsToLoad={morePostsToLoad}
+                setMorePostsToLoad={setMorePostsToLoad}
+                url={urlToGetMorePosts}
+            />
     );
 }

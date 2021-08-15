@@ -4,12 +4,12 @@ import { useContext } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import styled from "styled-components";
 
-import UserContext from '../../contexts/UserContext';
-import UserFollowersContext from '../../contexts/UserFollowersContext';
-import { StyledButtom, Loading } from "./Styles";
-import UserInput from '../UserPosts/UserInput'
-import Trending from "../Trending";
-import {loadMorePosts , renderPosts} from'./GenericFunctions';
+import UserContext from '../contexts/UserContext';
+import UserFollowersContext from '../contexts/UserFollowersContext';
+import CreatePost from './CreatePost'
+import Trending from "./Trending";
+import RenderPosts from './RenderPosts'
+import { loadMorePosts } from'../functions/apiFunctions';
 
 export default function GenericPage(props) {
 
@@ -35,7 +35,7 @@ export default function GenericPage(props) {
             </PageTitle>
             <ContainerPostsAndTrendings>
                 <ContainerPosts>
-                    {location === "/timeline" ? <UserInput setArrayOfPosts={setArrayOfPosts}/> : ""}
+                    {location === "/timeline" ? <CreatePost setArrayOfPosts={setArrayOfPosts}/> : ""}
                     <InfiniteScroll
                         pageStart={0}
                         loadMore={() => loadMorePosts(arrayOfPosts,setArrayOfPosts, setMorePostsToLoad, urlToGetMorePosts, config)}
@@ -45,7 +45,13 @@ export default function GenericPage(props) {
                             <span>Loading more posts...</span>
                         </Loading>}
                     >
-                        {renderPosts(arrayOfPosts, setArrayOfPosts, location, followers, pageUrl)}
+                        <RenderPosts
+                            arrayOfPosts={arrayOfPosts}
+                            setArrayOfPosts={setArrayOfPosts}
+                            location={location}
+                            followers={followers}
+                            pageUrl={pageUrl}
+                        />
                     </InfiniteScroll>
                 </ContainerPosts>
                 <Trending />
@@ -93,4 +99,24 @@ const ContainerPosts =styled.div`
     @media (max-width: 614px) {
         width: 100%;
     }
+`;
+
+const StyledButtom = styled.button`
+font-size: 15px;
+background: ${ props => props.clicked ? '#EFEFEF' : '#1877F2'};
+border-radius: 5px;
+color: ${ props => props.clicked ? '#1877F2' : '#FFF'};
+font-weight: 700;
+padding: 10px;
+text-align: center;
+border: none;
+width: 120px;
+cursor: pointer;
+`;
+
+const Loading = styled.div`
+display:flex;
+flex-direction: column;
+align-items:center;
+color: #6D6D6D;
 `;

@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
-import { CommentBox, Comments, CommentInfo, Divider, AddCommentForm, InputComment, ButtonComment } from "./Styles"
+import { useContext, useState } from "react";
 import { BsDot } from 'react-icons/bs';
 import { IoPaperPlaneOutline } from 'react-icons/io5';
-import { useContext, useState } from "react";
+
+import { CommentBox, Comments, CommentInfo, Divider, AddCommentForm, InputComment, ButtonComment } from "../SinglePost/Styles"
 import UserContext from "../../contexts/UserContext";
 import UserFollowersContext from "../../contexts/UserFollowersContext";
 import axios from "axios";
@@ -18,7 +19,7 @@ export default function PostComments({ setComments, openComments, comments, Post
         const config = { headers: { Authorization: `Bearer ${userProfile.token}` } }
         const body = { text: newComment }
 
-        const request = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts/${PostId}/comment`, body, config);
+        const request = axios.post(`${process.env.REACT_APP_API_BASE_URL}/posts/${PostId}/comment`, body, config);
 
         request.then((response) => {
             setComments([...comments, {
