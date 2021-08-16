@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import UserContext from '../../contexts/UserContext';
 import Profile from "./Profile";
 import { loadComments } from'../../functions/apiFunctions';
-import PostComments from './PostComments';
+import PostComments from './postComments/PostComments';
 import LinkToContent from './postLink/LinkToContent';
 import PostHeader from './PostHeader';
 import EditPost from './postFeatures/EditPost';
@@ -17,7 +17,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
     
     const { userProfile } = useContext(UserContext);
     const { token } = userProfile
-    const { text, link, linkTitle, linkDescription, linkImage, id, user } = postDetails;
+    const { text, link, linkTitle, linkDescription, linkImage, id } = postDetails;
     const [OnEditingPost, setOnEditingPost] = useState(false);
     const [openComments, setOpenComments] = useState(false);
     const [comments, setComments] = useState([]);
@@ -75,7 +75,13 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                     }
                 </PostContent>
             </PostContainer>
-            <PostComments key={id} PostId={id} authorId={user.id} openComments={openComments} setComments={setComments} comments={comments} />
+            <PostComments 
+                key={id} 
+                postDetails={postDetails}
+                openComments={openComments} 
+                setComments={setComments} 
+                comments={comments} 
+            />
         </>
     );
 }

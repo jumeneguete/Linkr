@@ -3,6 +3,7 @@ import { AiOutlineComment } from "react-icons/ai";
 import styled from 'styled-components';
 
 import LikePost from './postFeatures/LikePost';
+import RePost from './postFeatures/RePost';
 
 export default function Profile(props) {
     
@@ -26,6 +27,11 @@ export default function Profile(props) {
                 <AiOutlineComment color={'#FFFFFF'} />
                 <p>{comments.length} comments</p>
             </CommentsContainer>
+
+            <RePost 
+                postDetails={postDetails}
+                setArrayOfPosts={setArrayOfPosts}
+            />
         </ProfileContainer>
     );
 }
@@ -66,10 +72,10 @@ const CommentsContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     p {
         margin-top: 5px;
         font-size: 11px;
         color: #fff;
+        text-align:center;
     }
 `;

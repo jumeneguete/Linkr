@@ -4,6 +4,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 import UserContext from '../contexts/UserContext';
+import ShareLocation from './post/postLocation/ShareLocation';
 import { callServer } from '../functions/apiFunctions';
 
 export default function CreatePost ({ setArrayOfPosts, pageUrl }) {
@@ -14,8 +15,9 @@ export default function CreatePost ({ setArrayOfPosts, pageUrl }) {
     const [ buttonText, setbuttonText ] = useState('Publicar');
     const [ userLink, setUserLink ] = useState('');
     const [ userComment, setUserComment ] = useState('');
+    const [location, setLocation] = useState(false);
 
-    function submitComment (e) {
+    function submitCreatedPost(e) {
         e.preventDefault();
 
         if (userLink.length) {
@@ -29,9 +31,15 @@ export default function CreatePost ({ setArrayOfPosts, pageUrl }) {
     }
 
     function formatObj () {
-        const postObj = userComment.length
-            ? {link: userLink, text: userComment}
-            : {link: userLink};
+        const postObj = userComment.length ? 
+            {link: userLink, text: userComment}
+        : {link: userLink};
+
+        if (location) {
+            postObj.geolocation = {};
+            postObj.geolocation.latitude = location.latitude;
+            postObj.geolocation.longitude = location.longitude;
+        }
         return postObj;
     }
 
@@ -68,7 +76,7 @@ export default function CreatePost ({ setArrayOfPosts, pageUrl }) {
                     alt={userProfile.user.username}
                 />
             </Link>
-            <NewPostForm onSubmit={(event) => submitComment(event)}>
+            <NewPostForm onSubmit={submitCreatedPost}>
 
                 <CreatePostTitle>O que você tem pra favoritar hoje?</CreatePostTitle>
 
@@ -86,7 +94,10 @@ export default function CreatePost ({ setArrayOfPosts, pageUrl }) {
                     disabled={isDisabled}
                 />
 
-                <StyledButtom disabled={isDisabled} type='submit'>{buttonText}</StyledButtom>
+                <Footer>
+                    <ShareLocation setLocation={setLocation} />
+                    <PublishButtom disabled={isDisabled} type='submit'>{buttonText}</PublishButtom>
+                </Footer>
 
             </NewPostForm>
         </CreatePostContainer>
@@ -99,7 +110,6 @@ const CreatePostContainer = styled.div`
     color: #707070;
     display: flex;
     font: 300 16px 'Lato', sans-serif;
-    height: 250px;
     margin-bottom: 20px;
     padding: 25px;
     width: 600px;
@@ -107,7 +117,6 @@ const CreatePostContainer = styled.div`
 
     @media (max-width: 614px) {
         border-radius: 0;
-        height: 200px;
         padding: 20px;
         width: 100vw;
     }
@@ -139,7 +148,6 @@ const CreatePostTitle = styled.h2`
 const NewPostForm = styled.form`
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
     width: 100%;
 
     @media (max-width: 614px) {
@@ -158,7 +166,7 @@ const NewPostComment = styled.textarea`
     width: 100%;
     border: none;
     box-shadow:none;
-    height: 80px;
+    min-height: 80px;
     resize: none;
 
     &::placeholder {
@@ -209,7 +217,13 @@ const NewLinkInput = styled.input`
     }
 `;
 
-const StyledButtom = styled.button`
+const Footer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`;
+
+const PublishButtom = styled.button`
     font-size: 15px;
     background: ${ props => props.disabled ? '#EFEFEF' : '#1877F2'};
     border-radius: 5px;

@@ -1,17 +1,12 @@
 import { useState } from "react";
 import styled from "styled-components";
-import Modal from "react-modal";
 import { IoLocationSharp } from "react-icons/io5";
 
-import "./StyleModal.css";
 import PostLocationModal from './PostLocationModal';
-
-Modal.setAppElement("body");
 
 export default function PostLocation({ user, geolocation }) {
 
   const [locationIsOpen, setLocationIsOpen] = useState(false);
-  
 
   function toggleLocationModal() {
     setLocationIsOpen(!locationIsOpen);
@@ -19,9 +14,9 @@ export default function PostLocation({ user, geolocation }) {
 
   return (
     <>
-      <LocationIcon onClick={toggleLocationModal}>
-        <IoLocationSharp />
-      </LocationIcon>
+      <LocationIcon 
+        onClick={toggleLocationModal} 
+      />
       <PostLocationModal
         locationIsOpen={locationIsOpen}
         onRequestClose={toggleLocationModal}
@@ -34,5 +29,7 @@ export default function PostLocation({ user, geolocation }) {
 
 const LocationIcon = styled(IoLocationSharp)`
   color: white;
-  font-size: 20px;
+  font-size: 17px;
+  cursor: pointer;
+  margin-left: 10px;
 `;

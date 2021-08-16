@@ -11,13 +11,16 @@ export default function LinkPageContentModal({ locationIsOpen, onRequestClose, u
 
   return (
 
-    <ModalStyle locationIsOpen={locationIsOpen}>
+    <ModalStyle 
+        isOpen={locationIsOpen}
+        contentLabel='Delete Modal'
+        >
 
         <Header>
           <h1>{user}'s location</h1>
-          <button onClick={onRequestClose}>
+          <CloseLocation onClick={() => onRequestClose(!locationIsOpen)}>
             <AiOutlineClose />
-          </button>
+          </CloseLocation>
         </Header>
         <MapsFrame>
           <p>Loading location...</p>
@@ -33,71 +36,83 @@ export default function LinkPageContentModal({ locationIsOpen, onRequestClose, u
 }
 
 const ModalStyle = styled(ReactModal)`
-    width:100%;
-    height: 100vh;
-    padding: 30px;
+    transform: translate(50%, 50%);
+    width:50%;
+    padding: 20px 50px;
     background-color: #333333;
+    border-radius: 20px;
     position: fixed;
+    border: none;
     top:0;
     left:0;
     z-index: 50;
 
-    button {
-      font-weight: 700;
-      padding:10px 20px;
-      margin-bottom: 15px;
-      background-color: #1877F2;
-      color: #FFF;
-      border:none;
-      border-radius: 7px;
-    }
+    @media (max-width: 600px) {
+        width: 100%;
+        flex-direction: column;
+        transform: translate(0, 50%);
+        border-radius: 0;
+        padding: 20px 0;
+    } 
 `;
-
 const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 20px;
   h1 {
     font-family: Oswald;
     font-weight: bold;
     font-size: 38px;
-    line-height: 56px;
     color: #ffffff;
   }
-  button {
+  @media (max-width: 600px) {
+    padding: 0 15px;
+        h1 {
+            font-size: 25px;
+        }
+    } 
+`;
+
+const CloseLocation = styled.button`
     background-color: transparent;
     color: white;
+    cursor: pointer;
     border: none;
-    font-size: 30px;
+    font-size: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
     padding: 0px;
-  }
 `;
 
 const MapsFrame = styled.div`
-  font-family: Oswald;
-  position: relative;
-  font-size: 24px;
-  width: 100%;
-  height: 100%;
-  max-width: 715px;
-  height: 240px;
-  margin-bottom: 23px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    font-family: Oswald;
+    position: relative;
+    font-size: 24px;
+    width: 100%;
+    height: 100%;
+    max-width: 790px;
+    min-height: 300px;
+    margin-bottom: 23px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
 `;
 
 const LocationObject = styled.object`
     position: absolute;
+    border: none;
+    outline: none;
     top: 0;
     right: 0;
     width: 100%;
     height: 100%;
-    max-width: 715px;
+    width: 100%;
+    max-width: 790px;
+    min-height: 300px;
     height: 240px;
     margin-bottom: 23px;
 

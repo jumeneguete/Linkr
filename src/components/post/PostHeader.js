@@ -15,15 +15,17 @@ export default function PostHeader({postDetails, OnEditingPost, setOnEditingPost
 
     return (
         <HeaderContainer>
-            <Link to={`/user/${id}`}>
-                <PostCreator>
+            <PostCreator>
+                <Link to={`/user/${id}`}>
                     {username}
+                </Link>
+                {geolocation && 
                     <PostLocation
                         user={username}
                         geolocation={geolocation}
                     />
-                </PostCreator>
-            </Link>
+                }
+            </PostCreator>
             
             {userProfile.user.id === id &&<IconsContainer>
                 <DeletePost 
@@ -45,6 +47,7 @@ const HeaderContainer = styled.div`
     display:flex;
     justify-content: space-between;
     align-items: center;
+    
 `;
 
 const PostCreator = styled.div`
@@ -52,6 +55,7 @@ const PostCreator = styled.div`
     height: 23px;
     font-size: 19px;
     color: #FFFFFF;
+    
     @media (max-width: 614px) {
         font-size: 17px;
     }
