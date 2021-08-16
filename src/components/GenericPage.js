@@ -35,7 +35,12 @@ export default function GenericPage(props) {
             </PageTitle>
             <ContainerPostsAndTrendings>
                 <ContainerPosts>
-                    {location === "/timeline" ? <CreatePost setArrayOfPosts={setArrayOfPosts}/> : ""}
+                    {location === "/timeline" ? 
+                        <CreatePost 
+                            setArrayOfPosts={setArrayOfPosts}
+                            pageUrl={pageUrl}
+                        /> : ""
+                    }
                     <InfiniteScroll
                         pageStart={0}
                         loadMore={() => loadMorePosts(arrayOfPosts,setArrayOfPosts, setMorePostsToLoad, urlToGetMorePosts, config)}

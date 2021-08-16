@@ -1,22 +1,26 @@
 import React, { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 
 import UserContext from '../contexts/UserContext';
-import { Link } from 'react-router-dom';
+import { callServer } from '../functions/apiFunctions';
 
-export default function CreatePost ({ setArrayOfPosts }) {
+export default function CreatePost ({ setArrayOfPosts, pageUrl }) {
+
     const { userProfile } = useContext(UserContext);
     const { token } = userProfile
-    const [ clicked, setClicked ] = useState(false);
-    const [ userComment, setUserComment ] = useState('');
+    const [ isDisabled, setIsDisabled ] = useState(false);
+    const [ buttonText, setbuttonText ] = useState('Publicar');
     const [ userLink, setUserLink ] = useState('');
+    const [ userComment, setUserComment ] = useState('');
 
     function submitComment (e) {
         e.preventDefault();
 
         if (userLink.length) {
-            setClicked(true);
+            setIsDisabled(true);
+            setbuttonText('Publicando...')
             sendPost(formatObj()); 
         }
         else {
@@ -38,74 +42,56 @@ export default function CreatePost ({ setArrayOfPosts }) {
                 Authorization: `Bearer ${token}`,
             },
         };
-        const request = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts',postObj,config);
-        request.then(userPostSucceeded).catch(userPostFailed);
-    }
-    
-    function userPostSucceeded () {
-        setUserLink('');
-        setUserComment('');
-        setClicked(false);
-        getPost();
-    }
+        const request = axios.post(`${process.env.REACT_APP_API_BASE_URL}/posts`,postObj,config);
+        request.then(() => {
+            setUserLink('');
+            setUserComment('');
+            setIsDisabled(false);
+            setbuttonText('Publicar');
+            const erroAlert = "Ocorreu um erro ao carregar os posts";
+            callServer(setArrayOfPosts, pageUrl, erroAlert, config);
 
-    function getPost(){
-        const config ={ headers: { Authorization: `Bearer ${token}` }}
-        const request = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/posts', config);
-        request.then(response => {
-            setArrayOfPosts(response.data.posts)
-        });
-        request.catch(erro => alert("Ocorreu um erro ao carregar os posts"))
+        }).catch(userPostFailed);
     }
 
     function userPostFailed () {
         alert('Desculpe, ocorreu um erro ao publicar seu link');
-        setClicked(false);
+        setIsDisabled(false);
+        setbuttonText('Publicar');
     }
 
     return (
-        <CreatePostContainer clicked={clicked}>
-            <Link to="/my-posts"><img src={userProfile.user.avatar} alt={userProfile.user.username}/></Link>
-            <form onSubmit={(event) => submitComment(event)}>
+        <CreatePostContainer isDisabled={isDisabled}>
+            <Link to="/my-posts">
+                <ProfileImage 
+                    src={userProfile.user.avatar} 
+                    alt={userProfile.user.username}
+                />
+            </Link>
+            <NewPostForm onSubmit={(event) => submitComment(event)}>
 
-                <h2>O que você tem pra favoritar hoje?</h2>
+                <CreatePostTitle>O que você tem pra favoritar hoje?</CreatePostTitle>
 
-                <input type='url' 
+                <NewLinkInput type='url' 
                     placeholder='https//...' 
                     onChange={(e) => setUserLink(e.target.value)} 
                     value={userLink} 
-                    disabled={clicked}
+                    disabled={isDisabled}
                 />
 
-                <textarea type='text' 
+                <NewPostComment type='text' 
                     placeholder='Muito irado esse post falando de #JavaScript' 
                     onChange={(e) => setUserComment(e.target.value)} 
                     value={userComment} 
-                    disabled={clicked}
+                    disabled={isDisabled}
                 />
 
-                {   clicked
-                    ? <StyledButtom disabled={clicked}>Publicando...</StyledButtom> 
-                    : <StyledButtom type='submit'>Publicar</StyledButtom>  
-                }  
+                <StyledButtom disabled={isDisabled} type='submit'>{buttonText}</StyledButtom>
 
-            </form>
+            </NewPostForm>
         </CreatePostContainer>
     );
 }
-
-const StyledButtom = styled.button`
-font-size: 15px;
-background: ${ props => props.clicked ? '#EFEFEF' : '#1877F2'};
-border-radius: 5px;
-color: ${ props => props.clicked ? '#1877F2' : '#FFF'};
-font-weight: 700;
-padding: 10px;
-text-align: center;
-border: none;
-width: 120px;
-cursor: pointer;
-`;
 
 const CreatePostContainer = styled.div`
     background: #fff;
@@ -118,107 +104,127 @@ const CreatePostContainer = styled.div`
     padding: 25px;
     width: 600px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    img {
-        border-radius: 50%;
-        height: 50px;
-        margin-right: 20px;
-        width: 50px;
-        object-fit: cover;
-    }
-    form {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        width: 100%;
-        button {
-            font-size: 15px;
-            background: ${ props => props.clicked ? '#CCC' : '#1877F2'};
-            cursor: ${ props => props.clicked ? 'not-allowed' : 'pointer'};
-            border-radius: 5px;
-            color: #FFF;
-            font-weight: 700;
-            padding: 10px;
-            text-align: center;
-            border: none;
-            width: 120px;
-        }
 
-        h2 {
-            font-size: 20px;
-            margin-bottom: 10px;
-            width: 100%;
-        }
-        
-        input, textarea {
-            background: #EFEFEF;
-            border-radius: 5px;
-            cursor: text;
-            flex-grow: grow;
-            margin-bottom: 10px;
-            overflow-wrap: anywhere;
-            padding: 10px;
-            width: 100%;
-            border: none;
-            box-shadow:none;
-        }
-        input[type=text] {
-            flex-grow: 1;
-        }
-
-        textarea {
-            height: 70px;
-            resize: none;
-        }
-
-        input::placeholder, textarea::placeholder{
-            font-family: "Lato", sans-serif;
-            padding-top: 0;
-            font-size: 15px;
-            color: #949494;
-        }
-
-        input:focus, textarea:focus{
-            box-shadow: 0 0 0 0;
-            outline: 0;
-        }
-    }
     @media (max-width: 614px) {
         border-radius: 0;
         height: 200px;
         padding: 20px;
         width: 100vw;
-        form {
-            padding-right: 20px;
-
-            button {
-                font-size: 15px;
-                margin-top: 5px;
-                padding: 7px;
-            }
-        
-            h2 {
-                font-size: 18px;
-                letter-spacing: -0.5px;
-                margin-bottom: 15px;
-                text-align: center;
-            }
-           
-            input, textarea {
-                font-size: 16px;
-                margin-bottom: 5px;
-            }
-            input {
-                height: 30px;
-            }
-
-            textarea {
-                height: 60px;
-            }
-
-        }
-        
-        img {
-            display: none;
-        }
     }
 `;
+
+const ProfileImage = styled.img`
+    border-radius: 50%;
+    height: 50px;
+    margin-right: 20px;
+    width: 50px;
+    object-fit: cover;
+    @media (max-width: 614px) {
+        display: none;
+    }
+`;
+
+const CreatePostTitle = styled.h2`
+    font-size: 20px;
+    margin-bottom: 10px;
+    width: 100%;
+    @media (max-width: 614px) {
+        font-size: 18px;
+        letter-spacing: -0.5px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+`;
+
+const NewPostForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+
+    @media (max-width: 614px) {
+        padding-right: 20px;
+    }
+`;
+
+const NewPostComment = styled.textarea`
+
+    background: #EFEFEF;
+    border-radius: 5px;
+    cursor: text;
+    margin-bottom: 10px;
+    overflow-wrap: anywhere;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    box-shadow:none;
+    height: 80px;
+    resize: none;
+
+    &::placeholder {
+        font-family: "Lato", sans-serif;
+        padding-top: 0;
+        font-size: 15px;
+        color: #949494;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 0;
+        outline: 0;
+    }
+
+    @media (max-width: 614px) {
+        font-size: 16px;
+        margin-bottom: 5px;
+        height: 60px;
+    }
+`;
+
+const NewLinkInput = styled.input`
+    background: #EFEFEF;
+    border-radius: 5px;
+    cursor: text;
+    margin-bottom: 10px;
+    overflow-wrap: anywhere;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    box-shadow:none;
+    height: 30px;
+    &::placeholder {
+        font-family: "Lato", sans-serif;
+        padding-top: 0;
+        font-size: 15px;
+        color: #949494;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 0;
+        outline: 0;
+    }
+    @media (max-width: 614px) {
+        font-size: 16px;
+        margin-bottom: 5px;
+        height: 40px;
+    }
+`;
+
+const StyledButtom = styled.button`
+    font-size: 15px;
+    background: ${ props => props.disabled ? '#EFEFEF' : '#1877F2'};
+    border-radius: 5px;
+    cursor: ${ props => props.clicked ? 'not-allowed' : 'pointer'};
+    color: ${ props => props.disabled ? '#1877F2' : '#FFF'};
+    font-weight: 700;
+    padding: 10px;
+    text-align: center;
+    border: none;
+    width: 120px;
+
+    @media (max-width: 614px) {
+        font-size: 15px;
+        margin-top: 5px;
+        padding: 7px;
+    }
+`;
+

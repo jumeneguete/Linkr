@@ -1,16 +1,13 @@
 import { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
 import useInterval from 'react-useinterval';
 
 import UserContext from '../contexts/UserContext';
-import UserFollowersContext from '../contexts/UserFollowersContext';
 import GenericPage from '../components/GenericPage';
 import { callServer, reloadPosts } from '../functions/apiFunctions';
 
 export default function Timeline() {
 
     const { userProfile } = useContext(UserContext);
-    const { setFollowers } = useContext(UserFollowersContext);
     const [postsList, setPostsList] = useState(null);
     const [morePostsToLoad, setMorePostsToLoad] = useState(true);
     const pageUrl = `${process.env.REACT_APP_API_BASE_URL}/following/posts`;
@@ -25,11 +22,7 @@ export default function Timeline() {
     useEffect(() => {
         const config = { headers: { Authorization: `Bearer ${userProfile.token}` }};
         callServer(setPostsList, pageUrl, erroAlert, config);
-
-        const request = axios.get(`${process.env.REACT_APP_API_BASE_URL}/users/follows`, config);
-        request.then( response => {
-            setFollowers(response.data.users)
-        })
+        
         // eslint-disable-next-line
     }, []);
     
