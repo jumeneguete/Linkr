@@ -137,6 +137,12 @@ const CreatePost = styled.div`
             box-shadow: 0 0 0 0;
             outline: 0;
         }
+
+        .footer{
+            display: flex;
+            width: 100%;
+            justify-content: space-between; 
+        }
     }
     @media (max-width: 614px) {
         border-radius: 0;
@@ -192,6 +198,38 @@ width: 120px;
 cursor: pointer;
 `;
 
+<<<<<<< HEAD
+=======
+const TrendingStyle = styled.div`
+    width: 301px;
+    height: 440px;
+    background: #171717;
+    border-radius: 16px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    right: auto;
+    top: 150px;
+
+    form {
+        margin-top: 10px;
+        text-align: center;
+        width: 100%;
+    }
+    input {
+        color:#fff;
+        margin-top: -10px;
+        background: #333;
+        border-radius: 5px;
+        cursor: text;
+        font: 400 18px 'Lato', sans-serif;
+        padding: 5px 20px 8px 30px;
+        text-align: left;
+        width: 90%;
+        border: none;;
+    }
+>>>>>>> 4a06082234b5fcac930127f1dc218fa87f9eb009
 
 
 const Loading = styled.div`
