@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
+import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
 import { IoChevronDownSharp, IoChevronUpSharp } from "react-icons/io5";
-import styled from 'styled-components';
 import ClickAwayListener from 'react-click-away-listener';
 
 import Search from "./Search";
@@ -9,6 +9,7 @@ import UserContext from "../../contexts/UserContext"
 
 export default function Header() {
     const [menuSelected, setMenuSelected] = useState(false);
+    const [search, setSearch] = useState("");
     const { userProfile, setUserProfile } = useContext(UserContext);
     const history = useHistory();
 
@@ -27,9 +28,9 @@ export default function Header() {
 
     return (
         <>
-            <HeaderStyles>
+            <HeaderStyles searching={search !== "" ? true : false}>
                 <span><Link to="/">linkr</Link></span>
-                <HeaderSearch><Search /></HeaderSearch>
+                <HeaderSearch><Search search={search} setSearch={setSearch}/></HeaderSearch>
                 <Menu onClick={(event) => toggle(event)}>
                     <span>{menuSelected ? <ArrowUp/> : <ArrowDown/>}</span>
                     <img src={userProfile.user.avatar} alt={userProfile.user.username} />
