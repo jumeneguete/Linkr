@@ -30,7 +30,9 @@ export default function GenericPage(props) {
             <PageTitle>
                 <span>{title}</span> 
                 {location === `/user/${id}` && id !== userProfile.user.id ? 
-                    <StyledButtom onClick={followUser} clicked={isFollowing.status}>{isFollowing.status?"Unfollow":"Follow"}</StyledButtom> 
+                    <StyledButtom onClick={followUser} clicked={isFollowing.status}>
+                        {isFollowing.status?"Unfollow":"Follow"}
+                    </StyledButtom> 
                 : ""}
             </PageTitle>
             <ContainerPostsAndTrendings>

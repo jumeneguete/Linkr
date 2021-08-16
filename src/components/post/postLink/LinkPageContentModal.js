@@ -12,7 +12,10 @@ export default function LinkPageContentModal({ modalIsOpen, setModalIsOpen, link
 
       <a href={link} target="_blank" rel="noreferrer"><button>Open in new tab</button></a>
       <ClickAwayListener onClickAway={() => setModalIsOpen(!modalIsOpen)}>
-        <iframe src={link} width="100%" height="100%" title={linkTitle}></iframe>
+        <LinkPageObject 
+          data={link} 
+          title={linkTitle}
+        />
       </ClickAwayListener>
 
     </ModalStyle>
@@ -38,4 +41,9 @@ const ModalStyle = styled(ReactModal)`
       border:none;
       border-radius: 7px;
     }
+`;
+
+const LinkPageObject = styled.object`
+  width:100%;
+  height:100%;
 `;

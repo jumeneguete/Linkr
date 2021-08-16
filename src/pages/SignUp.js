@@ -2,10 +2,10 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
-import {Page, FieldsContainer, FormContainer} from "../components/Login_SignUp/Styles"
-import Banner from "../components/Login_SignUp/Banner"
-import Button from "../components/Login_SignUp/Button";
-import Input from "../components/Login_SignUp/Input";
+import {Page, FieldsContainer, FormContainer} from "../components/login_signUp/Styles"
+import Banner from "../components/login_signUp/Banner"
+import Button from "../components/login_signUp/Button";
+import Input from "../components/login_signUp/Input";
 
 export default function SignUp() {
 

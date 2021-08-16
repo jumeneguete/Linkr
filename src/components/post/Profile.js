@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { AiOutlineComment } from "react-icons/ai";
 import styled from 'styled-components';
 
-import LikePost from './PostFeatures/LikePost';
+import LikePost from './postFeatures/LikePost';
 
 export default function Profile(props) {
     

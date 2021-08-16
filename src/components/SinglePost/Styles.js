@@ -1,14 +1,7 @@
 
 import styled from 'styled-components';
 
-const CreatorName = styled.div`
-height: 23px;
-font-size: 19px;
-color: #FFFFFF;
-@media (max-width: 614px) {
-    font-size: 17px;
-}
-`;
+
 
 const LinkContainer = styled.div`
 display: flex;
@@ -182,4 +175,4 @@ const ButtonComment = styled.button`
     justify-content: center;
 `;
 
-export { CreatorName, LinkContainer, LinkInfo, LinkImg, CommentBox, Comments, CommentInfo, Divider, AddCommentForm, InputComment, ButtonComment };
+export { LinkContainer, LinkInfo, LinkImg, CommentBox, Comments, CommentInfo, Divider, AddCommentForm, InputComment, ButtonComment };

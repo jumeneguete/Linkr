@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import Post from './Post/Post';
+import Post from './post/Post';
 
 export default function RenderPosts(props) {
 

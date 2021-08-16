@@ -8,10 +8,10 @@ import UserContext from '../../contexts/UserContext';
 import Profile from "./Profile";
 import { loadComments } from'../../functions/apiFunctions';
 import PostComments from './PostComments';
-import LinkToContent from './PostLink/LinkToContent';
-import PostHeader from './PostHeader'
-import EditPost from './PostFeatures/EditPost';
-import YoutubeVideo from './PostFeatures/YoutubeVideo';
+import LinkToContent from './postLink/LinkToContent';
+import PostHeader from './PostHeader';
+import EditPost from './postFeatures/EditPost';
+import YoutubeVideo from './postFeatures/YoutubeVideo';
 
 export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts, pageUrl }) {
     
@@ -59,7 +59,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                             pageUrl={pageUrl}
                         /> : 
                         <Description>
-                            <ReactHashtag renderHashtag={(val) => (
+                            <ReactHashtag renderHashtag={(val, i) => (
                                 <Link to={`/hashtag/${val.replace("#", "")}`} >
                                     <Hashtag >
                                         {val}

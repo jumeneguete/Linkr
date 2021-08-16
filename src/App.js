@@ -6,7 +6,7 @@ import {FollowersProvider} from './contexts/UserFollowersContext';
 import GlobalStyle from "./assets/styles/GlobalStyle";
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
-import Header from "./components/Header/Header";
+import Header from "./components/header/Header";
 import Timeline from './pages/Timeline';
 import UserPosts from "./pages/UserPosts";
 import HashtagPosts from "./pages/HashtagPosts";

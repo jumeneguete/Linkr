@@ -1,0 +1,36 @@
+import styled from 'styled-components';
+
+export default function YoutubeVideo({youtubeLink, postDetails}) {
+
+    const { link, linkTitle } = postDetails;
+    return(
+        <>
+            <YoutubeObject 
+                data={`http://www.youtube.com/embed/${youtubeLink}`}
+                title={linkTitle} 
+            />
+            <VideoLink >{link}</VideoLink>
+        </>
+    );
+}
+
+const YoutubeObject = styled.object`
+    width: 100%;
+    height: 300px;
+
+    @media (max-width: 614px) {
+        height: 200px;
+    }
+`;
+
+const VideoLink = styled.div`
+    display: flex;
+    justify-content: center;
+    font-size: 16px;
+    color: #B7B7B7;
+    margin-top: 10px;
+
+    @media (max-width: 614px) {
+        font-size: 11px;
+    }
+`;

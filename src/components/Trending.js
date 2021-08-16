@@ -120,10 +120,18 @@ const FormContainer = styled.form`
 
 const HashtagInput = styled.input`
     background: #333;
+    color: #FFFFFF;
+    overflow-wrap: anywhere;
     border-radius: 5px;
     cursor: text;
     font: 400 18px 'Lato', sans-serif;
     padding: 5px 20px;
     text-align: left;
     width: 90%;
+    &::placeholder {
+        font-family: "Lato", sans-serif;
+        padding-top: 0;
+        font-size: 15px;
+        color: #949494;
+    }
 `;

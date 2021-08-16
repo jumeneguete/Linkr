@@ -41,7 +41,6 @@ export function callServer(setArrayOfPosts, url, erroAlert, config) {
     request.catch(erro => alert(erroAlert))
 }
 
-//Melhorar Performace
 export function reloadPosts(arrayOfPosts, setArrayOfPosts, url, erroAlert, config) {
     if(!arrayOfPosts || arrayOfPosts.length === 0) return;
     const request = axios.get(url, config);

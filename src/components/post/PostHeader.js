@@ -4,17 +4,26 @@ import { BsPencil } from 'react-icons/bs';
 import styled from 'styled-components';
 
 import UserContext from '../../contexts/UserContext';
-import DeletePost from './PostFeatures/DeletePost';
-import { CreatorName } from "../SinglePost/Styles";
+import PostLocation from './postLocation/PostLocation';
+import DeletePost from './postFeatures/DeletePost';
 
 export default function PostHeader({postDetails, OnEditingPost, setOnEditingPost, setArrayOfPosts, pageUrl}) {
 
     const { userProfile } = useContext(UserContext);
-    const { id, username } = postDetails.user;
+    const { user, geolocation } = postDetails;
+    const { id, username } = user;
 
     return (
         <HeaderContainer>
-            <Link to={`/user/${id}`}><CreatorName>{username}</CreatorName></Link>
+            <Link to={`/user/${id}`}>
+                <PostCreator>
+                    {username}
+                    <PostLocation
+                        user={username}
+                        geolocation={geolocation}
+                    />
+                </PostCreator>
+            </Link>
             
             {userProfile.user.id === id &&<IconsContainer>
                 <DeletePost 
@@ -36,6 +45,16 @@ const HeaderContainer = styled.div`
     display:flex;
     justify-content: space-between;
     align-items: center;
+`;
+
+const PostCreator = styled.div`
+    display: flex;
+    height: 23px;
+    font-size: 19px;
+    color: #FFFFFF;
+    @media (max-width: 614px) {
+        font-size: 17px;
+    }
 `;
 
 const IconsContainer = styled.div`
