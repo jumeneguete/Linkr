@@ -45,7 +45,8 @@ export default function Trending (){
                 }
             </TrendingList>
             <FormContainer onSubmit={(event) => searchHashtag(event)}>
-                <input type='text' 
+                <HashtagInput 
+                    type='text' 
                     placeholder='type a hashtag' 
                     onChange={(e) => setHashtagSearched(e.target.value)} 
                     value={hashtagSearched}
@@ -106,16 +107,6 @@ const FormContainer = styled.form`
     text-align: center;
     width: 100%;
 
-    input {
-        background: #333;
-        border-radius: 5px;
-        cursor: text;
-        font: 400 18px 'Lato', sans-serif;
-        padding: 5px 20px;
-        text-align: left;
-        width: 90%;
-    }
-
     span{
         position: absolute; 
         display: block; 
@@ -125,4 +116,14 @@ const FormContainer = styled.form`
         color: #FFF;
         font: bold 19px "Lato";
     }
+`;
+
+const HashtagInput = styled.input`
+    background: #333;
+    border-radius: 5px;
+    cursor: text;
+    font: 400 18px 'Lato', sans-serif;
+    padding: 5px 20px;
+    text-align: left;
+    width: 90%;
 `;
