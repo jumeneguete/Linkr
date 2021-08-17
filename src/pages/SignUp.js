@@ -29,9 +29,9 @@ export default function SignUp() {
         });
         request.catch((resp) => {
             if (resp.response.status === 403) {
-                alert("Este usuário já é cadastrado No Linkr!");
+                alert("This user already exist!");
             } else {
-                alert("Preencha os campos corretamente!");
+                alert("Fill all field correctly!");
             }
             setIsDisabled(false);
         });

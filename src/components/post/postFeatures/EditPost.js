@@ -34,13 +34,13 @@ export default function EditPost({
         request.then(() => {
             setOnSendingPostEdition(false);
             setOnEditingPost(false);
-            const erroAlert = "Ocorreu um erro ao carregar os posts";
+            const erroAlert = "Sorry, we couln't load this posts";
             callServer(setArrayOfPosts, pageUrl, erroAlert, config);
         });
         request.catch(() => {
             setOnSendingPostEdition(false);
             setOnEditingPost(false);
-            alert("A alteração não foi possível de ser concluída!");
+            alert("Sorry, we couln't edit this posts");
             setPostMainDescription(text);
         });
     }

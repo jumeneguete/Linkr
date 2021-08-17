@@ -38,9 +38,9 @@ export default function Login() {
         });
         request.catch((resp) => {
             if (resp.response.status === 403) {
-                alert("Usuário ou senha incorretos!");
+                alert("Invalid email or password!");
             } else {
-                alert("Preencha os campos corretamente!");
+                alert("Fill all field correctly!");
             }
             setIsDisabled(false);
         });

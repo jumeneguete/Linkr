@@ -57,7 +57,7 @@ const Loading = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: auto;
+    margin: 50px;
     span {
         color: #ffffff;
         margin-left: 15px;

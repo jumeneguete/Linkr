@@ -23,7 +23,7 @@ export default function DeletePost({ postDetails, setArrayOfPosts, pageUrl }) {
         request.then(() => {
             setIsLoading(false);
             setModalIsOpen(!modalIsOpen);
-            const erroAlert = "Ocorreu um erro ao carregar os posts";
+            const erroAlert = "Sorry, we couln't load this posts";
             callServer(setArrayOfPosts, pageUrl, erroAlert, config);
         });
         request.catch(() => {

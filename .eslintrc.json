@@ -29,6 +29,7 @@
         "prefer-arrow-callback": "off"
       },
     "globals": {
+        "navigator":true,
         "alert": true,
         "_": "readonly",
         "localStorage": true,

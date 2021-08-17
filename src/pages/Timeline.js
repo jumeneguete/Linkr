@@ -10,7 +10,7 @@ export default function Timeline() {
     const [postsList, setPostsList] = useState(null);
     const [morePostsToLoad, setMorePostsToLoad] = useState(true);
     const pageUrl = `${process.env.REACT_APP_API_BASE_URL}/following/posts`;
-    const erroAlert = "Ocorreu um erro ao carregar os posts";
+    const erroAlert = "Sorry, we couln't load your timeline posts";
     let urlToGetMorePosts = "";
 
     if (postsList && postsList.length > 0) {

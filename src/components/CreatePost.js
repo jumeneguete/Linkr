@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
@@ -11,7 +11,7 @@ export default function CreatePost({ setArrayOfPosts, pageUrl }) {
     const { userProfile } = useContext(UserContext);
     const { token } = userProfile;
     const [isDisabled, setIsDisabled] = useState(false);
-    const [buttonText, setbuttonText] = useState("Publicar");
+    const [buttonText, setbuttonText] = useState("Publish");
     const [userLink, setUserLink] = useState("");
     const [userComment, setUserComment] = useState("");
     const [location, setLocation] = useState(false);
@@ -21,10 +21,10 @@ export default function CreatePost({ setArrayOfPosts, pageUrl }) {
 
         if (userLink.length) {
             setIsDisabled(true);
-            setbuttonText("Publicando...");
+            setbuttonText("Publishing...");
             sendPost(formatObj());
         } else {
-            alert(`Desculpe, você não pode publicar sem um link`);
+            alert("Sorry, you can't publish without a link");
         }
     }
 
@@ -57,17 +57,17 @@ export default function CreatePost({ setArrayOfPosts, pageUrl }) {
                 setUserLink("");
                 setUserComment("");
                 setIsDisabled(false);
-                setbuttonText("Publicar");
-                const erroAlert = "Ocorreu um erro ao carregar os posts";
+                setbuttonText("Publish");
+                const erroAlert = "Sorry, we couln't load your timeline posts";
                 callServer(setArrayOfPosts, pageUrl, erroAlert, config);
             })
             .catch(userPostFailed);
     }
 
     function userPostFailed() {
-        alert("Desculpe, ocorreu um erro ao publicar seu link");
+        alert("Sorry, we couln't publish your link");
         setIsDisabled(false);
-        setbuttonText("Publicar");
+        setbuttonText("Publish");
     }
 
     return (

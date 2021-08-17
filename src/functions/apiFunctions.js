@@ -33,7 +33,7 @@ export function loadComments(url, setArrayOfComments, config) {
     request.then((response) => {
         setArrayOfComments(response.data.comments);
     });
-    request.catch(() => alert("Erro ao carregar comentários"));
+    request.catch(() => alert("Error to load comments"));
 }
 
 export function callServer(setArrayOfPosts, url, erroAlert, config) {

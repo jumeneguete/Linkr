@@ -10,7 +10,7 @@ export default function MyLikes() {
     const [morePostsToLoad, setMorePostsToLoad] = useState(true);
 
     const pageUrl = `${process.env.REACT_APP_API_BASE_URL}/posts/liked`;
-    const erroAlert = "Ocorreu um erro ao carregar os seus likes";
+    const erroAlert = "Sorry, we couln't load your liked posts";
 
     let urlToGetMorePosts = "";
 

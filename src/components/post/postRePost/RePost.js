@@ -33,7 +33,7 @@ export default function RePost({ postDetails, setArrayOfPosts, pageUrl }) {
             setModalIsOpen(false);
             setIsLoading(false);
             setRepostCounter(repostCounter + 1);
-            const erroAlert = "Ocorreu um erro ao carregar os posts";
+            const erroAlert = "Sorry, we couln't load this posts";
             callServer(setArrayOfPosts, pageUrl, erroAlert, config);
         });
         repostRequest.catch(() => {

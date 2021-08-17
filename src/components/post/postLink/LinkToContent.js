@@ -33,6 +33,7 @@ const LinkContainer = styled.div`
     border: 1px solid #4d4d4d;
     box-sizing: border-box;
     border-radius: 11px;
+    cursor: pointer;
 `;
 
 const LinkInfo = styled.div`

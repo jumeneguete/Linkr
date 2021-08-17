@@ -12,7 +12,7 @@ export default function MyPosts() {
     const [morePostsToLoad, setMorePostsToLoad] = useState(true);
 
     const pageUrl = `${process.env.REACT_APP_API_BASE_URL}/users/${id}/posts`;
-    const erroAlert = "Ocorreu um erro ao carregar os seus posts";
+    const erroAlert = "Sorry, we couln't load your posts";
 
     let urlToGetMorePosts = "";
 
