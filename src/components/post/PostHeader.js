@@ -8,68 +8,66 @@ import PostLocation from "./postLocation/PostLocation";
 import DeletePost from "./postFeatures/DeletePost";
 
 export default function PostHeader({
-    postDetails,
-    OnEditingPost,
-    setOnEditingPost,
-    setArrayOfPosts,
-    pageUrl,
+  postDetails,
+  OnEditingPost,
+  setOnEditingPost,
+  setArrayOfPosts,
+  pageUrl,
 }) {
-    const { userProfile } = useContext(UserContext);
-    const { user, geolocation } = postDetails;
-    const { id, username } = user;
+  const { userProfile } = useContext(UserContext);
+  const { user, geolocation } = postDetails;
+  const { id, username } = user;
 
-    return (
-        <HeaderContainer>
-            <PostCreator>
-                <Link to={`/user/${id}`}>
-                    <span>{username}</span>
-                </Link>
-                {geolocation && (
-                    <PostLocation user={username} geolocation={geolocation} />
-                )}
-            </PostCreator>
+  return (
+    <HeaderContainer>
+      <PostCreator>
+        <Link to={`/user/${id}`}>
+          <span>{username}</span>
+        </Link>
+        {geolocation && <PostLocation user={username} geolocation={geolocation} />}
+      </PostCreator>
 
-            {userProfile.user.id === id && (
-                <IconsContainer>
-                    <DeletePost
-                        postDetails={postDetails}
-                        setArrayOfPosts={setArrayOfPosts}
-                        pageUrl={pageUrl}
-                    />
-                    <BsPencil
-                        color={"#FFFFFF"}
-                        cursor="pointer"
-                        onClick={() => {
-                            setOnEditingPost(!OnEditingPost);
-                        }}
-                    />
-                </IconsContainer>
-            )}
-        </HeaderContainer>
-    );
+      {userProfile.user.id === id && (
+        <IconsContainer>
+          <DeletePost
+            postDetails={postDetails}
+            setArrayOfPosts={setArrayOfPosts}
+            pageUrl={pageUrl}
+          />
+          <BsPencil
+            color={"#FFFFFF"}
+            cursor="pointer"
+            onClick={() => {
+              setOnEditingPost(!OnEditingPost);
+            }}
+          />
+        </IconsContainer>
+      )}
+    </HeaderContainer>
+  );
 }
 
 const HeaderContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const PostCreator = styled.div`
-    display: flex;
-    height: 23px;
-    font-size: 19px;
-    color: #ffffff;
-    span {
-        line-height: 40px;
-    }
-    @media (max-width: 614px) {
-        font-size: 17px;
-    }
+  display: flex;
+  height: 23px;
+  font-size: 19px;
+  color: #ffffff;
+  span {
+    line-height: 40px;
+  }
+  @media (max-width: 614px) {
+    font-size: 17px;
+  }
 `;
 
 const IconsContainer = styled.div`
-    width: 40px;
-    display: flex;
-    justify-content: space-between;
+  width: 40px;
+  display: flex;
+  justify-content: space-between;
 `;

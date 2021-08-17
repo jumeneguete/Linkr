@@ -14,41 +14,42 @@ import MyPosts from "./pages/MyPosts";
 import MyLikes from "./pages/MyLikes";
 
 export default function App() {
-    return (
-        <UserProvider>
-            <GlobalStyle />
-            <Router>
-                <Switch>
-                    <Route exact path="/">
-                        <Login />
-                    </Route>
-                    <Route path="/sign-up">
-                        <SignUp />
-                    </Route>
-                    <FollowersProvider>
-                        <Route path="/timeline">
-                            <Header />
-                            <Timeline />
-                        </Route>
-                        <Route path="/user/:id">
-                            <Header />
-                            <UserPosts />
-                        </Route>
-                        <Route path="/hashtag/:hashtag">
-                            <Header />
-                            <HashtagPosts />
-                        </Route>
-                        <Route path="/my-posts">
-                            <Header />
-                            <MyPosts />
-                        </Route>
-                        <Route path="/my-likes">
-                            <Header />
-                            <MyLikes />
-                        </Route>
-                    </FollowersProvider>
-                </Switch>
-            </Router>
-        </UserProvider>
-    );
+  return (
+    <UserProvider>
+      <GlobalStyle />
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Login />
+          </Route>
+          <Route path="/sign-up">
+            <SignUp />
+          </Route>
+
+          <FollowersProvider>
+            <Route path="/timeline">
+              <Header />
+              <Timeline />
+            </Route>
+            <Route path="/user/:id">
+              <Header />
+              <UserPosts />
+            </Route>
+            <Route path="/hashtag/:hashtag">
+              <Header />
+              <HashtagPosts />
+            </Route>
+            <Route path="/my-posts">
+              <Header />
+              <MyPosts />
+            </Route>
+            <Route path="/my-likes">
+              <Header />
+              <MyLikes />
+            </Route>
+          </FollowersProvider>
+        </Switch>
+      </Router>
+    </UserProvider>
+  );
 }

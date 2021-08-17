@@ -7,11 +7,11 @@ const UserContext = createContext();
 export default UserContext;
 
 export function UserProvider({ children }) {
-    const [userProfile, setUserProfile] = useLocalStorage("linkerUser", null);
+  const [userProfile, setUserProfile] = useLocalStorage("linkerUser", null);
 
-    return (
-        <UserContext.Provider value={{ userProfile, setUserProfile }}>
-            {children}
-        </UserContext.Provider>
-    );
+  return (
+    <UserContext.Provider value={{ userProfile, setUserProfile }}>
+      {children}
+    </UserContext.Provider>
+  );
 }
