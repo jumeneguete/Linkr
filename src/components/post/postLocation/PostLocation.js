@@ -32,4 +32,5 @@ const LocationIcon = styled(IoLocationSharp)`
   font-size: 17px;
   cursor: pointer;
   margin-left: 10px;
+  margin-top: 10px;
 `;
