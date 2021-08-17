@@ -23,7 +23,12 @@ export default function LinkPageContentModal({
                 </a>
             </OpenInANewTab>
             <ClickAwayListener onClickAway={() => setModalIsOpen(!modalIsOpen)}>
-                <LinkPageObject src={link} title={linkTitle} type={"text/html"} />
+                <LinkPageObject
+                    src={link}
+                    title={linkTitle}
+                    loading="lazy"
+                    type={"text/html"}
+                />
             </ClickAwayListener>
         </ModalStyle>
     );
@@ -36,6 +41,7 @@ const ModalStyle = styled(ReactModal)`
     padding: 30px;
     background-color: #333333;
     border-radius: 20px;
+    border: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -53,7 +59,7 @@ const OpenInANewTab = styled.button`
     cursor: pointer;
 `;
 
-const LinkPageObject = styled.object`
+const LinkPageObject = styled.iframe`
     width: 100%;
     height: 90%;
 `;
