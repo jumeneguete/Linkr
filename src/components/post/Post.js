@@ -12,12 +12,13 @@ import LinkToContent from './postLink/LinkToContent';
 import PostHeader from './PostHeader';
 import EditPost from './postFeatures/EditPost';
 import YoutubeVideo from './postFeatures/YoutubeVideo';
+import RePostDetails from './postRePost/RePostDetails';
 
 export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts, pageUrl }) {
     
     const { userProfile } = useContext(UserContext);
     const { token } = userProfile
-    const { text, link, linkTitle, linkDescription, linkImage, id } = postDetails;
+    const { text, link, linkTitle, linkDescription, linkImage, id, repostId } = postDetails;
     const [OnEditingPost, setOnEditingPost] = useState(false);
     const [openComments, setOpenComments] = useState(false);
     const [comments, setComments] = useState([]);
@@ -32,6 +33,12 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
     
     return(
         <>
+            {repostId && 
+                <RePostDetails 
+                    postDetails={postDetails}
+                    setArrayOfPosts={setArrayOfPosts}
+                    pageUrl={pageUrl}
+                />}
             <PostContainer>
                 <Profile 
                     index={index}
@@ -41,6 +48,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                     comments={comments}
                     arrayOfPosts={arrayOfPosts}
                     setArrayOfPosts={setArrayOfPosts}
+                    pageUrl={pageUrl}
                 />
                     
                 <PostContent>

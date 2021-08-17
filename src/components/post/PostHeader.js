@@ -27,18 +27,20 @@ export default function PostHeader({postDetails, OnEditingPost, setOnEditingPost
                 }
             </PostCreator>
             
-            {userProfile.user.id === id &&<IconsContainer>
-                <DeletePost 
-                    postDetails={postDetails}
-                    setArrayOfPosts={setArrayOfPosts}
-                    pageUrl={pageUrl}
-                />
-                <BsPencil 
-                    color={'#FFFFFF'} 
-                    cursor="pointer" 
-                    onClick={() => {setOnEditingPost(!OnEditingPost)}}
-                />
-            </IconsContainer>}
+            {userProfile.user.id === id &&
+                <IconsContainer>
+                    <DeletePost 
+                        postDetails={postDetails}
+                        setArrayOfPosts={setArrayOfPosts}
+                        pageUrl={pageUrl}
+                    />
+                    <BsPencil 
+                        color={'#FFFFFF'} 
+                        cursor="pointer" 
+                        onClick={() => {setOnEditingPost(!OnEditingPost)}}
+                    />
+                </IconsContainer>
+            }
         </HeaderContainer>
     );
 }

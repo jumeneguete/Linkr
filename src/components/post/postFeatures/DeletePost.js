@@ -10,7 +10,7 @@ export default function DeletePost({ postDetails, setArrayOfPosts, pageUrl }) {
 
     const { userProfile } = useContext(UserContext);
     const { token } = userProfile
-    const { id, user } = postDetails;
+    const { id } = postDetails;
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -33,10 +33,11 @@ export default function DeletePost({ postDetails, setArrayOfPosts, pageUrl }) {
 
     return(
         <>
-            {userProfile.user.username === user.username && 
-                <BsTrash color="#FFFFFF" cursor="pointer" onClick={() => setModalIsOpen(!modalIsOpen)}/>
-            } 
-
+            <BsTrash 
+                color="#FFFFFF" 
+                cursor="pointer" 
+                onClick={() => setModalIsOpen(!modalIsOpen)}
+            />
             < DeleteModal 
                 modalIsOpen = { modalIsOpen }
                 setModalIsOpen = { setModalIsOpen }

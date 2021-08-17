@@ -5,8 +5,9 @@ import styled from "styled-components";
 
 import UserContext from '../../../contexts/UserContext';
 import RePostModal from "./RePostModal";
+import { callServer } from'../../../functions/apiFunctions';
 
-export default function RePost({ postDetails, setArrayOfPosts }) {
+export default function RePost({ postDetails, setArrayOfPosts, pageUrl }) {
 
   const { id, repostCount } = postDetails;
   const [repostCounter, setRepostCounter] = useState(repostCount);
@@ -29,7 +30,8 @@ export default function RePost({ postDetails, setArrayOfPosts }) {
         setModalIsOpen(false);
         setIsLoading(false);
         setRepostCounter(repostCounter + 1);
-        //getPost();
+        const erroAlert = "Ocorreu um erro ao carregar os posts";
+        callServer(setArrayOfPosts, pageUrl, erroAlert, config);
       });
       repostRequest.catch(() => {
         setError(true);

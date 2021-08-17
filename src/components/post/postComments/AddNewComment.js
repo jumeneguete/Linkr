@@ -46,6 +46,7 @@ const AddCommentForm = styled.form`
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    position: relative;
    
     img {
         width: 40px;
@@ -69,7 +70,7 @@ const InputComment = styled.input`
     padding-left: 10px;
     color: #fff;
     border: none;
-    border-radius: 8px 0 0 8px;
+    border-radius: 8px;
     background-color: #252525;
 
     &:focus{
@@ -87,10 +88,12 @@ const InputComment = styled.input`
 const ButtonComment = styled.button`
     height: 40px;
     border: none;
-    padding: 0 15px;
-    border-radius: 0 8px 8px 0;
+    position:absolute;
+    right: 15px;
+    margin-right: 15px;
     background-color: #252525;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 `;

@@ -3,11 +3,11 @@ import { AiOutlineComment } from "react-icons/ai";
 import styled from 'styled-components';
 
 import LikePost from './postFeatures/LikePost';
-import RePost from './postFeatures/RePost';
+import RePost from './postRePost/RePost';
 
 export default function Profile(props) {
     
-    const { index, postDetails, openComments, setOpenComments, comments, arrayOfPosts, setArrayOfPosts } = props;
+    const { index, postDetails, openComments, setOpenComments, comments, arrayOfPosts, setArrayOfPosts, pageUrl } = props;
     const { id, username, avatar } = postDetails.user
 
     function toggleComments(e) {
@@ -31,6 +31,7 @@ export default function Profile(props) {
             <RePost 
                 postDetails={postDetails}
                 setArrayOfPosts={setArrayOfPosts}
+                pageUrl={pageUrl}
             />
         </ProfileContainer>
     );
