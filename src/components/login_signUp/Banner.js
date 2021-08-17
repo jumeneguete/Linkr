@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
-export default function Banner(){
+export default function Banner() {
     return (
         <BannerStyle>
             <h1>linkr</h1>
-            <h2>save, share and discover <br/> the best links on the web</h2>
+            <h2>
+                save, share and discover <br /> the best links on the web
+            </h2>
         </BannerStyle>
     );
 }
@@ -24,14 +26,14 @@ const BannerStyle = styled.div`
     }
 
     h1 {
-        font-family: 'Passion One', sans-serif;
+        font-family: "Passion One", sans-serif;
         color: #fff;
         font-size: 110px;
         font-weight: bold;
     }
 
     h2 {
-        font-family: 'Oswald', sans-serif;
+        font-family: "Oswald", sans-serif;
         color: #fff;
         font-size: 43px;
         font-weight: bold;

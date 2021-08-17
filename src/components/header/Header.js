@@ -1,22 +1,20 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { IoChevronDownSharp, IoChevronUpSharp } from "react-icons/io5";
-import ClickAwayListener from 'react-click-away-listener';
+import ClickAwayListener from "react-click-away-listener";
 import styled from "styled-components";
 
 import Search from "./Search";
 import ToggleMenu from "./ToggleMenu";
-import UserContext from "../../contexts/UserContext"
+import UserContext from "../../contexts/UserContext";
 
 export default function Header() {
-
     const [menuSelected, setMenuSelected] = useState(false);
     const [search, setSearch] = useState("");
     const { userProfile } = useContext(UserContext);
 
     function showMenu(e) {
         e.stopPropagation();
-        
         setMenuSelected(!menuSelected);
     }
 
@@ -24,28 +22,19 @@ export default function Header() {
         <>
             <HeaderStyles searching={search !== "" ? true : false}>
                 <Title>
-                    <Link to="/">
-                        linkr
-                    </Link>
+                    <Link to="/">linkr</Link>
                 </Title>
                 <HeaderSearch>
-                    <Search 
-                        search={search} 
-                        setSearch={setSearch}
-                    />
+                    <Search search={search} setSearch={setSearch} />
                 </HeaderSearch>
                 <Menu onClick={showMenu}>
-                    {menuSelected ? 
-                        <ArrowUp/> : <ArrowDown/>
-                    }
-                    <UserAvatar 
-                        src={userProfile.user.avatar} 
-                        alt={userProfile.user.username} 
+                    {menuSelected ? <ArrowUp /> : <ArrowDown />}
+                    <UserAvatar
+                        src={userProfile.user.avatar}
+                        alt={userProfile.user.username}
                     />
                     <ClickAwayListener onClickAway={() => setMenuSelected(false)}>
-                        <ToggleMenu 
-                            menuSelected={menuSelected}
-                        />
+                        <ToggleMenu menuSelected={menuSelected} />
                     </ClickAwayListener>
                 </Menu>
             </HeaderStyles>
@@ -97,12 +86,12 @@ const UserAvatar = styled.img`
 const HeaderSearch = styled.div`
     @media (max-width: 640px) {
         display: none;
-    }   
+    }
 `;
 
 const ArrowDown = styled(IoChevronDownSharp)`
     font-size: 25px;
-    color: #FFFFFF;
+    color: #ffffff;
     @media (max-width: 640px) {
         font-size: 18px;
     }
@@ -110,7 +99,7 @@ const ArrowDown = styled(IoChevronDownSharp)`
 
 const ArrowUp = styled(IoChevronUpSharp)`
     font-size: 25px;
-    color: #FFFFFF;
+    color: #ffffff;
     @media (max-width: 640px) {
         font-size: 18px;
     }

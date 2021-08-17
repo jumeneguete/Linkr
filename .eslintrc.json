@@ -5,7 +5,9 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "plugin:prettier/recommended",
+        "prettier"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -15,12 +17,16 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "prettier"
     ],
     "rules": {
         "react/react-in-jsx-scope": "off",
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-        "react/prop-types": "off"
+        "react/prop-types": "off",
+        "prettier/prettier": 0,
+        "arrow-body-style": "off",
+        "prefer-arrow-callback": "off"
       },
     "globals": {
         "alert": true,
