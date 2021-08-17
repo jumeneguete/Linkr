@@ -1,49 +1,53 @@
 import { useContext, useState } from "react";
-import styled from "styled-components";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { IoChevronDownSharp, IoChevronUpSharp } from "react-icons/io5";
 import ClickAwayListener from 'react-click-away-listener';
+import styled from "styled-components";
 
 import Search from "./Search";
+import ToggleMenu from "./ToggleMenu";
 import UserContext from "../../contexts/UserContext"
 
 export default function Header() {
+
     const [menuSelected, setMenuSelected] = useState(false);
     const [search, setSearch] = useState("");
-    const { userProfile, setUserProfile } = useContext(UserContext);
-    const history = useHistory();
+    const { userProfile } = useContext(UserContext);
 
-    function toggle(e) {
+    function showMenu(e) {
         e.stopPropagation();
-
-        const selection = !menuSelected;
-        setMenuSelected(selection);
-    }
-
-    function logout() {
-        localStorage.removeItem("linkerUser");
-        setUserProfile("");
-        history.push("/");
+        
+        setMenuSelected(!menuSelected);
     }
 
     return (
         <>
             <HeaderStyles searching={search !== "" ? true : false}>
-                <span><Link to="/">linkr</Link></span>
-                <HeaderSearch><Search search={search} setSearch={setSearch}/></HeaderSearch>
-                <Menu onClick={(event) => toggle(event)}>
-                    <span>{menuSelected ? <ArrowUp/> : <ArrowDown/>}</span>
-                    <img src={userProfile.user.avatar} alt={userProfile.user.username} />
+                <Title>
+                    <Link to="/">
+                        linkr
+                    </Link>
+                </Title>
+                <HeaderSearch>
+                    <Search 
+                        search={search} 
+                        setSearch={setSearch}
+                    />
+                </HeaderSearch>
+                <Menu onClick={showMenu}>
+                    {menuSelected ? 
+                        <ArrowUp/> : <ArrowDown/>
+                    }
+                    <UserAvatar 
+                        src={userProfile.user.avatar} 
+                        alt={userProfile.user.username} 
+                    />
+                    <ClickAwayListener onClickAway={() => setMenuSelected(false)}>
+                        <ToggleMenu 
+                            menuSelected={menuSelected}
+                        />
+                    </ClickAwayListener>
                 </Menu>
-                <ClickAwayListener onClickAway={() => setMenuSelected(false)}>
-                    <ToggleMenu menuSelected={menuSelected}>
-                        <ul>
-                            <Link to={"/my-posts"}><li>My posts</li></Link>
-                            <Link to={"/my-likes"}><li>My likes</li></Link>
-                            <li onClick={logout}>Logout</li>
-                        </ul>
-                    </ToggleMenu>
-                </ClickAwayListener>
             </HeaderStyles>
         </>
     );
@@ -60,14 +64,15 @@ const HeaderStyles = styled.header`
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 2;
+`;
 
-    & > span {
-        font-family: "Passion One", sans-serif;
-        font-weight: 700;
-        font-size: 50px;
-        letter-spacing: 1px;
-        color: #fff;
-    }
+const Title = styled.span`
+    font-family: "Passion One", sans-serif;
+    font-weight: 700;
+    font-size: 50px;
+    letter-spacing: 1px;
+    color: #fff;
 `;
 
 const Menu = styled.div`
@@ -75,53 +80,38 @@ const Menu = styled.div`
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    img {
-        border-radius: 50%;
-        height: 55px;
-        margin-left: 10px;
-        width: 55px;
-        object-fit: cover;
-    }
 `;
 
-const ToggleMenu = styled.div`
-    width: 150px;
-    height: 125px;
-    background-color: #151515;
-    position: fixed;
-    top: 75px;
-    right: 0;
-    border-radius: 0px 0px 0px 20px;
-    display: ${props => props.menuSelected ? "block" : "none"};
-    z-index: 1;
-    ul {
-        margin-top: 15px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    li {
-        font-size: 18px;
-        font-weight: 700;
-        color: #fff;
-        margin-top: 7px;
-        cursor: pointer;
+const UserAvatar = styled.img`
+    border-radius: 50%;
+    height: 55px;
+    margin-left: 10px;
+    width: 55px;
+    object-fit: cover;
+    @media (max-width: 640px) {
+        height: 40px;
+        width: 40px;
     }
 `;
 
 const HeaderSearch = styled.div`
-@media (max-width: 640px) {
+    @media (max-width: 640px) {
         display: none;
-    }
+    }   
 `;
 
 const ArrowDown = styled(IoChevronDownSharp)`
     font-size: 25px;
     color: #FFFFFF;
+    @media (max-width: 640px) {
+        font-size: 18px;
+    }
 `;
 
 const ArrowUp = styled(IoChevronUpSharp)`
     font-size: 25px;
     color: #FFFFFF;
+    @media (max-width: 640px) {
+        font-size: 18px;
+    }
 `;

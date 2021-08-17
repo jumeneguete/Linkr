@@ -1,30 +1,38 @@
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import ClickAwayListener from 'react-click-away-listener';
-import { SearchStyle, StyledInput, Suggestions, NotFound, UserSearched } from "./Styles"
+import styled from 'styled-components';
+import { DebounceInput } from 'react-debounce-input';
 
-import UserFollowersContext from "../../contexts/UserFollowersContext";
 import UserContext from "../../contexts/UserContext";
+import SearchSuggestions from "./SearchSuggestions";
 
 export default function Search({search, setSearch}) {
-    const { userProfile } = useContext(UserContext);
-    const { followers } = useContext(UserFollowersContext);
-    const [usersFound, SetUsersFound] = useState(null);
 
+    const { userProfile } = useContext(UserContext);
+    const [usersFound, SetUsersFound] = useState(null);
 
     useEffect(() => {
         if (search.length > 2) {
             const config = { headers: { Authorization: `Bearer ${userProfile.token}` } }
-
-            const request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/users/search?username=${search}`, config);
+            const request = axios.get(`${process.env.REACT_APP_API_BASE_URL}/users/search?username=${search}`, config);
 
             request.then(response => {
-                SetUsersFound(response.data.users);
+                const suggestions = suggestFollowersFirst(response.data.users)
+                SetUsersFound(suggestions);
             })
         }
-        // eslint-disable-next-line
-    }, [])
+    }, [search, userProfile])
+
+    function suggestFollowersFirst(UsersArray) {
+        const suggetionArray = [];
+        UsersArray.forEach(s => {
+            s.isFollowingLoggedUser ?
+                suggetionArray.unshift(s)
+            : suggetionArray.push(s)
+        });
+        return suggetionArray
+    }
 
     return (
 
@@ -35,33 +43,40 @@ export default function Search({search, setSearch}) {
                     debounceTimeout={300}
                     onChange={(e) => setSearch(e.target.value)} value={search}
                     searching={search}
-                    placeholder="Search for people and friends" />
-                <Suggestions searching={search}>
-                    {usersFound === null ? "" : usersFound.length === 0 ? <NotFound>Nenhum usuário encontrado</NotFound> :
-                        usersFound.map(f => (
-                            followers.find(fol => fol.id === f.id) ? (
-                                <Link to={`/user/${f.id}`}>
-                                    <UserSearched key={f.id}>
-                                        <img src={f.avatar} alt={f.username} />
-                                        <p>{f.username}</p>
-                                        <span> • following</span>
-                                    </UserSearched>
-                                </Link>
-                            ) : ""
-                        ))}
-                    {usersFound === null ? "" :
-                        usersFound.map(u => (
-                            followers.find(foll => foll.id === u.id) ? "" : (
-                                <Link to={`/user/${u.id}`}>
-                                    <UserSearched key={u.id}>
-                                        <img src={u.avatar} alt={u.username} />
-                                        <p>{u.username}</p>
-                                    </UserSearched>
-                                </Link>
-                            )
-                        ))}
-                </Suggestions>
+                    placeholder="Search for people and friends" 
+                />
+                <SearchSuggestions 
+                    search={search}
+                    usersFound={usersFound}
+                />
             </SearchStyle>
         </ClickAwayListener>
     );
 }
+
+const SearchStyle = styled.div`
+    display: flex;
+    flex-direction: column;
+    position: relative;
+`;
+
+const StyledInput = styled(DebounceInput)`
+    width: 350px;
+    height: 35px;
+    border:none;
+    border-radius: ${props => props.searching ? "5px 5px 0 0" : "5px"};
+    box-shadow: 0;
+    padding: 20px 10px;
+    @media (max-width: 640px) {
+        width: 90vw;
+    }
+    &:focus{
+        box-shadow: 0 0 0 0;
+        outline: 0;
+    }
+    &::placeholder {
+        font-family: "Lato", sans-serif;
+        font-size: 15px;
+        color: #C6C6C6;
+    }
+`;

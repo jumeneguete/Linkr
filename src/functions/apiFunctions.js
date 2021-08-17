@@ -56,11 +56,13 @@ export function reloadPosts(arrayOfPosts, setArrayOfPosts, url, erroAlert, confi
     request.catch(erro => alert(erroAlert));
 }
 
-export function getUserFollowers(setArrayOfPosts, url, erroAlert, config) {
+export function getUserFollowers(setArrayOfFollowers, url, erroAlert, config) {
 
     const request = axios.get(url, config);
     request.then(response => {
-        setArrayOfPosts(response.data.users)
+        const followers = response.data.users;
+        followers.forEach(f => f.isFollowingLoggedUser = true)
+        setArrayOfFollowers(followers)
     });
     request.catch(erro => alert(erroAlert))
 }
