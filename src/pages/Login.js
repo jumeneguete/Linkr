@@ -22,7 +22,7 @@ export default function Login() {
         }
     }, [history, userProfile]);
 
-    function SigningUp(e) {
+    function SigningIn(e) {
         e.preventDefault();
 
         const body = { email, password };
@@ -50,7 +50,7 @@ export default function Login() {
         <Page>
             <Banner />
             <FieldsContainer>
-                <FormContainer onSubmit={SigningUp}>
+                <FormContainer onSubmit={SigningIn}>
                     <Input
                         type="email"
                         placeholder="e-mail"
