@@ -1,20 +1,19 @@
-import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import styled from 'styled-components';
+import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import styled from "styled-components";
 
-import UserContext from '../contexts/UserContext';
-import ShareLocation from './post/postLocation/ShareLocation';
-import { callServer } from '../functions/apiFunctions';
+import UserContext from "../contexts/UserContext";
+import ShareLocation from "./post/postLocation/ShareLocation";
+import { callServer } from "../functions/apiFunctions";
 
-export default function CreatePost ({ setArrayOfPosts, pageUrl }) {
-
+export default function CreatePost({ setArrayOfPosts, pageUrl }) {
     const { userProfile } = useContext(UserContext);
-    const { token } = userProfile
-    const [ isDisabled, setIsDisabled ] = useState(false);
-    const [ buttonText, setbuttonText ] = useState('Publicar');
-    const [ userLink, setUserLink ] = useState('');
-    const [ userComment, setUserComment ] = useState('');
+    const { token } = userProfile;
+    const [isDisabled, setIsDisabled] = useState(false);
+    const [buttonText, setbuttonText] = useState("Publicar");
+    const [userLink, setUserLink] = useState("");
+    const [userComment, setUserComment] = useState("");
     const [location, setLocation] = useState(false);
 
     function submitCreatedPost(e) {
@@ -22,18 +21,17 @@ export default function CreatePost ({ setArrayOfPosts, pageUrl }) {
 
         if (userLink.length) {
             setIsDisabled(true);
-            setbuttonText('Publicando...')
-            sendPost(formatObj()); 
-        }
-        else {
+            setbuttonText("Publicando...");
+            sendPost(formatObj());
+        } else {
             alert(`Desculpe, você não pode publicar sem um link`);
         }
     }
 
-    function formatObj () {
-        const postObj = userComment.length ? 
-            {link: userLink, text: userComment}
-        : {link: userLink};
+    function formatObj() {
+        const postObj = userComment.length
+            ? { link: userLink, text: userComment }
+            : { link: userLink };
 
         if (location) {
             postObj.geolocation = {};
@@ -43,62 +41,68 @@ export default function CreatePost ({ setArrayOfPosts, pageUrl }) {
         return postObj;
     }
 
-    function sendPost (postObj) {
-
+    function sendPost(postObj) {
         const config = {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         };
-        const request = axios.post(`${process.env.REACT_APP_API_BASE_URL}/posts`,postObj,config);
-        request.then(() => {
-            setUserLink('');
-            setUserComment('');
-            setIsDisabled(false);
-            setbuttonText('Publicar');
-            const erroAlert = "Ocorreu um erro ao carregar os posts";
-            callServer(setArrayOfPosts, pageUrl, erroAlert, config);
-
-        }).catch(userPostFailed);
+        const request = axios.post(
+            `${process.env.REACT_APP_API_BASE_URL}/posts`,
+            postObj,
+            config
+        );
+        request
+            .then(() => {
+                setUserLink("");
+                setUserComment("");
+                setIsDisabled(false);
+                setbuttonText("Publicar");
+                const erroAlert = "Ocorreu um erro ao carregar os posts";
+                callServer(setArrayOfPosts, pageUrl, erroAlert, config);
+            })
+            .catch(userPostFailed);
     }
 
-    function userPostFailed () {
-        alert('Desculpe, ocorreu um erro ao publicar seu link');
+    function userPostFailed() {
+        alert("Desculpe, ocorreu um erro ao publicar seu link");
         setIsDisabled(false);
-        setbuttonText('Publicar');
+        setbuttonText("Publicar");
     }
 
     return (
         <CreatePostContainer isDisabled={isDisabled}>
             <Link to="/my-posts">
-                <ProfileImage 
-                    src={userProfile.user.avatar} 
+                <ProfileImage
+                    src={userProfile.user.avatar}
                     alt={userProfile.user.username}
                 />
             </Link>
             <NewPostForm onSubmit={submitCreatedPost}>
-
                 <CreatePostTitle>O que você tem pra favoritar hoje?</CreatePostTitle>
 
-                <NewLinkInput type='url' 
-                    placeholder='https//...' 
-                    onChange={(e) => setUserLink(e.target.value)} 
-                    value={userLink} 
+                <NewLinkInput
+                    type="url"
+                    placeholder="https//..."
+                    onChange={(e) => setUserLink(e.target.value)}
+                    value={userLink}
                     disabled={isDisabled}
                 />
 
-                <NewPostComment type='text' 
-                    placeholder='Muito irado esse post falando de #JavaScript' 
-                    onChange={(e) => setUserComment(e.target.value)} 
-                    value={userComment} 
+                <NewPostComment
+                    type="text"
+                    placeholder="Muito irado esse post falando de #JavaScript"
+                    onChange={(e) => setUserComment(e.target.value)}
+                    value={userComment}
                     disabled={isDisabled}
                 />
 
                 <Footer>
                     <ShareLocation setLocation={setLocation} />
-                    <PublishButtom disabled={isDisabled} type='submit'>{buttonText}</PublishButtom>
+                    <PublishButtom disabled={isDisabled} type="submit">
+                        {buttonText}
+                    </PublishButtom>
                 </Footer>
-
             </NewPostForm>
         </CreatePostContainer>
     );
@@ -109,7 +113,7 @@ const CreatePostContainer = styled.div`
     border-radius: 15px;
     color: #707070;
     display: flex;
-    font: 300 16px 'Lato', sans-serif;
+    font: 300 16px "Lato", sans-serif;
     margin-bottom: 20px;
     padding: 25px;
     width: 600px;
@@ -156,8 +160,7 @@ const NewPostForm = styled.form`
 `;
 
 const NewPostComment = styled.textarea`
-
-    background: #EFEFEF;
+    background: #efefef;
     border-radius: 5px;
     cursor: text;
     margin-bottom: 10px;
@@ -165,7 +168,7 @@ const NewPostComment = styled.textarea`
     padding: 10px;
     width: 100%;
     border: none;
-    box-shadow:none;
+    box-shadow: none;
     min-height: 80px;
     resize: none;
 
@@ -189,7 +192,7 @@ const NewPostComment = styled.textarea`
 `;
 
 const NewLinkInput = styled.input`
-    background: #EFEFEF;
+    background: #efefef;
     border-radius: 5px;
     cursor: text;
     margin-bottom: 10px;
@@ -197,7 +200,7 @@ const NewLinkInput = styled.input`
     padding: 10px;
     width: 100%;
     border: none;
-    box-shadow:none;
+    box-shadow: none;
     height: 30px;
     &::placeholder {
         font-family: "Lato", sans-serif;
@@ -225,10 +228,10 @@ const Footer = styled.div`
 
 const PublishButtom = styled.button`
     font-size: 15px;
-    background: ${ props => props.disabled ? '#EFEFEF' : '#1877F2'};
+    background: ${(props) => (props.disabled ? "#EFEFEF" : "#1877F2")};
     border-radius: 5px;
-    cursor: ${ props => props.clicked ? 'not-allowed' : 'pointer'};
-    color: ${ props => props.disabled ? '#1877F2' : '#FFF'};
+    cursor: ${(props) => (props.clicked ? "not-allowed" : "pointer")};
+    color: ${(props) => (props.disabled ? "#1877F2" : "#FFF")};
     font-weight: 700;
     padding: 10px;
     text-align: center;
@@ -241,4 +244,3 @@ const PublishButtom = styled.button`
         padding: 7px;
     }
 `;
-

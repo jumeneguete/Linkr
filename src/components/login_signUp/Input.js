@@ -1,8 +1,14 @@
 import styled from "styled-components";
 
-export default function Input({type, placeholder, value, onChange, disabled}) {
+export default function Input({ type, placeholder, value, onChange, disabled }) {
     return (
-        <InputStyle type={type} placeholder={placeholder} onChange={onChange} value={value} disabled ={disabled}></InputStyle>
+        <InputStyle
+            type={type}
+            placeholder={placeholder}
+            onChange={onChange}
+            value={value}
+            disabled={disabled}
+        />
     );
 }
 
@@ -17,14 +23,14 @@ const InputStyle = styled.input`
         width: 90%;
     }
 
-    &::placeholder{
-            font-family: "Oswald", sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: #9F9F9F;
-        }
-        &:focus{
-            box-shadow: 0 0 0 0;
-            outline: 0;
-        }
+    &::placeholder {
+        font-family: "Oswald", sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        color: #9f9f9f;
+    }
+    &:focus {
+        box-shadow: 0 0 0 0;
+        outline: 0;
+    }
 `;

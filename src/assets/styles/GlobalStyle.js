@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
 
@@ -9,6 +9,6 @@ body {
 .ReactModal__Body--open {
     overflow: hidden;
 }
-`
+`;
 
 export default GlobalStyle;

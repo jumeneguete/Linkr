@@ -1,15 +1,14 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-export default function YoutubeVideo({youtubeLink, postDetails}) {
-
+export default function YoutubeVideo({ youtubeLink, postDetails }) {
     const { link, linkTitle } = postDetails;
-    return(
+    return (
         <>
-            <YoutubeObject 
+            <YoutubeObject
                 data={`http://www.youtube.com/embed/${youtubeLink}`}
-                title={linkTitle} 
+                title={linkTitle}
             />
-            <VideoLink >{link}</VideoLink>
+            <VideoLink>{link}</VideoLink>
         </>
     );
 }
@@ -27,7 +26,7 @@ const VideoLink = styled.div`
     display: flex;
     justify-content: center;
     font-size: 16px;
-    color: #B7B7B7;
+    color: #b7b7b7;
     margin-top: 10px;
 
     @media (max-width: 614px) {

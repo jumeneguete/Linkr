@@ -1,16 +1,15 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-export default function useLocalStorage(key, initialValue){
-    
+export default function useLocalStorage(key, initialValue) {
     const [storedValue, setStoredValue] = useState(() => {
         try {
-          const item = localStorage.getItem(key);
-          return item ? JSON.parse(item) : initialValue;
+            const item = localStorage.getItem(key);
+            return item ? JSON.parse(item) : initialValue;
         } catch (error) {
-          console.log(error);
-          return initialValue;
+            console.log(error);
+            return initialValue;
         }
-      });
+    });
 
     const setValue = (value) => {
         try {
@@ -18,25 +17,9 @@ export default function useLocalStorage(key, initialValue){
             setStoredValue(valueToStore);
             localStorage.setItem(key, JSON.stringify(valueToStore));
         } catch (error) {
-          console.log(error);
+            console.log(error);
         }
-      };
+    };
 
     return [storedValue, setValue];
 }
-
-
-
-
-
-/*
-const setUserProfile = (value) => {
-    try {
-      const valueToStore = value instanceof Function ? value(storedValue) : value;
-      setStoredValue(valueToStore);
-      window.localStorage.setItem(key, JSON.stringify(valueToStore));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-*/

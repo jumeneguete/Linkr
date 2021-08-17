@@ -1,33 +1,47 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { AiOutlineComment } from "react-icons/ai";
-import styled from 'styled-components';
+import styled from "styled-components";
 
-import LikePost from './postFeatures/LikePost';
-import RePost from './postRePost/RePost';
+import LikePost from "./postFeatures/LikePost";
+import RePost from "./postRePost/RePost";
 
 export default function Profile(props) {
-    
-    const { index, postDetails, openComments, setOpenComments, comments, arrayOfPosts, setArrayOfPosts, pageUrl } = props;
-    const { id, username, avatar } = postDetails.user
+    const {
+        index,
+        postDetails,
+        openComments,
+        setOpenComments,
+        comments,
+        arrayOfPosts,
+        setArrayOfPosts,
+        pageUrl,
+    } = props;
+    const { id, username, avatar } = postDetails.user;
 
     function toggleComments(e) {
         e.stopPropagation();
-
         setOpenComments(!openComments);
     }
 
-    return(
+    return (
         <ProfileContainer>
-            <Link to={`/user/${id}`}><img src={avatar} alt={username}/></Link>
+            <Link to={`/user/${id}`}>
+                <img src={avatar} alt={username} />
+            </Link>
 
-            <LikePost postDetails={postDetails} index={index} arrayOfPosts={arrayOfPosts} setArrayOfPosts={setArrayOfPosts} />
-            
-            <CommentsContainer onClick={(event) => toggleComments(event)} >
-                <AiOutlineComment color={'#FFFFFF'} />
+            <LikePost
+                postDetails={postDetails}
+                index={index}
+                arrayOfPosts={arrayOfPosts}
+                setArrayOfPosts={setArrayOfPosts}
+            />
+
+            <CommentsContainer onClick={(event) => toggleComments(event)}>
+                <AiOutlineComment color={"#FFFFFF"} />
                 <p>{comments.length} comments</p>
             </CommentsContainer>
 
-            <RePost 
+            <RePost
                 postDetails={postDetails}
                 setArrayOfPosts={setArrayOfPosts}
                 pageUrl={pageUrl}
@@ -36,10 +50,10 @@ export default function Profile(props) {
     );
 }
 const ProfileContainer = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
-width: calc(15% - 20px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: calc(15% - 20px);
     img {
         width: 50px;
         height: 50px;
@@ -51,18 +65,18 @@ width: calc(15% - 20px);
         font-size: 25px;
         cursor: pointer;
     }
-@media (max-width: 614px) {
-    img{
-        width: 40px;
-        height: 40px;
+    @media (max-width: 614px) {
+        img {
+            width: 40px;
+            height: 40px;
+        }
+        p {
+            font-size: 9px;
+        }
+        svg {
+            font-size: 15px;
+        }
     }
-    p{
-        font-size: 9px;
-    }
-    svg {
-        font-size: 15px;
-    }
-}
 `;
 
 const CommentsContainer = styled.div`
@@ -76,6 +90,6 @@ const CommentsContainer = styled.div`
         margin-top: 5px;
         font-size: 11px;
         color: #fff;
-        text-align:center;
+        text-align: center;
     }
 `;
