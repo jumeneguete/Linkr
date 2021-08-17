@@ -10,6 +10,8 @@ export default function RePostModal({ modalIsOpen, setModalIsOpen, isLoading, re
       <RePostModalStyle
         isOpen={ modalIsOpen }
         onRequestClose={() => setModalIsOpen(!modalIsOpen)}
+        bodyOpenClassName={"ReactModal__Body--open"}
+        style={{overlay:{zIndex:100}}}
       >
         <ModalContent error={error}>
           {!error ? 

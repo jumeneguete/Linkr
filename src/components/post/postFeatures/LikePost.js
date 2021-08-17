@@ -30,7 +30,7 @@ export default function LikePost({postDetails, index, arrayOfPosts, setArrayOfPo
             setPostLiked(!postLiked);
     
         })
-    };
+    }
 
     return(
         <>

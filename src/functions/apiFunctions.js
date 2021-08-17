@@ -38,7 +38,7 @@ export function callServer(setArrayOfPosts, url, erroAlert, config) {
     request.then(response => {
         setArrayOfPosts(response.data.posts)
     });
-    request.catch(erro => alert(erroAlert))
+    request.catch(() => alert(erroAlert))
 }
 
 export function reloadPosts(arrayOfPosts, setArrayOfPosts, url, erroAlert, config) {
@@ -53,7 +53,7 @@ export function reloadPosts(arrayOfPosts, setArrayOfPosts, url, erroAlert, confi
         }))
         setArrayOfPosts([...newPosts, ...arrayOfPosts])
     });
-    request.catch(erro => alert(erroAlert));
+    request.catch(() => alert(erroAlert));
 }
 
 export function getUserFollowers(setArrayOfFollowers, url, erroAlert, config) {
@@ -64,5 +64,5 @@ export function getUserFollowers(setArrayOfFollowers, url, erroAlert, config) {
         followers.forEach(f => f.isFollowingLoggedUser = true)
         setArrayOfFollowers(followers)
     });
-    request.catch(erro => alert(erroAlert))
+    request.catch(() => alert(erroAlert))
 }

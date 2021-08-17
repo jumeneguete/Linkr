@@ -13,8 +13,7 @@ export default function Profile(props) {
     function toggleComments(e) {
         e.stopPropagation();
 
-        const selection = !openComments;
-        setOpenComments(selection);
+        setOpenComments(!openComments);
     }
 
     return(

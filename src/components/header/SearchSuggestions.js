@@ -11,7 +11,7 @@ export default function SearchSuggestions({ search, usersFound }) {
             {usersFound !== null ? 
                 usersFound.length > 0 ?
                     usersFound.map(f => (
-                        <Link to={`/user/${f.id}`}>
+                        <Link to={`/user/${f.id}`} key={f.id}>
                             <UserSearched key={f.id}>
                                 <UserAvatar 
                                     src={f.avatar} 

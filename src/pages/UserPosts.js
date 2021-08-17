@@ -29,7 +29,7 @@ export default function UserPosts() {
         if(Number(id) === userProfile.user.id) {
             history.push("/my-posts")
             return;
-        };
+        }
         callServer(setUserPostsList, pageUrl, erroAlert, config);
     }, [history, pageUrl, id, userProfile])
 
@@ -52,10 +52,10 @@ export default function UserPosts() {
         `${process.env.REACT_APP_API_BASE_URL}/users/${id}/follow`
 
         const request = axios.post(url, {}, config);
-        request.then(response => {
+        request.then(() => {
             setIsFollowing({status: !isFollowing.status, isDisabled: false});
         });
-        request.catch(erro => alert("Ocorreu um erro ao seguir esse usuario"));
+        request.catch(() => alert("Ocorreu um erro ao seguir esse usuario"));
     }
 
     return(

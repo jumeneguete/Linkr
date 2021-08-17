@@ -14,7 +14,8 @@ export default function DeleteModal({
   return (
     <ModalStyle
       isOpen={modalIsOpen}
-      contentLabel='Delete Modal'
+      bodyOpenClassName={"ReactModal__Body--open"}
+      style={{overlay:{zIndex:100}}}
     >
       {isLoading 
         ? <h1>Loading...</h1> 
@@ -39,18 +40,19 @@ export default function DeleteModal({
 }
 
 const ModalStyle = styled(ReactModal)`
-  top: 0;
-  left: 0;
-  transform: translate(50%, 150%);
+  position: fixed;
+  top: 300px;
+  left: calc(50vw - 20%);
   background: #333333;
   border-radius: 20px;
   width:50%;
+  max-width:500px;
   padding: 20px 50px;
-  z-index: 10;
+  z-index: 5;
   @media (max-width: 600px) {
       width: 100%;
+      left: 0;
       flex-direction: column;
-      transform: translate(0, 150%);
       border-radius: 0;
       padding: 20px 0;
   }

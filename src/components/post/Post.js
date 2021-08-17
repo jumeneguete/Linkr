@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ReactHashtag from "react-hashtag";
+
 import getYouTubeID from 'get-youtube-id';
 import styled from 'styled-components';
 
@@ -36,8 +37,6 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
             {repostId && 
                 <RePostDetails 
                     postDetails={postDetails}
-                    setArrayOfPosts={setArrayOfPosts}
-                    pageUrl={pageUrl}
                 />}
             <PostContainer>
                 <Profile 
@@ -67,7 +66,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                             pageUrl={pageUrl}
                         /> : 
                         <Description>
-                            <ReactHashtag renderHashtag={(val, i) => (
+                            <ReactHashtag renderHashtag={(val) => (
                                 <Link to={`/hashtag/${val.replace("#", "")}`} >
                                     <Hashtag >
                                         {val}
@@ -88,6 +87,7 @@ export default function Post({ postDetails, setArrayOfPosts, index, arrayOfPosts
                 postDetails={postDetails}
                 openComments={openComments} 
                 setComments={setComments} 
+                setOpenComments={setOpenComments}
                 comments={comments} 
             />
         </>
@@ -110,6 +110,9 @@ z-index: 1;
 `;
 
 const PostContent = styled.div`
+display:flex;
+flex-direction:column;
+justify-content:space-between;
 width: calc(90% - 20px);
 word-break: break-all;
 `;
@@ -118,8 +121,7 @@ const Description = styled.div`
     font-size: 17px;
     line-height: 20px;
     color: #B7B7B7;
-    margin: 10px 0;
-   
+    margin: 20px 0;
 `;
 const Hashtag = styled.span`
     color: #FFFFFF;

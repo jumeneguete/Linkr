@@ -17,7 +17,7 @@ export default function PostHeader({postDetails, OnEditingPost, setOnEditingPost
         <HeaderContainer>
             <PostCreator>
                 <Link to={`/user/${id}`}>
-                    {username}
+                    <span>{username}</span>
                 </Link>
                 {geolocation && 
                     <PostLocation
@@ -57,7 +57,9 @@ const PostCreator = styled.div`
     height: 23px;
     font-size: 19px;
     color: #FFFFFF;
-    
+    span {
+        line-height:40px;
+    }
     @media (max-width: 614px) {
         font-size: 17px;
     }

@@ -5,9 +5,8 @@ import { BiRepost } from "react-icons/bi";
 import styled from 'styled-components';
 
 import UserContext from '../../../contexts/UserContext';
-import DeletePost from '../postFeatures/DeletePost';
 
-export default function RePostDetails({ postDetails, setArrayOfPosts, pageUrl}) {
+export default function RePostDetails({ postDetails }) {
 
     const { repostedBy } = postDetails;
     const { userProfile } = useContext(UserContext);
@@ -23,14 +22,6 @@ export default function RePostDetails({ postDetails, setArrayOfPosts, pageUrl}) 
                     </Link>
                 </span>
             </RepostInfo>
-            
-            {repostedBy.id === userProfile.user.id && 
-                <DeletePost 
-                    postDetails={postDetails}
-                    setArrayOfPosts={setArrayOfPosts}
-                    pageUrl={pageUrl}
-                />
-            }
         </Repost>
     );
 }

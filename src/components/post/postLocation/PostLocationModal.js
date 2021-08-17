@@ -13,11 +13,12 @@ export default function LinkPageContentModal({ locationIsOpen, onRequestClose, u
 
     <ModalStyle 
         isOpen={locationIsOpen}
-        contentLabel='Delete Modal'
+        bodyOpenClassName={"ReactModal__Body--open"}
+        style={{overlay:{zIndex:100}}}
         >
 
         <Header>
-          <h1>{user}'s location</h1>
+          <h1>{user} &apos;s location</h1>
           <CloseLocation onClick={() => onRequestClose(!locationIsOpen)}>
             <AiOutlineClose />
           </CloseLocation>

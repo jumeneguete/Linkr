@@ -8,7 +8,12 @@ ReactModal.setAppElement("body");
 export default function LinkPageContentModal({ modalIsOpen, setModalIsOpen, link, linkTitle }) {
   
   return (
-    <ModalStyle isOpen={modalIsOpen} link={link}>
+    <ModalStyle 
+    isOpen={modalIsOpen} 
+    link={link}
+    bodyOpenClassName={"ReactModal__Body--open"}
+    style={{overlay:{zIndex:100}}}
+    >
 
       <a href={link} target="_blank" rel="noreferrer"><button>Open in new tab</button></a>
       <ClickAwayListener onClickAway={() => setModalIsOpen(!modalIsOpen)}>
